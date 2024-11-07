@@ -1,8 +1,8 @@
 import { createBdd } from "playwright-bdd";
 const {Given, When, Then} = createBdd();
 const {readExcelData} = require('../Utilities/ExcelUtils');
-const testData = readExcelData('tests/TestData/PlayWright_Group2_Data.xlsx', 'Login')
-require('../Hooks/Hooks.js');
+const testData = readExcelData('tests/TestData/TestData.xlsx', 'Login')
+ 
 
 
 // 1. Missing step definition for "tests\Features\001_Login.feature:6:1"
