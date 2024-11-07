@@ -22,8 +22,7 @@ Before(async function () {
   After(async function () {
     // Assuming this.driver is a selenium webdriver
     console.log("Browser will close");
-    
-    
-  });
+    });
 
   
+    
