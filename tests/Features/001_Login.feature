@@ -13,3 +13,8 @@ Then Admin should land on dashboard page.
 Examples:
 |   userName                    |   password        |
 |   playwrightuser@gmail.com    |   Playwright@1234 |
+
+Scenario: Validate login with valid credentials
+Given Admin is in login Page
+When Admin enter valid username and password from excel file and clicks login button 
+Then Admin should land on dashboard page.  

@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "bddgen":"npx bddgen",
-    "test" : "npx playwright test --headed --reporter=html,list"
+    "bddgen": "npx bddgen",
+    "test": "npx playwright test --headed --reporter=html,list"
   },
   "keywords": [],
   "author": "",
@@ -15,5 +15,9 @@
     "@playwright/test": "^1.48.2",
     "@types/node": "^22.9.0",
     "playwright-bdd": "^7.5.0"
+  },
+  "dependencies": {
+    "playwright": "^1.48.2",
+    "xlsx": "^0.18.5"
   }
 }

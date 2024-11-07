@@ -13,7 +13,7 @@ import { defineBddConfig } from 'playwright-bdd';
 const testDir = defineBddConfig({
   paths: ['tests/Features/001_Login.feature'],
   
-  steps: ['tests/StepDefinitions/*.js','tests/Hooks/Hooks.js'],
+  steps: ['tests/StepDefinitions/LoginSteps.js','tests/Hooks/Hooks.js'],
 });
 module.exports = defineConfig({
   testDir,
