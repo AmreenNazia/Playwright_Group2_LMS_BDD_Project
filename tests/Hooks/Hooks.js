@@ -1,54 +1,29 @@
-// const {chromium} = require('@playwright/test');
-// let browser,page,context;
-// import { createBdd } from "playwright-bdd";
-// const { Before, After } = createBdd();
+const {After, Before,AfterStep,Status} = require('@cucumber/cucumber');
+const playwright = require('@playwright/test');
+Before(async function () {
+    // This hook will be executed before all scenarios
+    const browser = await playwright.chromium.launch({
+      headless: false,
+  });
+  const context = await browser.newContext();
+    this.page =  await context.newPage();
+  });
 
-// Before(async () => {
-//     browser = await chromium.launch();
-//     context = await browser.newContext();
-//     page = await context.newPage();
-//     // await page.goto('https://playwright-frontend-app-a9ea85794ad9.herokuapp.com/login'); 
-//     console.log(page)
-//   });
+  AfterStep( async function ({result}) {
+    // This hook will be executed after all steps, and take a screenshot on step failure
+    if (result.status === Status.FAILED) {
+      const buffer = await this.page.screenshot();
+      await this.page.screenshot({ path: 'screenshot1.png' });
+      this.attach(buffer.toString('base64'), 'base64:image/png');
+      console.log("Screenshot logged")
 
-//   After(async () => {
-//     // await browser.close();
-//   });
-
-const { chromium } = require('@playwright/test');
-import { createBdd } from 'playwright-bdd';
-const { Before, After } = createBdd();
-
-let browser, context, page;
-
-Before(async function (testContext ) {
-    try {
-        browser = await chromium.launch();
-        context = await browser.newContext();
-       page = await context.newPage();
-       testContext.page = page;
-        // await page.goto('https://playwright-frontend-app-a9ea85794ad9.herokuapp.com/login');
-
-        // Debug logging to confirm navigation
-        console.log('Page title:', await this.page.title());
-    } catch (error) {
-        console.error('Error during Before hook:', error);
     }
+  });
+  After(async function () {
+    // Assuming this.driver is a selenium webdriver
+    console.log("Browser will close");
+    
+    
+  });
 
-    // Make sure the page is accessible as part of the test context
-    this.page = page;
-});
-
-After(async function () {
-    if (page) {
-        await page.close();
-    }
-    if (context) {
-        await context.close();
-    }
-    if (browser) {
-        await browser.close();
-    }
-});
-
- 
+  
