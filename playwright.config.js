@@ -11,9 +11,9 @@ import { defineBddConfig } from 'playwright-bdd';
  * @see https://playwright.dev/docs/test-configuration
  */
 const testDir = defineBddConfig({
-  paths: ['tests/Features/001_Login.feature'],
+  features: ['tests/Features/001_Login.feature'],
   
-  steps: ['tests/StepDefinitions/LoginSteps.js','tests/Hooks/Hooks.js'],
+  steps: ['tests/StepDefinitions/***.js','tests/Hooks/Hooks.js']
 });
 module.exports = defineConfig({
   testDir,
@@ -34,7 +34,9 @@ module.exports = defineConfig({
     // baseURL: 'http://127.0.0.1:3000',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',
+    trace: 'on',
+    screenshot : 'only-on-failure',
+    video:'retain-on-failure'
   },
 
   /* Configure projects for major browsers */

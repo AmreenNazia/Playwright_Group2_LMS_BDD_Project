@@ -1,11 +1,11 @@
-/** Generated from: tests\Features\001_Login.feature */
+/** Generated from: tests/Features/001_Login.feature */
 import { test } from "playwright-bdd";
 
 test.describe("", () => {
 
-  test("Validate login with valid credentials", async ({ Given, page, When, Then }) => {
-    await Given("Admin is in login Page", null, { page });
-    await When("Admin enter valid username and password from excel file and clicks login button", null, { page });
+  test("Validate login with valid credentials", async ({ Given, When, Then }) => {
+    await Given("Admin is in login Page");
+    await When("Admin enter valid username and password from excel file and clicks login button");
     await Then("Admin should land on dashboard page.");
   });
 
@@ -15,7 +15,7 @@ test.describe("", () => {
 
 test.use({
   $test: ({}, use) => use(test),
-  $uri: ({}, use) => use("tests\\Features\\001_Login.feature"),
+  $uri: ({}, use) => use("tests/Features/001_Login.feature"),
   $bddFileMeta: ({}, use) => use(bddFileMeta),
 });
 
