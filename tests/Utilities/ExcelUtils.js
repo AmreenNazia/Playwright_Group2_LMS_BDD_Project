@@ -1,17 +1,22 @@
-const xlsx = require('xlsx');
-/**
- * Function to read data from an Excel sheet.
- * @param {string} filePath - The path to the Excel file.
- * @param {string} sheetName - The name of the sheet to read.
- * @returns {Array<Object>} - Returns data as an array of key-value objects.
- */
+const ExcelJS = require('exceljs');
 
- function readExcelData(filepath, sheetName){
-    const workbook = xlsx.readFile(filepath);
-    const sheet = workbook.Sheets[sheetName];
-    const jsonData = xlsx.utils.sheet_to_json(sheet);
-    return jsonData;
- }
+async function readExcelFile(SheetPath, SheetName) {
+   const workbook = new ExcelJS.Workbook();
+   await workbook.xlsx.readFile(SheetPath);
+   const worksheet = workbook.getWorksheet(SheetName);
 
- module.exports = {readExcelData,};
+   const data = [];
+   worksheet.eachRow((row, rowNumber) => {
+      // Assuming your Excel data has headers in the first row and data below
+      if (rowNumber > 1) {  // Skip the header row (if any)
+         data.push({
+            username: row.getCell(1).value,  // Assuming username is in the first column
+            password: row.getCell(2).value   // Assuming password is in the second column
+         });
+      }
+   });
 
+   return data;  // Return the data array
+}
+
+module.exports = { readExcelFile };
