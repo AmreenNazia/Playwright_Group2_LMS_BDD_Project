@@ -1,6 +1,7 @@
 const { assert } = require('console');
-const { readExcelFile } = require('../Utilities/ExcelUtils');  // Import the function
+const { getDataByKeyOption } = require('../Utilities/ExcelUtils');  // Import the function
 const { expect } = require('playwright/test');
+
 
  class LoginPage {
     constructor(page) {
@@ -18,9 +19,19 @@ const { expect } = require('playwright/test');
     }
 
     async loginPage() {
-        // Wait for the data from the Excel file
-        const testData = await readExcelFile('/Users/amreennaziasyed/Downloads/Amreen.xlsx', 'Login');
+
         
+        // Wait for the data from the Excel file
+        // const testData = await readExcelFile('/Users/amreennaziasyed/Downloads/Amreen.xlsx', 'Login');
+        // const filepath = 'tests/TestData/PlayWright_Group2_Data.xlsx';
+        // const sheetName = 'Login';
+        // const keyOption = 'ValidCredential'
+
+        // const testData = getDataByKeyOption(filepath,sheetName,keyOption);
+        // const userName = testData['UserNameData'];
+        // console.log(userName)
+        // const password = testData['PasswordData']
+        // console.log(password)
         // // If testData is empty or no data found, throw an error
         // if (testData.length === 0) {
         //     throw new Error('No test data found in the Excel sheet');
@@ -32,10 +43,10 @@ const { expect } = require('playwright/test');
         // if (!username || !password) {
         //     throw new Error('Username or password not found in test data');
         // }
-        const username = testData.find(data => data.Key === 'userName');
-        const password = testData.find(data => data.Key === 'password');
-        await this.username.fill(username.Value);
-        await this.password.fill(password.Value);
+        // const username = testData.find(data => data.Key === 'userName');
+        // const password = testData.find(data => data.Key === 'password');
+        await this.username.fill(userName);
+        await this.password.fill(password);
         await this.login_btn.click();
     }
 
@@ -43,5 +54,23 @@ const { expect } = require('playwright/test');
         
        await expect(this.logout).toBeVisible();
     }
+    async validLogin(keyOption){
+        const filepath = 'tests/TestData/PlayWright_Group2_Data.xlsx';
+        const sheetName = 'Login';
+        // const keyOption = 'ValidCredential';
+        
+        const testData = getDataByKeyOption(filepath,sheetName,keyOption);
+        const userName = testData['UserNameData'];
+        console.log(userName)
+        const password = testData['PasswordData']
+        console.log(password)
+        await this.username.fill(userName);
+        await this.password.fill(password);
+        await this.login_btn.click();
+    }
+    
+    
 }
+
+
 module.exports = {LoginPage}

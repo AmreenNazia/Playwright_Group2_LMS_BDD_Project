@@ -2,8 +2,8 @@
 Feature:
 Login Page Verification
 
-# Background: 
-# Given Admin gives the correct LMS portal URL
+Background: 
+Given Admin launch the browser
 
 # Scenario Outline: Validate login with valid credentials
 # Given Admin is in login Page
@@ -14,7 +14,47 @@ Login Page Verification
 # |   userName                    |   password        |
 # |   playwrightuser@gmail.com    |   Playwright@1234 |
 
-Scenario: Validate login with valid credentials
+Scenario Outline: Validate login with valid credentials
 Given Admin is in login Page
-When Admin enter valid username and password from excel file and clicks login button 
+When Admin enter valid username and password from excel file for the scenario "<KeyOption>" and clicks login button 
 Then Admin should land on dashboard page.  
+
+Examples:
+|   KeyOption        |
+|   ValidCredential  |
+
+Scenario Outline: Validate login with invalid credentials
+Given Admin is in login Page
+When Admin enter invalid credentials from excel file for the Scenario "<KeyOption>" and clicks login button 
+Then Admin should receive an error message
+
+Examples:
+|   KeyOption                   |
+|   InvalidCredential         |
+
+
+
+Scenario Outline: Validate login credentials with null Adminname
+Given Admin is in login Page
+When Admin enter value only in password for the "<KeyOption>" from the exceland clicks login button 
+Then Admin should receive an error message
+Examples:
+|   KeyOption                   |
+|   InValidNullUsername         |
+
+# Scenario Outline: Validate login credentials with null password
+# Given Admin is in login Page
+# When Admin enter value only in adminname for the "<KeyOption>" from the excel and clicks login button 
+# Then Admin should receive an error message
+# Examples:
+# |   KeyOption                   |
+# |   InValidNullPassword         |
+
+# Scenario Outline: Validate login credentials with null userName and password
+# Given Admin is in login Page
+# When Admin try to login leaving adminname and password blank for the "<KeyOption>" from the excel and clicks login button 
+# Then Admin should receive an error message
+# Examples:
+# |   KeyOption                           |
+# |   InValidEmptyUserAndPassword         |
+
