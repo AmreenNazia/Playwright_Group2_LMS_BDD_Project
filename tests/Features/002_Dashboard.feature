@@ -1,2 +1,2 @@
 Feature: Validating Dashboard Page
-Scenario: 
+Scenario:  Dashboard Page
