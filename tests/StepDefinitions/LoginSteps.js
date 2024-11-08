@@ -1,26 +1,24 @@
 import { createBdd } from "playwright-bdd";
 const { Given, When, Then } = createBdd();
 const { POManager } = require('../PageObject/POManager'); 
- 
+const { expect } = require('@playwright/test')
+let login_Page;
 
-Given('Admin gives the correct LMS portal URL', async () => {
+Given('Admin gives the correct LMS portal URL', async function () {
     console.log("Admin is in the LMS Portal");
 });
 
-Given('Admin is in login Page', async () => {
+Given('Admin is in login Page', async function () {
     console.log("Admin is in the login page");
 });
 
-When('Admin enter valid username and password from excel file and clicks login button', async () => {
+When('Admin enter valid username and password from excel file and clicks login button', async function () {
    
-    // const pageManager = new POManager(page);  
-    // const login_Page = pageManager.getLoginPage();
-    //  poManager = new POManager(this.page)
-   const login_page =   this.poManager.getLoginPage();
-    await   login_page.goTo();
-    await   login_page.loginPage();
+     login_Page = this.pageManager.getLoginPage();
+    await   login_Page.goTo();
+    await   login_Page.loginPage();
 });
 
-Then('Admin should land on dashboard page.', async () => {
-    //  await  this.login_page.validation();
+Then('Admin should land on dashboard page.', async function () {
+    await login_Page.validate();
 });
