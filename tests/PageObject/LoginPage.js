@@ -8,7 +8,8 @@ const { expect } = require('playwright/test');
         this.username = page.locator('#username');
         this.password = page.locator('#password');
         this.login_btn = page.locator('#login');
-        this.logout_btn = page.locator('//div//button//span[text()="Logout"]');
+       this.logout = page.getByText('Logout');
+        // this.logout_btn = page.locator('//div//button//span[text()="Logout"]');
         
     }
 
@@ -20,25 +21,27 @@ const { expect } = require('playwright/test');
         // Wait for the data from the Excel file
         const testData = await readExcelFile('/Users/amreennaziasyed/Downloads/Amreen.xlsx', 'Login');
         
-        // If testData is empty or no data found, throw an error
-        if (testData.length === 0) {
-            throw new Error('No test data found in the Excel sheet');
-        }
+        // // If testData is empty or no data found, throw an error
+        // if (testData.length === 0) {
+        //     throw new Error('No test data found in the Excel sheet');
+        // }
 
-        // // Log in using the first set of credentials from the test data (you can adjust this as needed)
-        const { username, password } = testData[0];  // Assuming you're using the first row's credentials
+        // // // Log in using the first set of credentials from the test data (you can adjust this as needed)
+        // const { username, password } = testData[0];  // Assuming you're using the first row's credentials
 
-        if (!username || !password) {
-            throw new Error('Username or password not found in test data');
-        }
-
-        await this.username.fill(username);
-        await this.password.fill(password);
+        // if (!username || !password) {
+        //     throw new Error('Username or password not found in test data');
+        // }
+        const username = testData.find(data => data.Key === 'userName');
+        const password = testData.find(data => data.Key === 'password');
+        await this.username.fill(username.Value);
+        await this.password.fill(password.Value);
         await this.login_btn.click();
     }
 
     async validate(){
-            
+        
+       await expect(this.logout).toBeVisible();
     }
 }
 module.exports = {LoginPage}
