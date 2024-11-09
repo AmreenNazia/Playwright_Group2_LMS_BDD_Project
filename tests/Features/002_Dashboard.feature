@@ -1,4 +1,4 @@
-@only
+
 Feature: Validating Dashboard Page
     Background:
         Given Admin gives the correct LMS portal URL
