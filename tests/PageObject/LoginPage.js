@@ -1,4 +1,3 @@
-const { assert } = require('console');
 const { readExcelFile } = require('../Utilities/ExcelUtils');  // Import the function
 const { expect } = require('playwright/test');
 
@@ -9,7 +8,7 @@ const { expect } = require('playwright/test');
         this.password = page.locator('#password');
         this.login_btn = page.locator('#login');
        this.logout = page.getByText('Logout');
-        // this.logout_btn = page.locator('//div//button//span[text()="Logout"]');
+    
         
     }
 
@@ -19,19 +18,7 @@ const { expect } = require('playwright/test');
 
     async loginPage() {
         // Wait for the data from the Excel file
-        const testData = await readExcelFile('/Users/amreennaziasyed/Downloads/Amreen.xlsx', 'Login');
-        
-        // // If testData is empty or no data found, throw an error
-        // if (testData.length === 0) {
-        //     throw new Error('No test data found in the Excel sheet');
-        // }
-
-        // // // Log in using the first set of credentials from the test data (you can adjust this as needed)
-        // const { username, password } = testData[0];  // Assuming you're using the first row's credentials
-
-        // if (!username || !password) {
-        //     throw new Error('Username or password not found in test data');
-        // }
+        const testData = readExcelFile('tests/TestData/PlayWright_Group2_Data.xlsx', 'Login');
         const username = testData.find(data => data.Key === 'userName');
         const password = testData.find(data => data.Key === 'password');
         await this.username.fill(username.Value);
