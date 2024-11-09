@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "bddgen": "npx bddgen",
-    "test": "npx playwright test --headed --reporter=html,list"
+    "test": "npx playwright test --headed --reporter=html,list,allure-playwright"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +14,7 @@
     "@cucumber/cucumber": "^11.0.1",
     "@playwright/test": "^1.48.2",
     "@types/node": "^22.9.0",
+    "allure-playwright": "^3.0.6",
     "playwright-bdd": "^7.5.0"
   },
   "dependencies": {
