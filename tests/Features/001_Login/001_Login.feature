@@ -1,5 +1,4 @@
-Feature:
-Login Page Verification
+Feature:Login Page Verification
 
 Background: 
 Given Admin launch the browser

@@ -1,4 +1,4 @@
-@only
+
 Feature: Manage Program Page validation
 
     Background:
