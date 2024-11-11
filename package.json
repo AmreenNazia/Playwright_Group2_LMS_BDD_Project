@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "clear-screenshots": "node clearScreenshots.js",
     "bddgen": "npx bddgen",
-    "test": "npx playwright test --headed --reporter=html,list"
+    "test": "npx playwright test --headed --reporter=html,list,allure-playwright"
   },
   "keywords": [],
   "author": "",
@@ -14,10 +15,15 @@
     "@cucumber/cucumber": "^11.0.1",
     "@playwright/test": "^1.48.2",
     "@types/node": "^22.9.0",
+    "allure-playwright": "^3.0.6",
     "playwright-bdd": "^7.5.0"
   },
   "dependencies": {
+<<<<<<< HEAD
     "checker": "^0.5.2",
+=======
+    "dotenv": "^16.4.5",
+>>>>>>> 8988f86ad5852def525b99a7a3a0f193017cb1de
     "playwright": "^1.48.2",
     "simple-spellchecker": "^1.0.2",
     "spell": "^1.0.0",

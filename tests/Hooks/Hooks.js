@@ -1,16 +1,16 @@
 
 const { createBdd } = require('playwright-bdd');
 const { Before, After } = createBdd();
-
 const playwright = require('@playwright/test');
-  const { POManager } = require('../PageObject/POManager');
-const { AfterStep, Status } = require('@cucumber/cucumber');
-const path = require('path');
+
+const { POManager } = require('../PageObject/POManager');
+// const { AfterStep } = require('@cucumber/cucumber');
+ 
 
  Before(async function () {
   // This hook will be executed before all scenarios
   const browser = await playwright.chromium.launch({
-    headless: false,
+    headless: true,
   });
   const context = await browser.newContext();
   this.page = await context.newPage();
@@ -20,11 +20,8 @@ const path = require('path');
 
 After(async function () {
   // Assuming this.driver is a selenium webdriver
-  console.log("Browser will close");
+  await this.page.screenshot({ path: `screenshots/screenshot-${Date.now()}.png` });
+  // console.log("Browser will close");
 });
 
-// AfterStep(async function ({result}){
-//   if(result.status = Status.FAILED){
-//     await this.page.screenshot({path: 'Screenshots/screenshot1.png'});
-//   }
-// });
+ 

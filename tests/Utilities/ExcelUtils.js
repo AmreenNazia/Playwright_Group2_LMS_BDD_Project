@@ -1,4 +1,3 @@
-// const ExcelJS = require('exce');
 const xlsx = require('xlsx');
 
 function readExcelFile(filepath, sheetName){
@@ -15,4 +14,7 @@ function getDataByKeyOption(filepath, sheetName, keyOptionValue) {
    return matchedEntry || {};
 } 
 module.exports = { readExcelFile };
+
 module.exports = {getDataByKeyOption};
+
+

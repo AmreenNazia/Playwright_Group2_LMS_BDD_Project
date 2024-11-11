@@ -6,7 +6,9 @@ const { getDataByKeyOption } = require('../Utilities/ExcelUtils');  // Import th
 let login_Page;
 
 Given('Admin gives the correct LMS portal URL', async function () {
-    console.log("Admin is in the LMS Portal");
+    login_Page = this.pageManager.getLoginPage();
+    await login_Page.goTo();
+    
 });
 
 // 1. Missing step definition for "tests\Features\001_Login.feature:6:1"
@@ -16,8 +18,11 @@ Given('Admin launch the browser', async function() {
 });
 
 Given('Admin is in login Page', async function () {
-    console.log("Admin is in the login page");
+    login_Page = this.pageManager.getLoginPage();
+ 
+    await expect(this.page.getByText('Please login to LMS application')).toBeVisible();
 });
+
 
 When('Admin enter valid username and password from excel file and clicks login button', async function ({},KeyOption) {
    
@@ -187,3 +192,4 @@ When('Admin gives the invalid LMS portal URL', async function ()  {
 //     // ...
 //   });
   
+
