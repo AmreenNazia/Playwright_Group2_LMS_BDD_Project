@@ -5,7 +5,15 @@ const { expect } = require('@playwright/test');
 let dashboard_Page
 const KeyOption = 'Dashboard';
  
-
+When('Admin enter valid username and password from the scenario {string} and {string} and clicks login button', async function ({}, KeyOption, sheetname) {
+     login_Page = this.pageManager.getLoginPage();
+     await login_Page.goTo();
+     await login_Page.validLogin(KeyOption,sheetname);
+   });
+   
+   Then('Admin should land on dashboard page.', async function () {
+     await expect(this.page.getByText('Logout')).toBeVisible();
+   });
  
 Then('Admin should see LMS -Learning management system as title from scenario {string}', async function({}, KeyOption) {
     
@@ -63,6 +71,7 @@ Then('Admin should see program in the 2nd place from scenario {string}', async f
      const order = await dashboard_Page.navorder(KeyOption);
      expect(order.actual_nav_order).toBe(order.expected_nav_text);
    });
+   
 
 
  

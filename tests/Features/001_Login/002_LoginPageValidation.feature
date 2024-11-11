@@ -17,7 +17,6 @@ Scenario: Verify for broken link
 When Admin gives the correct LMS portal URL
 Then HTTP response >= 400. Then the link is broken
 
-@only
 Scenario: Verify the text spelling in the page 
 When Admin gives the correct LMS portal URL
 Then Admin should see correct spellings in all fields 
