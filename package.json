@@ -17,7 +17,10 @@
     "playwright-bdd": "^7.5.0"
   },
   "dependencies": {
+    "checker": "^0.5.2",
     "playwright": "^1.48.2",
+    "simple-spellchecker": "^1.0.2",
+    "spell": "^1.0.0",
     "xlsx": "^0.18.5"
   }
 }

@@ -11,7 +11,7 @@ import { defineBddConfig } from 'playwright-bdd';
  * @see https://playwright.dev/docs/test-configuration
  */
 const testDir = defineBddConfig({
-  features:['tests/Features/001_Login.feature'],
+  features:['tests/Features/LoginPageValidation.feature'],
   
   steps:['tests/StepDefinitions/LoginSteps.js','tests/Hooks/Hooks.js']
 });
