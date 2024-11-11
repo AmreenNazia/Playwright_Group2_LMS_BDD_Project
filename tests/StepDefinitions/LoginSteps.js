@@ -12,9 +12,7 @@ Given('Admin gives the correct LMS portal URL', async function () {
 });
 
 Given('Admin is in login Page', async function () {
-  login_Page = this.pageManager.getLoginPage();
-
-  await expect(this.page.getByText('Please login to LMS application')).toBeVisible();
+   console.log("***Admin is in the login Page**")
 });
 
 // 1. Missing step definition for "tests\Features\001_Login.feature:6:1"

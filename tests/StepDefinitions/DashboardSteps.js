@@ -6,8 +6,8 @@ let dashboard_Page
 const KeyOption = 'Dashboard';
  
 When('Admin enter valid username and password from the scenario {string} and {string} and clicks login button', async function ({}, KeyOption, sheetname) {
-     login_Page = this.pageManager.getLoginPage();
-     await login_Page.goTo();
+    const login_Page = this.pageManager.getReusablePage();
+     await login_Page.navigate();
      await login_Page.validLogin(KeyOption,sheetname);
    });
    
@@ -19,7 +19,7 @@ Then('Admin should see LMS -Learning management system as title from scenario {s
     
      dashboard_Page = this.pageManager.getDashboardPage();
      const title_text = await dashboard_Page.title(KeyOption);
-     expect.soft(title_text.actual_title).toBe(title_text.expectedtitle);
+     expect(title_text.actual_title).toBe(title_text.expectedtitle);
 });
 
  
