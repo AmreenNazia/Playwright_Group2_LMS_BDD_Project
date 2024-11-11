@@ -1,6 +1,7 @@
 // @ts-check
 const { defineConfig, devices } = require('@playwright/test');
 import { defineBddConfig } from 'playwright-bdd';
+
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
@@ -11,7 +12,7 @@ import { defineBddConfig } from 'playwright-bdd';
  * @see https://playwright.dev/docs/test-configuration
  */
 const testDir = defineBddConfig({
-  features:['tests/Features/***.feature'],
+  features:['tests/Features/***/***.feature'],
   
   steps:['tests/StepDefinitions/***.js','tests/Hooks/Hooks.js']
 });
@@ -23,7 +24,7 @@ module.exports = defineConfig({
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
  
- retries: 1,
+//  retries: 1,
  
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
