@@ -11,17 +11,18 @@ Given('Admin gives the correct LMS portal URL', async function () {
     
 });
 
+Given('Admin is in login Page', async function () {
+  login_Page = this.pageManager.getLoginPage();
+
+  await expect(this.page.getByText('Please login to LMS application')).toBeVisible();
+});
+
 // 1. Missing step definition for "tests\Features\001_Login.feature:6:1"
 Given('Admin launch the browser', async function() {
   login_Page = this.pageManager.getLoginPage();
  await login_Page.goTo();
 });
 
-Given('Admin is in login Page', async function () {
-    login_Page = this.pageManager.getLoginPage();
- 
-    await expect(this.page.getByText('Please login to LMS application')).toBeVisible();
-});
 
 
 When('Admin enter valid username and password from excel file and clicks login button', async function ({},KeyOption) {
@@ -31,10 +32,7 @@ When('Admin enter valid username and password from excel file and clicks login b
     await   login_Page.validLogin(KeyOption);
 });
 
-Then('Admin should land on dashboard page.', async function () {
-  login_Page = this.pageManager.getLoginPage();  
-  await login_Page.validate();
-});
+
 
   // 2. Missing step definition for "tests\Features\001_Login.feature:19:1"
   When('Admin enter valid username and password from excel file for the scenario {string} and clicks login button', async function({},KeyOption)  {
