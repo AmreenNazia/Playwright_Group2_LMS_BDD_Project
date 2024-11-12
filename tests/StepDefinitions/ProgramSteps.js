@@ -3,8 +3,10 @@ const { Given, When, Then }= createBdd();
 const { POManager } = require('../PageObject/POManager'); 
 const { expect } = require('@playwright/test');
 const exp = require('constants');
+require('dotenv').config();
 let program;
 let reusablepage;
+
 
 
 // 1. Missing step definition for "tests/Features/003_Program.feature:5:1"
@@ -114,4 +116,101 @@ Then('Admin should see the sort arrow icon beside to each column header except E
   program = await this.pageManager.getProgramPage(); 
   program.checkSortIconsVisibility() ;
    
+});
+
+When('Admin clicks on Edit option for particular program', async function (){
+  program =  await this.pageManager.getProgramPage();
+  await program.clickEditIcon();
+});
+
+Then('Admin lands on Program details form', async function () {
+  program =  await this.pageManager.getProgramPage();
+  await program.AssertProgramDetailsPage();
+});
+
+Then('Admin should see window title as {string}', async function ({}, arg)  {
+  program =  await this.pageManager.getProgramPage();
+  await program.AssertProgramDetailsPage();
+});
+
+Then('Admin should see red {string} mark beside mandatory field {string}', async function ({}, arg, arg1)  {
+  await program.AssertMandatoryFields();
+});
+
+
+When('Admin edits the program name and click on save button', async function (){
+  program =  await this.pageManager.getProgramPage();
+  await program.editProgramName();
+});
+
+
+Then('Updated program name is seen by the Admin', async function () {
+  expect (await program.editProgramName).toBeTruthy();
+});
+
+
+When('Admin edits the description text and click on save button', async function (){
+  program =  await this.pageManager.getProgramPage();
+  await program.editProgramDescription();
+});
+
+
+Then('Admin can see the description is updated', async function (){
+  expect (await program.editProgramDescription).toBeTruthy();
+});
+
+
+When('Admin can change the status of the program and click on save button', async function () {
+  program =  await this.pageManager.getProgramPage();
+  await program.statusUpdate();
+});
+
+
+Then('Status updated can be viewed by the Admin', async function () {
+  expect (await program.statusUpdate).toBeTruthy();
+});
+
+
+When('Admin click on save button', async function () {
+  program =  await this.pageManager.getProgramPage();
+  await program.editProgramDescription();
+
+});
+
+
+Then('Admin can see the updated program details', async function () {
+  expect (await program.editProgramDescription).toBeTruthy();
+});
+
+
+When('Admin click on cancel button', async function () {
+  program =  await this.pageManager.getProgramPage();
+  program.clickCancel();
+});
+
+
+Then('Admin can see the Program details form disappears', async function () {
+  console.log('Admin clicked cancel no changes made')
+});
+
+
+When('Admin searches with newly updated {string}', async function () {
+  program =  await this.pageManager.getProgramPage();
+  program.editProgramName();
+});
+
+
+Then('Admin verifies that the details are correctly updated.', async function () {
+  expect (await program.editProgramName).toBeTruthy();
+});
+
+
+When('Admin Click on {string} button',async function () {
+  program =  await this.pageManager.getProgramPage();
+  program.clickClose();
+});
+
+
+Then('Admin can see program details form disappear', async function () {
+  console.log('Admin closed the program Description page')
 });

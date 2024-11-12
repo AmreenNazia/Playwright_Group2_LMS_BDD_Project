@@ -1,8 +1,10 @@
 const { expect } = require('@playwright/test');
 const exp = require('constants');
+const { ReusablePage } = require('./ReusablePage');
 // const { getDataByKeyOption } = require('../Utilities/ExcelUtils'); 
 const filepath = 'tests/TestData/PlayWright_Group2_Data.xlsx';
 require('dotenv').config();
+
 
 class ProgramPage {
   constructor(page) {
@@ -21,6 +23,22 @@ class ProgramPage {
     this.checkbox_headerlevel = page.locator('//tr//th[1]//input[@type="checkbox"]');
     this.eachrow_checkbox = page.locator('//tbody//tr//td[1]//input');
     this.sorticons = page.locator('//th//p-sorticon');
+    this.editIcon = page.locator('//tr[1]//button[@id = "editProgram"]');
+    this.programDetailsPage = page.getByText('Program Details')
+    this.mandatoryFields = page.locator('label').filter({ hasText: 'Name*' }).locator('span');
+    this.aestrikAssetion = page.getByLabel('Program Details')
+    this.specificEditIcon = page.locator('#editProgram');
+    this.programNameTextBox = page.locator('#programName');
+    this.saveProgram = page.getByText('Save');
+    this.lastPageIcon = page.locator('.p-paginator-last p-paginator-element p-link p-ripple ng-star-inserted');
+    this.savedProgramNameAssertion = page.locator('//td[2]')
+    this.programDescriptionTextBox = page.locator('#programDescription');
+    this.savedProgramDesc = page.locator('//td[3]');
+    this.successMessage = page.locator('.Successful');
+    this.activeRadioButton = page.locator('//p-radiobutton[@ng-reflect-input-id = "Active"]')
+    this.savedStatus = page.locator('//td[4]')
+    this.cancelProgramBtn = page.getByText('Cancel');
+    this.closeIcon = page.locator('//span[@ng-reflect-ng-class = "pi pi-times"]');
   }
   async click_program() {
     await this.program_btn.waitFor({ state: 'visible' })
@@ -91,6 +109,63 @@ class ProgramPage {
     }
     console.log('All sort icons are visible');
   }
+
+  async clickEditIcon(){
+    await this.overlayer.click();
+    this.editIcon.click();
+  }
+
+  async AssertProgramDetailsPage(){
+    expect (await this.programDetailsPage).toHaveText(/.*Program Details/);
+  }
+
+  async AssertMandatoryFields(){
+    await expect(this.aestrikAssetion).toContainText('*');
+  }
+
+  async editProgramName(){
+    await (this.search_text).fill('PlayWrightGroupTwo');
+    await this.overlayer.click();
+    await (this.specificEditIcon).click();
+    await (this.programNameTextBox).fill('PlayWrightGrouptwo');
+    await (this.saveProgram).click();
+    expect (await this.savedProgramNameAssertion).toHaveText('PlayWrightGrouptwo');
+  }
+
+  async editProgramDescription(){
+    await (this.search_text).fill('PlayWright Automation using');
+    await this.overlayer.click();
+    await (this.specificEditIcon).click();
+    await (this.programDescriptionTextBox).fill('PlayWright Automation using Java');
+    await (this.saveProgram).click();
+    await (this.successMessage);
+    expect (await this.savedProgramDesc).toHaveText('PlayWright Automation using Java');
+  }
+  async statusUpdate(){
+    await (this.search_text).fill('PlayWright Automation using');
+    await this.overlayer.click();
+    await (this.specificEditIcon).click();
+    await (this.activeRadioButton).click();
+    await (this.saveProgram).click();
+    await (this.successMessage);
+    expect (await this.savedStatus).toHaveText('Active');
+  }
+
+ async clickCancel(){
+  await (this.search_text).fill('PlayWright Automation using');
+    await this.overlayer.click();
+    await (this.specificEditIcon).click();
+    await (this.cancelProgramBtn).click();
+    expect (await this.programDetailsPage).not.toBeVisible();
+ }
+ 
+ async clickClose(){
+  await (this.search_text).fill('PlayWright Automation using');
+  await this.overlayer.click();
+  await (this.specificEditIcon).click();
+  await (this.closeIcon).click();
+  expect (await this.programDetailsPage).not.toBeVisible();
+ }
 }
 
 module.exports = { ProgramPage }

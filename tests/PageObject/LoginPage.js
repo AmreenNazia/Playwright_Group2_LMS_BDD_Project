@@ -1,9 +1,8 @@
 
-const { assert } = require('console');
 const { getDataByKeyOption } = require('../Utilities/ExcelUtils');  
-
 const { expect } = require('playwright/test');
-const spellchecker = require('simple-spellchecker')
+const Tesseract = require('tesseract.js');
+const sharp = require('sharp')
 
 
 
@@ -21,47 +20,15 @@ const spellchecker = require('simple-spellchecker')
        this.passErrorMessage = page.getByText(' Please enter your password ');
        this.formPage = page.locator('.ng-untouched ng-pristine ng-invalid');
        this.links = page.locator('link');
-        // this.logout_btn = page.locator('//div//button//span[text()="Logout"]');
-
+       this.Home_image = page.locator('.image-container'); 
     }
 
     async goTo() {
         await this.page.goto('https://playwright-frontend-app-a9ea85794ad9.herokuapp.com/login');
          
     }
-    // async InvaligoTo() {
-    //     await this.page.goto('https://playwright-frontend-app-a9ea8579ad9.herokuapp.com/logi');
-    // }
-
-
-
+  
     async loginPage() {
-
-        
-        // Wait for the data from the Excel file
-        // const testData = await readExcelFile('/Users/amreennaziasyed/Downloads/Amreen.xlsx', 'Login');
-        // const filepath = 'tests/TestData/PlayWright_Group2_Data.xlsx';
-        // const sheetName = 'Login';
-        // const keyOption = 'ValidCredential'
-
-        // const testData = getDataByKeyOption(filepath,sheetName,keyOption);
-        // const userName = testData['UserNameData'];
-        // console.log(userName)
-        // const password = testData['PasswordData']
-        // console.log(password)
-        // // If testData is empty or no data found, throw an error
-        // if (testData.length === 0) {
-        //     throw new Error('No test data found in the Excel sheet');
-        // }
-
-        // // // Log in using the first set of credentials from the test data (you can adjust this as needed)
-        // const { username, password } = testData[0];  // Assuming you're using the first row's credentials
-
-        // if (!username || !password) {
-        //     throw new Error('Username or password not found in test data');
-        // }
-        // const username = testData.find(data => data.Key === 'userName');
-        // const password = testData.find(data => data.Key === 'password');
 
         await this.username.fill(userName);
         await this.password.fill(password);
@@ -136,6 +103,9 @@ const spellchecker = require('simple-spellchecker')
     async geterrorMessage(){
         return errorMessage;
     }
+    async AssertSigninPage(expText){   
+        expect(await this.signinPage.textContent()).toEqual(expText);
+    }
 
     async verifyURL(){
         try {
@@ -188,6 +158,55 @@ const spellchecker = require('simple-spellchecker')
     }
   }
         }
+
+        async ExtractTextFromImage(){
+           
+            await this.Home_image.screenshot({path: 'homepage.png'})
+            await sharp('homepage.png')
+                .grayscale()
+                .threshold(150) 
+                // .normalize()
+                .toFile('processed_image.png')
+           let image_text = Tesseract.recognize(
+                'processed_image.png',
+                'eng',
+                
+                {
+                    psm: 6, 
+                    oem: 1 ,
+                    tessedit_char_whitelist: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz -',
+                    logger: m => console.log(m), 
+                }
+            )
+            
+            const extractedText = (await image_text).data.text;
+            console.log(extractedText)
+            // return extractedText;
+            
+        }
+
+        async verifyTextField(){
+            expect(await this.username).toHaveAttribute('data-placeholder')
+            expect (await this.password).toHaveAttribute('data-placeholder')
+        }
+
+       async userTextFieldAssetion(){
+        
+        expect(await this.username).toHaveAttribute('data-placeholder', 'User')
+       }
+
+       async passwordTextFieldAssertion(){
+        expect (await this.password).toHaveAttribute('data-placeholder', 'Password')
+       }
+
+       async loginBtnVisibility(){
+        expect (await this.login_btn).toBeVisible();
+       }
+
+       async AssertPlaceHolderColor(){
+        var styles = window.getComputedStyle(this.username, '::data-placeholder');
+        expect(styles.getPropertyValue('color')).toBe('grey');
+       }
     }
   
 
