@@ -21,6 +21,9 @@ class ProgramPage {
     this.checkbox_headerlevel = page.locator('//tr//th[1]//input[@type="checkbox"]');
     this.eachrow_checkbox = page.locator('//tbody//tr//td[1]//input');
     this.sorticons = page.locator('//th//p-sorticon');
+    this.editanddelete_icons = page.locator('//tr//td[5]');
+    this.bottomfooter = page.locator('//span[@class="p-paginator-current ng-star-inserted"]');
+    this.footer = page.getByText(' In total there are 20 programs. ');
   }
   async click_program() {
     await this.program_btn.waitFor({ state: 'visible' })
@@ -84,13 +87,31 @@ class ProgramPage {
   }
 
   async checkSortIconsVisibility() {
-    const sortIcons = await this.sorticons.elementHandles();
-    const count = await sortIcons.count();
-    for (let i = 0; i < count; i++) {
-      await expect(sortIcons.nth(i)).toBeVisible();
+    const count= await this.sorticons.count();
+      for (let i = 0; i < count; i++) {
+      await expect(this.sorticons.nth(i)).toBeVisible();
     }
     console.log('All sort icons are visible');
   }
+
+  async edit_deletebuttons(){
+    const count= await this.editanddelete_icons.count();
+    for (let i = 0; i < count; i++) {
+    await expect(this.editanddelete_icons.nth(i)).toBeVisible();
+  }
+  console.log('All Edit/Delete icons are visible');
 }
+async pagination_icons(){
+ const pagination_text =  await this.bottomfooter.textContent();
+ const actualtext =await pagination_text.toString();
+ return actualtext;
+}
+async footer_text(){
+  const footer_Text = await this.footer.textContent();
+  const actual_footer = await footer_Text.toString();
+  return actual_footer;
+}
+  }
+
 
 module.exports = { ProgramPage }

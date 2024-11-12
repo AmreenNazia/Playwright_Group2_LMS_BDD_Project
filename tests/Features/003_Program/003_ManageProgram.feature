@@ -39,11 +39,19 @@ Feature: Manage Program Page validation
          When Admin clicks Program on the navigation bar
         Then Admin should see the sort arrow icon beside to each column header except Edit and Delete
 
+    Scenario: Verify edit and delete icon in manage program
+         When Admin clicks Program on the navigation bar
+        Then Admin should see the Edit and Delete buttons on each row of the data table
+ 
+    Scenario: Verify pagination icons below data table in manage program
+         When Admin clicks Program on the navigation bar
+         Then Admin should see the text as "Showing x to y of z entries" along with Pagination icon below the table. x- starting record number on that page y-ending record number on that page z-Total number of records
 
-
-
-
-
+   
+    Scenario: Verify footer message in manage program
+         When Admin clicks Program on the navigation bar
+        Then Admin should see the footer as In total there are z programs.
+ 
 
 
 
