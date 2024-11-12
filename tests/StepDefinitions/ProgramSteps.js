@@ -4,7 +4,7 @@ const { POManager } = require('../PageObject/POManager');
 const { expect } = require('@playwright/test');
 const exp = require('constants');
 let program;
-let reusablepage;
+ 
 
 
 // 1. Missing step definition for "tests/Features/003_Program.feature:5:1"
@@ -114,4 +114,24 @@ Then('Admin should see the sort arrow icon beside to each column header except E
   program = await this.pageManager.getProgramPage(); 
   program.checkSortIconsVisibility() ;
    
+});
+
+Then('Admin should see the Edit and Delete buttons on each row of the data table', async function () {
+   program = await this.pageManager.getProgramPage();
+   program.edit_deletebuttons();
+
+});
+
+Then('Admin should see the text as {string} along with Pagination icon below the table. x- starting record number on that page y-ending record number on that page z-Total number of records', async function({}, text) {
+  program = await this.pageManager.getProgramPage();
+ const actual_text = await program.pagination_icons();
+ expect(actual_text).toMatch(/Showing/);
+  
+ 
+});
+
+Then('Admin should see the footer as In total there are z programs.', async function({}) {
+  program = await this.pageManager.getProgramPage();
+  const actual_footer = await program.footer_text();
+   expect(actual_footer).toMatch(/In/)
 });
