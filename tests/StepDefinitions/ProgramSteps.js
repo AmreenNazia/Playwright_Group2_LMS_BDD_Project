@@ -18,7 +18,7 @@ Given('Admin is logged in to LMS Portal', async function(){
   Given('Admin is on dashboard page after Login', async function() {
     const reusablepage = this.pageManager.getReusablePage();
    const actual_Text =  await  reusablepage.validate();
-   expect(actual_Text).toBe('Logout');
+   expect(await actual_Text).toBe('Logout');
          
   });
   
@@ -31,27 +31,27 @@ Given('Admin is logged in to LMS Portal', async function(){
   // 4. Missing step definition for "tests/Features/003_Program.feature:10:1"
   Then('Admin should be navigated to Program module', async function()   {
     const actual_text = await this.program.validate_manageprogram();
-    expect(actual_text).toBe(' Manage Program');
+    expect(await actual_text).toBe(' Manage Program');
   });
 
    
 Then('Admin should see Logout in menu bar', async function() {
    program = await this.pageManager.getProgramPage();
    const logout_visible=await program.logout_Menubar();
-   expect(logout_visible).toBe('Logout');
+   expect(await logout_visible).toBe('Logout');
 });
 
  
 Then('Admin should see the heading {string}', async function({},header){
   program = await this.pageManager.getProgramPage();
   const actual_header = await program.header_LMS();
-  expect(actual_header).toBe(header);
+  expect(await actual_header).toBe(header);
 });
 
 Then('Admin should see the module names as in order {string}', async function({}, expected_modulenames) {
    program = await this.pageManager.getProgramPage();
    const actual_modules = await program.modulenames();
-   expect(actual_modules).toBe(expected_modulenames);
+   expect(await actual_modules).toBe(expected_modulenames);
 });
 
 Given('Admin is on program page', async function(){
@@ -67,18 +67,18 @@ When('Admin clicks Program on navigation bar', async function() {
 // 2. Missing step definition for "tests/Features/003_Program/002_MenuBar.feature:24:1"
 Then('Admin should see sub menu in menu bar as {string}', async function({}, expected_submenubar) {
    const actual_submenu = await program.submenubar();
-   expect(actual_submenu).toBe(expected_submenubar);
+   expect(await actual_submenu).toBe(expected_submenubar);
 });
 
 Then('Admin should see heading {string}', async function({}, expected){
    this.program = await this.pageManager.getProgramPage();
    const actual_header = await this.program.validate_manageprogram();
-   expect(actual_header).toBe(expected);
+   expect(await actual_header).toBe(expected);
 });
 Then('Admin should able to see Program name, description, and status for each program', async function() {
    this.program = await this.pageManager.getProgramPage();
    const  actual_programdetails = await this.program.detailsOfProgram();
-   expect(actual_programdetails).toEqual(["Program Name ", "Program Description ", "Program Status "])
+   expect(await actual_programdetails).toEqual(["Program Name ", "Program Description ", "Program Status "])
 });
 
 Then('Admin should see a Delete button in left top is disabled', async function() {
@@ -95,7 +95,7 @@ Then('Admin should see a Delete button in left top is disabled', async function(
  Then('Admin should see data table with column header on the Manage Program Page as  Program Name, Program Description, Program Status, Edit\\/Delete', async function () {
     program = await this.pageManager.getProgramPage();
    const actual_header = await program.datacolumnheaders();
-   expect(actual_header).toStrictEqual(["","Program Name ", "Program Description ", "Program Status "," Edit / Delete "]);
+   expect(await actual_header).toStrictEqual(["","Program Name ", "Program Description ", "Program Status "," Edit / Delete "]);
    
  });
 
@@ -125,7 +125,7 @@ Then('Admin should see the Edit and Delete buttons on each row of the data table
 Then('Admin should see the text as {string} along with Pagination icon below the table. x- starting record number on that page y-ending record number on that page z-Total number of records', async function({}, text) {
   program = await this.pageManager.getProgramPage();
  const actual_text = await program.pagination_icons();
- expect(actual_text).toMatch(/Showing/);
+ expect(await actual_text).toMatch(/Showing/);
   
  
 });
@@ -133,7 +133,7 @@ Then('Admin should see the text as {string} along with Pagination icon below the
 Then('Admin should see the footer as In total there are z programs.', async function({}) {
   program = await this.pageManager.getProgramPage();
   const actual_footer = await program.footer_text();
-   expect(actual_footer).toMatch(/In/)
+   expect(await actual_footer).toMatch(/In/)
 });
 
 /* Add New Program */
@@ -150,7 +150,7 @@ Given('Admin is on program module after reaching dashboard', async function ({})
 Given('Admin is on Program module', async function({}) {
        program = await this.pageManager.getProgramPage();
        const actual_page = await program.validate_manageprogram();
-       expect(actual_page).toBe(' Manage Program');
+       expect(await actual_page).toBe(' Manage Program');
 });
 
 // 3. Missing step definition for "tests/Features/003_Program/004_AddNewProgram.feature:8:1"
@@ -166,13 +166,13 @@ When('Admin clicks on New Program under the Program menu bar', async function({}
 Then('Admin should see pop up window for program details', async function ({}){
          program = await this.pageManager.getProgramPage();
         const dialob_box = await program.dialogbox();
-        expect(dialob_box).toBeVisible();
+        expect(await dialob_box).toBeVisible();
 });
 
 Then('Admin should see window title as {string}', async function({}, expected) {
       program = await this.pageManager.getProgramPage();
      const actualtext = await program.program_details();
-      expect(actualtext).toBe(expected);
+      expect(await actualtext).toBe(expected);
 });
 
 Then('Admin should see red {string} mark beside mandatory field {string}', async function({}, arg, arg1) {

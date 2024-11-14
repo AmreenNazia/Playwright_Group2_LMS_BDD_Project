@@ -6,70 +6,81 @@ let dashboard_Page
 const KeyOption = 'Dashboard';
  
 When('Admin enter valid username and password from the scenario {string} and {string} and clicks login button', async function ({}, KeyOption, sheetname) {
-    const login_Page = this.pageManager.getReusablePage();
+    const login_Page = await this.pageManager.getReusablePage();
      await login_Page.navigate();
      await login_Page.validLogin(KeyOption,sheetname);
    });
    
    Then('Admin should land on dashboard page.', async function () {
-     await expect(this.page.getByText('Logout')).toBeVisible();
+    dashboard_Page = await this.pageManager.getDashboardPage();
+     const title_locator = await dashboard_Page.getHeadertitle();
+     const reusablepage = this.pageManager.getReusablePage();
+     await reusablepage.isVisible(title_locator);
+    
+     
    });
  
-Then('Admin should see LMS -Learning management system as title from scenario {string}', async function({}, KeyOption) {
+Then('Admin should see LMS -Learning management system as title', async function({}) {
+    dashboard_Page = await this.pageManager.getDashboardPage();
+     const title_locator = await dashboard_Page.getHeadertitle();
+     const reusablepage = this.pageManager.getReusablePage();
+     await reusablepage.isVisible(title_locator);
     
-     dashboard_Page = this.pageManager.getDashboardPage();
-     const title_text = await dashboard_Page.title(KeyOption);
-     expect(title_text.actual_title).toBe(title_text.expectedtitle);
 });
 
  
-Then('LMS title should be on the top left corner of page from scenario {string}', async function({}, KeyOption) {
-     dashboard_Page = this.pageManager.getDashboardPage();
+Then('LMS title should be on the top left corner of page', async function({}) {
+     dashboard_Page =await  this.pageManager.getDashboardPage();
       await dashboard_Page.allignment();
    });
 
     
-Then('Admin should see correct spelling in navigation bar text from scenario {string}', async function({}, KeyOption) {
-     
-      dashboard_Page = this.pageManager.getDashboardPage(); 
-     const text =   await dashboard_Page.navbartext(KeyOption);
-      expect(text.actual_nav_text).toBe(text.expected_nav_text);
-       
-   
+Then('Admin should see correct spelling in navigation bar text', async function({}) {
+  dashboard_Page = await this.pageManager.getDashboardPage();
+  const navbar_locator = await dashboard_Page.getNavbarText();
+  const reusablepage = this.pageManager.getReusablePage();
+  await reusablepage.isVisible(navbar_locator);
 });
 
-Then('Admin should see correct spelling and space in LMS title from scenario {string}', async function({}, KeyOption){
-     dashboard_Page = this.pageManager.getDashboardPage();
-     const title = await dashboard_Page.title(KeyOption);
-     expect(title.actual_title).toBe(title.expectedtitle);
+Then('Admin should see correct spelling and space in LMS title', async function({}){
+  dashboard_Page = await this.pageManager.getDashboardPage();
+  const title_locator = await dashboard_Page.getHeadertitle();
+  const reusablepage = this.pageManager.getReusablePage();
+  await reusablepage.isVisible(title_locator);
 });
 
-
-Then('Admin should see program in the 1st place from scenario {string}', async function({}, KeyOption) {
-   dashboard_Page = this.pageManager.getDashboardPage();
-   const order = await dashboard_Page.navorder(KeyOption);
-     expect(order.actual_nav_order).toBe(order.expected_nav_text);
-});
 
  
-Then('Admin should see program in the 2nd place from scenario {string}', async function({}, KeyOption){
-     dashboard_Page = this.pageManager.getDashboardPage();
-     const order = await dashboard_Page.navorder(KeyOption);
-     expect(order.actual_nav_order).toBe(order.expected_nav_text);
+Then('Admin should see {string} in the 1st place', async function({}, name)  {
+  dashboard_Page = await this.pageManager.getDashboardPage();
+  const navbarorder_locator = await dashboard_Page.getnavorderlocator();
+  const reusablepage = this.pageManager.getReusablePage();
+  await reusablepage.navbar_order(name,navbarorder_locator);
+});
+
+
+ 
+Then('Admin should see {string} in the 2nd place', async function({},name){
+  dashboard_Page = await this.pageManager.getDashboardPage();
+  const navbarorder_locator = await dashboard_Page.getnavorderlocator();
+  const reusablepage = this.pageManager.getReusablePage();
+  await reusablepage.navbar_order(name,navbarorder_locator);
 });
    
     
-   Then('Admin should see program in the 3rd place from scenario {string}', async function({}, KeyOption){
-     dashboard_Page = this.pageManager.getDashboardPage();
-     const order = await dashboard_Page.navorder(KeyOption);
-     expect(order.actual_nav_order).toBe(order.expected_nav_text);
+   Then('Admin should see {string} in the 3rd place', async function({},name){
+    dashboard_Page = await this.pageManager.getDashboardPage();
+    const navbarorder_locator = await dashboard_Page.getnavorderlocator();
+    const reusablepage = this.pageManager.getReusablePage();
+    await reusablepage.navbar_order(name,navbarorder_locator);
    });
    
     
-   Then('Admin should see program in the 4th place from scenario {string}', async function({}, KeyOption){
-     dashboard_Page = this.pageManager.getDashboardPage();
-     const order = await dashboard_Page.navorder(KeyOption);
-     expect(order.actual_nav_order).toBe(order.expected_nav_text);
+   Then('Admin should see {string} in the 4th place', async function({},name){
+    dashboard_Page = await this.pageManager.getDashboardPage();
+    const navbarorder_locator = await dashboard_Page.getnavorderlocator();
+    const reusablepage = this.pageManager.getReusablePage();
+    await reusablepage.navbar_order(name,navbarorder_locator);
    });
    
 
