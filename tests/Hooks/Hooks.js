@@ -10,7 +10,7 @@ const { POManager } = require('../PageObject/POManager');
  Before(async function () {
   // This hook will be executed before all scenarios
   const browser = await playwright.chromium.launch({
-    headless: false,
+    headless: true,
   });
   const context = await browser.newContext();
   this.page = await context.newPage();

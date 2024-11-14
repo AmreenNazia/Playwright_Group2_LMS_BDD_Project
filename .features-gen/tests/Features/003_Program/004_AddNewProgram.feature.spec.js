@@ -1,4 +1,4 @@
-/** Generated from: tests/Features/003_Program/004_AddNewProgram.feature */
+/** Generated from: tests\Features\003_Program\004_AddNewProgram.feature */
 import { test } from "playwright-bdd";
 
 test.describe("Verify add New Program", () => {
@@ -63,7 +63,7 @@ test.describe("Verify add New Program", () => {
 
 test.use({
   $test: ({}, use) => use(test),
-  $uri: ({}, use) => use("tests/Features/003_Program/004_AddNewProgram.feature"),
+  $uri: ({}, use) => use("tests\\Features\\003_Program\\004_AddNewProgram.feature"),
   $bddFileMeta: ({}, use) => use(bddFileMeta),
 });
 
