@@ -14,6 +14,7 @@ const { POManager } = require('../PageObject/POManager');
   });
   const context = await browser.newContext();
   this.page = await context.newPage();
+  
   this.pageManager = new POManager(this.page);
 });
 

@@ -24,5 +24,5 @@ test.use({
 });
 
 const bddFileMeta = {
-  "Verify that Admin is able to navigate to Program module": {"pickleLocation":"6:5"},
+  "Verify that Admin is able to navigate to Program module": {"pickleLocation":"7:5"},
 };
