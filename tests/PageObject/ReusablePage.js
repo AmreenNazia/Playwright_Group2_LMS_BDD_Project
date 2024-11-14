@@ -1,6 +1,7 @@
 const { expect } = require('@playwright/test');
 const filepath = 'tests/TestData/PlayWright_Group2_Data.xlsx';
 const { getDataByKeyOption } = require('../Utilities/ExcelUtils');
+const { equal } = require('assert');
 require('dotenv').config();
 
 class ReusablePage{
@@ -33,21 +34,9 @@ async navigate() {
 
   async validLogin(KeyOption,sheetname){
     const filepath = 'tests/TestData/PlayWright_Group2_Data.xlsx';
-    const sheetName = 'Login';
-    // const keyOption = 'ValidCredential';
-    
     const testData = getDataByKeyOption(filepath,sheetname,KeyOption);
     let userName = testData['UserNameData'];
-    console.log(userName)
     let password = testData['PasswordData']
-    
-    console.log(password)
-
-    if(userName === undefined || password === undefined){
-        userName = '';
-        password = '';
-    }
-    
     await this.username.fill(userName);
     await this.password.fill(password);
     await this.login_btn.click();
@@ -57,6 +46,30 @@ async validate(){
   const text = await this.logout.textContent();
   return text;
 }
+
+async isVisible(selector){
+  
+  const element = await (selector);
+  const text = await (selector).textContent();
+  return element !== null && await element.isVisible();
+}
+async navbar_order(name, selector) {
+  await selector.first().waitFor({ state: 'visible' });
+  const count = await selector.count();
+  console.log(count);
+  for (let i = 0; i < count; i++) {
+    const element = selector.nth(i);
+    const element_name = await element.textContent();
+    console.log(element_name);
+    if (element_name === name) {
+      await expect(element).toBeVisible();
+      console.log(name + " is in the " + (i+1) + " position");
+      return; // Exit once the item is found and validated
+    }
+  }
+  console.log(name + " was not found in the navbar");
+}
+
 
 }
 module.exports= {ReusablePage}
