@@ -78,12 +78,12 @@ class ProgramPage {
     return actual_text;
   }
   async logout_Menubar() {
-    const actual_text = await this.logout.textContent();
-    return actual_text;
+       return this.logout;
+     
   }
   async header_LMS() {
-    const actual_header = await this.header.textContent();
-    return actual_header;
+    return this.header;
+    
   }
   async modulenames() {
     const actual_modules = await this.module_names.allTextContents();

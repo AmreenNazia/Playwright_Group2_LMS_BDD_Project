@@ -28,7 +28,7 @@ test.describe("Verify add New Program", () => {
   test("Verify empty form submission", async ({ Given, When, Then }) => {
     await Given("Admin is on Program details form");
     await When("Admin clicks save button without entering mandatory");
-    await Then("Admin gets message '<field> is required'");
+    await Then("Admin gets message field is required");
   });
 
   test("Verify cancel button", async ({ Given, When, Then }) => {

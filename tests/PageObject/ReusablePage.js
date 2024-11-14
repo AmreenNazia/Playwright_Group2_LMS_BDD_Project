@@ -50,17 +50,16 @@ async validate(){
 async isVisible(selector){
   
   const element = await (selector);
-  const text = await (selector).textContent();
   return element !== null && await element.isVisible();
 }
 async navbar_order(name, selector) {
   await selector.first().waitFor({ state: 'visible' });
   const count = await selector.count();
-  console.log(count);
+ 
   for (let i = 0; i < count; i++) {
     const element = selector.nth(i);
     const element_name = await element.textContent();
-    console.log(element_name);
+ 
     if (element_name === name) {
       await expect(element).toBeVisible();
       console.log(name + " is in the " + (i+1) + " position");
