@@ -2,7 +2,7 @@
 Feature: Menu Bar
 Background: 
 Given Admin is logged in to LMS Portal
-
+ 
 Scenario:Verify Logout displayed in menu bar
 Given Admin is on dashboard page after Login
 When Admin clicks Program on the navigation bar

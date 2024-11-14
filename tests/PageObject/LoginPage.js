@@ -9,6 +9,7 @@ const sharp = require('sharp')
  class LoginPage {
     constructor(page) {
         this.page = page;
+        this.loginpage = page.getByText('Please login to LMS application');
         this.username = page.locator('#username');
         this.password = page.locator('#password');
         this.login_btn = page.locator('#login');
@@ -27,7 +28,16 @@ const sharp = require('sharp')
         await this.page.goto('https://playwright-frontend-app-a9ea85794ad9.herokuapp.com/login');
          
     }
-  
+    // async InvaligoTo() {
+    //     await this.page.goto('https://playwright-frontend-app-a9ea8579ad9.herokuapp.com/logi');
+    // }
+    async validate_loginpage(){
+        const text = await this.loginpage.textContent();
+        return text;
+    }
+
+
+
     async loginPage() {
 
         await this.username.fill(userName);
@@ -37,6 +47,7 @@ const sharp = require('sharp')
 
     async validate(){
         const text = await this.logout.textContent();
+        console.log(text)
         return text;
     }
 

@@ -1,4 +1,3 @@
-
 Feature: Login page Validations
 
 Background: Admin launches the browser
