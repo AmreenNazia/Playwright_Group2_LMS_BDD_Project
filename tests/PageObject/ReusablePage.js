@@ -11,6 +11,7 @@ constructor(page){
         this.login_btn = page.locator('#login');
         this.loginPageHeader = process.env.LOGIN_PAGEHEADER;
         this.editProgramName = process.env.EDIT_PROGRAM;
+        this.editProgramDesc = process.env.EDIT_PROGRAMDES;
 }
 async navigate() { 
     await this.page.goto(this.url);
@@ -24,6 +25,8 @@ async navigate() {
   async getEditProgramName(){
     return this.editProgramName;
   }
+  async getEditProgramDesc(){
+    return this.editProgramDesc;
+  }
 }
-
 module.exports= {ReusablePage}

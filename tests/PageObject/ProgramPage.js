@@ -1,12 +1,16 @@
 const { expect } = require('@playwright/test');
 const exp = require('constants');
 const { ReusablePage } = require('./ReusablePage');
-// const { getDataByKeyOption } = require('../Utilities/ExcelUtils'); 
+const { getDataByKeyOption } = require('../Utilities/ExcelUtils'); 
 const filepath = 'tests/TestData/PlayWright_Group2_Data.xlsx';
 require('dotenv').config();
 
+const programName =  'GroupTwoPWTestingTwo';
+const programDesc =  'GroupTwoTesingTwo';
 
 class ProgramPage {
+
+  
   constructor(page) {
     this.page = page;
     this.program_btn = page.getByRole('button', { name: 'Program' });
@@ -39,6 +43,15 @@ class ProgramPage {
     this.savedStatus = page.locator('//td[4]')
     this.cancelProgramBtn = page.getByText('Cancel');
     this.closeIcon = page.locator('//span[@ng-reflect-ng-class = "pi pi-times"]');
+    this.deletIcon = page.locator('//tr[1]//button[@id = "deleteProgram"]')
+    this.deletConfirmation = page.locator('div').filter({ hasText: /^Confirm$/ })
+    this.yesBtn = page.getByText('Yes');
+    this.saveSuccesMessage= page.getByRole('alert')
+    this.paginationBar = page.locator('p-paginator')
+    this.noBtn = page.getByText('No');
+    this.closeButton = page.getByRole('button', { name: '' })
+   
+ 
   }
   async click_program() {
     await this.program_btn.waitFor({ state: 'visible' })
@@ -124,25 +137,25 @@ class ProgramPage {
   }
 
   async editProgramName(){
-    await (this.search_text).fill('PlayWrightGroupTwo');
+    await (this.search_text).fill(programName);
     await this.overlayer.click();
     await (this.specificEditIcon).click();
-    await (this.programNameTextBox).fill('PlayWrightGrouptwo');
+    await (this.programNameTextBox).fill(programName);
     await (this.saveProgram).click();
-    expect (await this.savedProgramNameAssertion).toHaveText('PlayWrightGrouptwo');
+    expect (await this.savedProgramNameAssertion).toHaveText(programName);
   }
 
   async editProgramDescription(){
-    await (this.search_text).fill('PlayWright Automation using');
+    await (this.search_text).fill(programDesc);
     await this.overlayer.click();
     await (this.specificEditIcon).click();
-    await (this.programDescriptionTextBox).fill('PlayWright Automation using Java');
+    await (this.programDescriptionTextBox).fill(programDesc);
     await (this.saveProgram).click();
     await (this.successMessage);
-    expect (await this.savedProgramDesc).toHaveText('PlayWright Automation using Java');
+    expect (await this.savedProgramDesc).toHaveText(programDesc);
   }
   async statusUpdate(){
-    await (this.search_text).fill('PlayWright Automation using');
+    await (this.search_text).fill(programName);
     await this.overlayer.click();
     await (this.specificEditIcon).click();
     await (this.activeRadioButton).click();
@@ -152,7 +165,7 @@ class ProgramPage {
   }
 
  async clickCancel(){
-  await (this.search_text).fill('PlayWright Automation using');
+  await (this.search_text).fill(programName);
     await this.overlayer.click();
     await (this.specificEditIcon).click();
     await (this.cancelProgramBtn).click();
@@ -160,12 +173,59 @@ class ProgramPage {
  }
  
  async clickClose(){
-  await (this.search_text).fill('PlayWright Automation using');
+  await (this.search_text).fill(programDesc);
   await this.overlayer.click();
   await (this.specificEditIcon).click();
   await (this.closeIcon).click();
   expect (await this.programDetailsPage).not.toBeVisible();
  }
+
+ async clickDeleteIcon(){
+  await (this.overlayer).click();
+  await (this.deletIcon).click();
+ }
+ 
+ async deleteConfirmation(){
+  expect (await this.deletConfirmation).toBeVisible();
+ }
+
+ async clickProgramMenu(){
+  await (this.program_btn).click();
+ }
+ async clickYesBtn(){
+ 
+  await (this.yesBtn).click();
+ }
+
+ async clickDeletewithoutOverLay(){
+  await (this.deletIcon).click();
+ }
+
+ async clickNoBtn(){
+  await (this.noBtn).click();
+ }
+
+ async searchProgram(){
+  await this.page.reload();
+  await (this.search_text).fill(programName);
+  
+ }
+ async overLayClick(){
+  await (this.overlayer).click();
+ }
+
+ async successMessageAssertion(){
+   expect(await this.saveSuccesMessage).toBeVisible();
+ }
+
+ async searchAssertion(){
+  expect (await this.paginationBar).toContainText('Showing 0 to 0 of 0 entries');
+ }
+
+async clickCloseIcon(){
+  await this.closeButton.click();
+}
+
 }
 
 module.exports = { ProgramPage }

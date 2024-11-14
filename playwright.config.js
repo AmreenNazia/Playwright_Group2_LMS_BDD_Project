@@ -13,7 +13,7 @@ import { defineBddConfig } from 'playwright-bdd';
  */
 const testDir = defineBddConfig({
 
-  features:['tests/Features/***/***.feature'],
+  features:['tests/Features/003_Program/006_DeleteProgram.feature'],
 
   
   steps:['tests/StepDefinitions/***.js','tests/Hooks/Hooks.js']

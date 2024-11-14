@@ -214,3 +214,76 @@ When('Admin Click on {string} button',async function () {
 Then('Admin can see program details form disappear', async function () {
   console.log('Admin closed the program Description page')
 });
+
+
+When('Admin clicks on program in dashboard and admin lands on Manage program Page', async function () {      
+  program = await this.pageManager.getProgramPage();
+  await program.clickProgramMenu();
+});
+
+
+Given('Admin is on Program module', async function () {
+  console.log('Admin is in the Manage Program page')
+});
+
+When('Admin clicks on delete button for a program', async function () {
+  program = await this.pageManager.getProgramPage();
+ await  program.clickDeleteIcon();
+});
+
+Then('Admin will get confirm deletion popup', async function () {
+  await program.deleteConfirmation();
+});
+
+Given('Admin is on Confirm deletion form', async function () {
+  program = await this.pageManager.getProgramPage();
+  await program.searchProgram();
+  await  program.clickDeletewithoutOverLay();
+  await program.deleteConfirmation();
+});
+
+
+When('Admin clicks on {string} button', async function ({},args) {
+  await program.clickYesBtn();
+});
+
+// 7. Missing step definition for "tests\Features\003_Program\006_DeleteProgram.feature:15:1"
+Then('Admin can see {string} message', async function ({}, arg) {
+  await program.successMessageAssertion();
+});
+
+// 8. Missing step definition for "tests\Features\003_Program\006_DeleteProgram.feature:19:1"
+When('Admin Searches for {string}', async function ({}, arg)  {
+  program = await this.pageManager.getProgramPage();
+  await program.searchProgram();
+  
+});
+
+// 9. Missing step definition for "tests\Features\003_Program\006_DeleteProgram.feature:20:1"
+Then('There should be zero results.', async function () {
+  await program.searchAssertion();
+});
+
+// 10. Missing step definition for "tests\Features\003_Program\006_DeleteProgram.feature:23:1"
+Given('Admin is on Program Confirm Deletion Page after selecting a program to delete', async function () {   
+  program = await this.pageManager.getProgramPage();
+   await program.clickDeleteIcon();
+});
+
+When('Admin clicks on No button', async function ()  {
+  await program.clickNoBtn();
+});
+
+
+Then('Admin can see Confirmation form disappears', async function (){
+ expect (await program.deleteConfirmation()).toBeFalsy();
+});
+
+When('Admin Click on X button', async function (){
+  program = await this.pageManager.getProgramPage();
+  await program.clickCloseIcon();
+});
+
+Then('Admin can see Confirm Deletion form disappear', async function () {
+  expect (await program.deleteConfirmation()).toBeFalsy();
+});
