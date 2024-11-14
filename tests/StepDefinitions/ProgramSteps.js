@@ -127,12 +127,9 @@ Then('Admin lands on Program details form', async function () {
   await program.AssertProgramDetailsPage();
 });
 
-Then('Admin should see window title as {string}', async function ({}, arg)  {
-  program =  await this.pageManager.getProgramPage();
-  await program.AssertProgramDetailsPage();
-});
 
-Then('Admin should see red {string} mark beside mandatory field {string}', async function ({}, arg, arg1)  {
+
+Then('Admin should see red aestrik mark beside mandatory field {string}', async function ({}, arg)  {
   await program.AssertMandatoryFields();
 });
 
@@ -221,9 +218,6 @@ When('Admin clicks on program in dashboard and admin lands on Manage program Pag
 });
 
 
-Given('Admin is on Program module', async function () {
-  console.log('Admin is in the Manage Program page')
-});
 
 When('Admin clicks on delete button for a program', async function () {
   program = await this.pageManager.getProgramPage();
@@ -425,4 +419,113 @@ When('Admin enter valid details for mandatory fields from {string} and {string} 
 Then('Admin gets a message {string}', async function({}, arg) {
       const success_message = await program.alert_message();
       expect(success_message).toBeVisible();
+});
+
+// 1. Missing step definition for "tests\Features\003_Program\007_SearchBarValidation.feature:10:1"
+When('Admin enter the program to search By program name', async ({}) => {
+  // ...
+});
+
+// 2. Missing step definition for "tests\Features\003_Program\007_SearchBarValidation.feature:11:1"
+Then('Admin should able to see Program name, description, and status for searched program name', async ({}) => {
+  // ...
+});
+
+// 3. Missing step definition for "tests\Features\003_Program\007_SearchBarValidation.feature:15:1"
+When('Admin enter the program to search By program description', async ({}) => {
+  // ...
+});
+
+// 4. Missing step definition for "tests\Features\003_Program\007_SearchBarValidation.feature:16:1"
+Then('Admin should able to see Program name, description, and status for searched program description', async ({}) => {
+  // ...
+});
+
+// 5. Missing step definition for "tests\Features\003_Program\007_SearchBarValidation.feature:20:1"
+When('Admin enter the program to search By program name that does not exist', async ({}) => {    
+  // ...
+});
+
+// 6. Missing step definition for "tests\Features\003_Program\007_SearchBarValidation.feature:25:1"
+When('Admin enter the program to search By partial name of program', async ({}) => {
+  // ...
+});
+
+// 7. Missing step definition for "tests\Features\003_Program\008_SortingProgram.feature:9:1"    
+When('Admin clicks on Arrow next to programName', async ({}) => {
+  // ...
+});
+
+// 8. Missing step definition for "tests\Features\003_Program\008_SortingProgram.feature:10:1"   
+Then('Admin See the Program Name is sorted in Ascending order\\/Descending order', async ({}) => {
+  // ...
+});
+
+// 9. Missing step definition for "tests\Features\003_Program\008_SortingProgram.feature:14:1"   
+When('Admin clicks on Arrow next to Program Description', async ({}) => {
+  // ...
+});
+
+// 10. Missing step definition for "tests\Features\003_Program\008_SortingProgram.feature:15:1"  
+Then('Admin See the program Description is sorted in Ascending order\\/Descending order', async ({}) => {
+  // ...
+});
+
+// 1. Missing step definition for "tests\Features\003_Program\008_SortingProgram.feature:19:1"   
+When('Admin clicks on Arrow next to Program status', async ({}) => {
+  // ...
+});
+
+// 2. Missing step definition for "tests\Features\003_Program\008_SortingProgram.feature:20:1"   
+Then('Admin See the  Program Status is sorted in Ascending order\\/Descending order', async ({}) => {
+  // ...
+});
+
+// 3. Missing step definition for "tests\Features\003_Program\009_PaginationProgram.feature:9:1" 
+When('Admin clicks Next page link on the program table', async ({}) => {
+  // ...
+});
+
+// 4. Missing step definition for "tests\Features\003_Program\009_PaginationProgram.feature:10:1"
+Then('Admin should see the Pagination has {string} active link', async ({}, arg) => {
+  // ...
+});
+
+// 5. Missing step definition for "tests\Features\003_Program\009_PaginationProgram.feature:14:1"
+When('Admin clicks Last page link', async ({}) => {
+  // ...
+});
+
+// 6. Missing step definition for "tests\Features\003_Program\009_PaginationProgram.feature:15:1"
+Then('Admin should see the last page record on the table with Next page link are disabled', async ({}) => {
+  // ...
+});
+
+// 7. Missing step definition for "tests\Features\003_Program\009_PaginationProgram.feature:18:1"
+Given('Admin is on last page of Program module table', async ({}) => {
+  // ...
+});
+
+// 8. Missing step definition for "tests\Features\003_Program\009_PaginationProgram.feature:19:1"
+When('Admin clicks Previous page link', async ({}) => {
+  // ...
+});
+
+// 9. Missing step definition for "tests\Features\003_Program\009_PaginationProgram.feature:20:1"
+Then('Admin should see the previous page record on the table with pagination has previous page link', async ({}) => {
+  // ...
+});
+
+// 10. Missing step definition for "tests\Features\003_Program\009_PaginationProgram.feature:23:1"
+Given('Admin is on Previous Program page', async ({}) => {
+  // ...
+});
+// 1. Missing step definition for "tests\Features\003_Program\009_PaginationProgram.feature:24:1"
+When('Admin clicks First page link', async ({}) => {
+  // ...
+});
+
+// 2. Missing step definition for "tests\Features\003_Program\009_PaginationProgram.feature:25:1"
+Then('Admin should see the very first page record on the table with Previous page link are disabled', async ({}) => {
+  // ...
 });

@@ -16,7 +16,7 @@ Then Admin should see window title as "Program Details"
 
 Scenario: Verify mandatory fields with red "*" mark 
 When Admin clicks on Edit option for particular program
-Then Admin should see red "*" mark beside mandatory field "Name"
+Then Admin should see red aestrik mark beside mandatory field "Name"
 
 
 Scenario: Verify edit Program Name
