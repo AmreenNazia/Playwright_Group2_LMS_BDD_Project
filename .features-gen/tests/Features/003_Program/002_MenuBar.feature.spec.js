@@ -42,8 +42,8 @@ test.use({
 });
 
 const bddFileMeta = {
-  "Verify Logout displayed in menu bar": {"pickleLocation":"5:1"},
-  "Verify heading in menu bar": {"pickleLocation":"10:1"},
-  "Verify other module's name displayed in menu bar": {"pickleLocation":"15:1"},
-  "Verify sub menu displayed in program menu bar": {"pickleLocation":"20:1"},
+  "Verify Logout displayed in menu bar": {"pickleLocation":"6:1"},
+  "Verify heading in menu bar": {"pickleLocation":"11:1"},
+  "Verify other module's name displayed in menu bar": {"pickleLocation":"16:1"},
+  "Verify sub menu displayed in program menu bar": {"pickleLocation":"21:1"},
 };

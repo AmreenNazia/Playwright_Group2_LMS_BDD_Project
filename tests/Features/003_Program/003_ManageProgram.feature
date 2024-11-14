@@ -26,7 +26,7 @@ Feature: Manage Program Page validation
         When Admin clicks Program on the navigation bar
         Then Admin should see data table with column header on the Manage Program Page as  Program Name, Program Description, Program Status, Edit/Delete
 
-
+ 
     Scenario: Verify checkbox default state beside Program Name column header
         When Admin clicks Program on the navigation bar
         Then Admin should see checkbox default state as unchecked beside Program Name column as header

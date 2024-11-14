@@ -1,3 +1,2 @@
-***Admin is in the login Page**
 playwrightuser@gmail.com
 Playwright@1234

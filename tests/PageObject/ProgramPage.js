@@ -1,6 +1,7 @@
 const { expect } = require('@playwright/test');
 const exp = require('constants');
-// const { getDataByKeyOption } = require('../Utilities/ExcelUtils'); 
+const { TIMEOUT } = require('dns');
+const { getDataByKeyOption } = require('../Utilities/ExcelUtils'); 
 const filepath = 'tests/TestData/PlayWright_Group2_Data.xlsx';
 require('dotenv').config();
 
@@ -18,13 +19,27 @@ class ProgramPage {
     this.disable_delete = page.locator('//div[@class="box"]//button');
     this.search_text = page.getByPlaceholder('Search...');
     this.table_columnheader = page.locator('//thead//tr//th');
-    this.checkbox_headerlevel = page.locator('//tr//th[1]//input[@type="checkbox"]');
-    this.eachrow_checkbox = page.locator('//tbody//tr//td[1]//input');
+    this.checkbox_headerlevel = page.locator('//table//th[1]//input[@type="checkbox"]');
+    this.eachrow_checkbox = page.locator('//tbody//tr//td[1]');
     this.sorticons = page.locator('//th//p-sorticon');
     this.editanddelete_icons = page.locator('//tr//td[5]');
     this.bottomfooter = page.locator('//span[@class="p-paginator-current ng-star-inserted"]');
-    this.footer = page.getByText(' In total there are 20 programs. ');
-  }
+    this.footer = page.locator('//div[@class="p-datatable-footer ng-star-inserted"]');
+   
+    this.addNewProgram_btn = page.getByRole('menuitem', { name: 'Add New Program' });
+    this.dialog_box = page.locator('//div[@role="dialog"]')
+    this.programdetails = page.getByText('Program Details');
+    this.name_star = page.locator('//div/label[@for="programName"]');
+    this.save = page.getByRole('button', { name: 'Save'});
+    this.cancel_btn = page.getByRole('button',{name: 'Cancel'});
+    this.required_text = page.getByLabel('Program Details');
+    this.programname = page.locator('//input[@id="programName"]');
+     this.programdescription = page.locator('#programDescription')
+    this.radiobutton =  page.locator('.p-radiobutton-box').first();
+    this.successmessage = page.getByText('Successful', { exact: true });
+    
+    
+}
   async click_program() {
     await this.program_btn.waitFor({ state: 'visible' })
     await this.program_btn.click();
@@ -75,14 +90,14 @@ class ProgramPage {
     return actual_header;
   }
   async checkbox_header() {
-    return this.checkbox_headerlevel;
+     await expect(this.checkbox_headerlevel).not.toBeChecked();
   }
   async eachrowCheckbox() {
-    const checkboxes = await this.eachrow_checkbox.elementHandles();
-
-    for (const checkbox of checkboxes) {
-      await expect(checkbox).not.toBeChecked();
+    const count = await this.eachrow_checkbox.count();
+    for (let i = 0; i < count; i++) {
+      await expect(this.eachrow_checkbox.nth(i)).not.toBeChecked();
     }
+     
       console.log('All checkboxes are verified to be unchecked.');
   }
 
@@ -111,7 +126,75 @@ async footer_text(){
   const actual_footer = await footer_Text.toString();
   return actual_footer;
 }
+async click_addNewProgram(){
+  
+  await this.addNewProgram_btn.click();
+}
+
+async dialogbox(){
+      return this.dialog_box;
+}
+async program_details(){
+ const actual_programdetails = await this.programdetails.textContent();
+ return actual_programdetails;
+}
+
+async redStar(){
+      const actualtext = await this.name_star.textContent();
+      return actualtext;
+}
+async saveProgram(){
+  await this.save.click();
+}
+
+async fieldsrequired(){
+return this.required_text;
+}
+
+async click_cancel(){
+  await this.cancel_btn.click();
+}
+
+async enter_programname(Keyoption,sheetname){
+  const testData = getDataByKeyOption(filepath,sheetname,Keyoption);
+  const program_name = testData['Input_name'];
+  await this.programname.fill(program_name);
+  
+}
+async enteredText(){
+ return this.programname;
+}
+async enter_programDescription(Keyoption,sheetname){
+  const testData = getDataByKeyOption(filepath,sheetname,Keyoption);
+  const program_description = testData['Input_desc'];
+  await this.programdescription.fill(program_description);
+  
+}
+async entered_text(){
+  return this.programdescription;
+ }
+
+ async select_radioButton(){
+    await this.radiobutton.click();
+    return this.radiobutton;
   }
 
+  async addNewProgram(keyoption,sheetname){
+    const testData = getDataByKeyOption(filepath,sheetname,keyoption);
+  const program_name = testData['Input_name'];
+  const program_description = testData['Input_desc'];
+    await this.programname.fill(program_name);
+    await this.programdescription.fill(program_description);
+    await this.radiobutton.click();
+    await this.save.click();
+  }
+  async alert_message(){
+     
+   const message =  await this.successmessage.textContent();
+   console.log(message)
+   return message;
+     
+  }
 
+}
 module.exports = { ProgramPage }

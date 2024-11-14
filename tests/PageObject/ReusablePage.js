@@ -10,13 +10,14 @@ constructor(page){
           this.username = page.locator('#username');
         this.password = page.locator('#password');
         this.login_btn = page.locator('#login');
+        this.logout = page.getByText('Logout');
 }
 async navigate() { 
     await this.page.goto(this.url);
   }
 
   async login() {
-    await this.username.fill(process.env.USERNAME);  // Use the username stored in .env
+    await this.username.fill(process.env.USEREMAIL);  // Use the username stored in .env
     await  this.password.fill(process.env.PASSWORD);  // Use the password stored in .env
     await this.login_btn.click();
   }
@@ -42,6 +43,10 @@ async navigate() {
     await this.password.fill(password);
     await this.login_btn.click();
     
+}
+async validate(){
+  const text = await this.logout.textContent();
+  return text;
 }
 
 }

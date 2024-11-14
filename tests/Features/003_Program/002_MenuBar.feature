@@ -1,3 +1,4 @@
+ 
 Feature: Menu Bar
 Background: 
 Given Admin is logged in to LMS Portal
