@@ -86,10 +86,10 @@ const { expect } = require('playwright/test');
         
         const testData = getDataByKeyOption(filepath,sheetName,keyOption);
         let userName = testData['UserNameData'];
-        console.log(userName)
+        
         let password = testData['PasswordData']
         
-        console.log(password)
+     
 
         if(userName === undefined || password === undefined){
             userName = '';

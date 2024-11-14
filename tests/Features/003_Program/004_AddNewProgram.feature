@@ -22,7 +22,7 @@ Then Admin should see red "*" mark beside mandatory field "Name"
 Scenario:Verify empty form submission
 Given Admin is on Program details form
 When Admin clicks save button without entering mandatory 
-Then Admin gets message '<field> is required'
+Then Admin gets message field is required
 
  
 Scenario:Verify cancel button
