@@ -64,7 +64,7 @@ Feature: Verify add New Program
 
     Scenario:Verify cancel program details
         Given Admin is on Program details form
-        When Admin Click on cancel button
+        When Admin clicks Cancel button
         Then Admin can see Program Details form disappears
 
     Scenario Outline: Verify added Program is created

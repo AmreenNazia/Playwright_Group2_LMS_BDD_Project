@@ -1,4 +1,4 @@
-/** Generated from: tests\Features\001_Login\002_LoginPageValidation.feature */
+/** Generated from: tests/Features/001_Login/002_LoginPageValidation.feature */
 import { test } from "playwright-bdd";
 
 test.describe("Login page Validations", () => {
@@ -64,7 +64,7 @@ test.describe("Login page Validations", () => {
 
 test.use({
   $test: ({}, use) => use(test),
-  $uri: ({}, use) => use("tests\\Features\\001_Login\\002_LoginPageValidation.feature"),
+  $uri: ({}, use) => use("tests/Features/001_Login/002_LoginPageValidation.feature"),
   $bddFileMeta: ({}, use) => use(bddFileMeta),
 });
 

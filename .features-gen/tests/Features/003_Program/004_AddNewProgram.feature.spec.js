@@ -1,4 +1,4 @@
-/** Generated from: tests\Features\003_Program\004_AddNewProgram.feature */
+/** Generated from: tests/Features/003_Program/004_AddNewProgram.feature */
 import { test } from "playwright-bdd";
 
 test.describe("Verify add New Program", () => {
@@ -75,7 +75,7 @@ test.describe("Verify add New Program", () => {
 
   test("Verify cancel program details", async ({ Given, When, Then }) => {
     await Given("Admin is on Program details form");
-    await When("Admin Click on cancel button");
+    await When("Admin clicks Cancel button");
     await Then("Admin can see Program Details form disappears");
   });
 
@@ -89,10 +89,10 @@ test.describe("Verify add New Program", () => {
 
   });
 
-  test.only("Verify close window with \"X\"", { tag: ["@only"] }, async ({ Given, When, Then }) => {
+  test("Verify close window with \"X\"", async ({ Given, When, Then }) => {
     await Given("Admin is on Program details form");
     await When("Admin Click on X button");
-    await Then("Admin can see program details form disappear");
+    await Then("Admin can see Program Details form disappears");
   });
 
 });
@@ -101,7 +101,7 @@ test.describe("Verify add New Program", () => {
 
 test.use({
   $test: ({}, use) => use(test),
-  $uri: ({}, use) => use("tests\\Features\\003_Program\\004_AddNewProgram.feature"),
+  $uri: ({}, use) => use("tests/Features/003_Program/004_AddNewProgram.feature"),
   $bddFileMeta: ({}, use) => use(bddFileMeta),
 });
 
@@ -117,5 +117,5 @@ const bddFileMeta = {
   "Verify Admin is able to save the program details|Example #1": {"pickleLocation":"63:13"},
   "Verify cancel program details": {"pickleLocation":"65:5"},
   "Verify added Program is created|Example #1": {"pickleLocation":"76:13"},
-  "Verify close window with \"X\"": {"pickleLocation":"78:5","tags":["@only"],"ownTags":["@only"]},
+  "Verify close window with \"X\"": {"pickleLocation":"78:5"},
 };
