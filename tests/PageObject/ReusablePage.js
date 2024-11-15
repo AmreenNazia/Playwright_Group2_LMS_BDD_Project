@@ -68,6 +68,9 @@ async navbar_order(name, selector) {
   }
   console.log(name + " was not found in the navbar");
 }
+async click(selector){
+await selector.click();
+}
 
 
 }

@@ -374,7 +374,7 @@ Given('Admin is on Program details form', async function({})  {
 });
 When('Admin clicks save button without entering mandatory', async function({}) {
       
-      await program.saveProgram();
+      await program.save_program();
 
 });
 
