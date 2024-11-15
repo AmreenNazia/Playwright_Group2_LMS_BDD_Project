@@ -11,6 +11,9 @@ constructor(page){
           this.username = page.locator('#username');
         this.password = page.locator('#password');
         this.login_btn = page.locator('#login');
+        this.loginPageHeader = process.env.LOGIN_PAGEHEADER;
+        this.editProgramName = process.env.EDIT_PROGRAM;
+        this.editProgramDesc = process.env.EDIT_PROGRAMDES;
         this.logout = page.getByText('Logout');
 }
 async navigate() { 
@@ -21,6 +24,12 @@ async navigate() {
     await this.username.fill(process.env.USEREMAIL);  // Use the username stored in .env
     await  this.password.fill(process.env.PASSWORD);  // Use the password stored in .env
     await this.login_btn.click();
+  }
+  async getEditProgramName(){
+    return this.editProgramName;
+  }
+  async getEditProgramDesc(){
+    return this.editProgramDesc;
   }
 
   async validLogin(KeyOption,sheetname){
@@ -62,5 +71,4 @@ async navbar_order(name, selector) {
 
 
 }
-
 module.exports= {ReusablePage}

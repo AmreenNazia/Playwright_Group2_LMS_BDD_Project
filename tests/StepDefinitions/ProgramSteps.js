@@ -9,6 +9,7 @@ let dashboard_Page;
  
 
 
+
 // 1. Missing step definition for "tests/Features/003_Program.feature:5:1"
 Given('Admin is logged in to LMS Portal', async function(){
         const reusablepage = await this.pageManager.getReusablePage();
@@ -135,6 +136,169 @@ Then('Admin should see the sort arrow icon beside to each column header except E
    
 });
 
+When('Admin clicks on Edit option for particular program', async function (){
+  program =  await this.pageManager.getProgramPage();
+  await program.clickEditIcon();
+});
+
+Then('Admin lands on Program details form', async function () {
+  program =  await this.pageManager.getProgramPage();
+  await program.AssertProgramDetailsPage();
+});
+
+
+
+Then('Admin should see red aestrik mark beside mandatory field {string}', async function ({}, arg)  {
+  await program.AssertMandatoryFields();
+});
+
+
+When('Admin edits the program name and click on save button', async function (){
+  program =  await this.pageManager.getProgramPage();
+  await program.editProgramName();
+});
+
+
+Then('Updated program name is seen by the Admin', async function () {
+  expect (await program.editProgramName).toBeTruthy();
+});
+
+
+When('Admin edits the description text and click on save button', async function (){
+  program =  await this.pageManager.getProgramPage();
+  await program.editProgramDescription();
+});
+
+
+Then('Admin can see the description is updated', async function (){
+  expect (await program.editProgramDescription).toBeTruthy();
+});
+
+
+When('Admin can change the status of the program and click on save button', async function () {
+  program =  await this.pageManager.getProgramPage();
+  await program.statusUpdate();
+});
+
+
+Then('Status updated can be viewed by the Admin', async function () {
+  expect (await program.statusUpdate).toBeTruthy();
+});
+
+
+When('Admin click on save button', async function () {
+  program =  await this.pageManager.getProgramPage();
+  await program.editProgramDescription();
+
+});
+
+
+Then('Admin can see the updated program details', async function () {
+  expect (await program.editProgramDescription).toBeTruthy();
+});
+
+
+When('Admin click on cancel button', async function () {
+  program =  await this.pageManager.getProgramPage();
+  program.clickCancel();
+});
+
+
+Then('Admin can see the Program details form disappears', async function () {
+  console.log('Admin clicked cancel no changes made')
+});
+
+
+When('Admin searches with newly updated {string}', async function () {
+  program =  await this.pageManager.getProgramPage();
+  program.editProgramName();
+});
+
+
+Then('Admin verifies that the details are correctly updated.', async function () {
+  expect (await program.editProgramName).toBeTruthy();
+});
+
+
+When('Admin Click on {string} button',async function () {
+  program =  await this.pageManager.getProgramPage();
+  program.clickClose();
+});
+
+
+Then('Admin can see program details form disappear', async function () {
+  console.log('Admin closed the program Description page')
+});
+
+
+When('Admin clicks on program in dashboard and admin lands on Manage program Page', async function () {      
+  program = await this.pageManager.getProgramPage();
+  await program.clickProgramMenu();
+});
+
+
+
+When('Admin clicks on delete button for a program', async function () {
+  program = await this.pageManager.getProgramPage();
+ await  program.clickDeleteIcon();
+});
+
+Then('Admin will get confirm deletion popup', async function () {
+  await program.deleteConfirmation();
+});
+
+Given('Admin is on Confirm deletion form', async function () {
+  program = await this.pageManager.getProgramPage();
+  await program.searchProgram();
+  await  program.clickDeletewithoutOverLay();
+  await program.deleteConfirmation();
+});
+
+
+When('Admin clicks on {string} button', async function ({},args) {
+  await program.clickYesBtn();
+});
+
+// 7. Missing step definition for "tests\Features\003_Program\006_DeleteProgram.feature:15:1"
+Then('Admin can see {string} message', async function ({}, arg) {
+  await program.successMessageAssertion();
+});
+
+// 8. Missing step definition for "tests\Features\003_Program\006_DeleteProgram.feature:19:1"
+When('Admin Searches for {string}', async function ({}, arg)  {
+  program = await this.pageManager.getProgramPage();
+  await program.searchProgram();
+  
+});
+
+// 9. Missing step definition for "tests\Features\003_Program\006_DeleteProgram.feature:20:1"
+Then('There should be zero results.', async function () {
+  await program.searchAssertion();
+});
+
+// 10. Missing step definition for "tests\Features\003_Program\006_DeleteProgram.feature:23:1"
+Given('Admin is on Program Confirm Deletion Page after selecting a program to delete', async function () {   
+  program = await this.pageManager.getProgramPage();
+   await program.clickDeleteIcon();
+});
+
+When('Admin clicks on No button', async function ()  {
+  await program.clickNoBtn();
+});
+
+
+Then('Admin can see Confirmation form disappears', async function (){
+ expect (await program.deleteConfirmation()).toBeFalsy();
+});
+
+When('Admin Click on X button', async function (){
+  program = await this.pageManager.getProgramPage();
+  await program.clickCloseIcon();
+});
+
+Then('Admin can see Confirm Deletion form disappear', async function () {
+  expect (await program.deleteConfirmation()).toBeFalsy();
+});
 Then('Admin should see the Edit and Delete buttons on each row of the data table', async function () {
    program = await this.pageManager.getProgramPage();
   await program.edit_deletebuttons();
@@ -276,4 +440,113 @@ When('Admin enter valid details for mandatory fields from {string} and {string} 
 Then('Admin gets a message {string}', async function({}, arg) {
       const success_message = await program.alert_message();
       expect(success_message).toBeVisible();
+});
+
+// 1. Missing step definition for "tests\Features\003_Program\007_SearchBarValidation.feature:10:1"
+When('Admin enter the program to search By program name', async ({}) => {
+  // ...
+});
+
+// 2. Missing step definition for "tests\Features\003_Program\007_SearchBarValidation.feature:11:1"
+Then('Admin should able to see Program name, description, and status for searched program name', async ({}) => {
+  // ...
+});
+
+// 3. Missing step definition for "tests\Features\003_Program\007_SearchBarValidation.feature:15:1"
+When('Admin enter the program to search By program description', async ({}) => {
+  // ...
+});
+
+// 4. Missing step definition for "tests\Features\003_Program\007_SearchBarValidation.feature:16:1"
+Then('Admin should able to see Program name, description, and status for searched program description', async ({}) => {
+  // ...
+});
+
+// 5. Missing step definition for "tests\Features\003_Program\007_SearchBarValidation.feature:20:1"
+When('Admin enter the program to search By program name that does not exist', async ({}) => {    
+  // ...
+});
+
+// 6. Missing step definition for "tests\Features\003_Program\007_SearchBarValidation.feature:25:1"
+When('Admin enter the program to search By partial name of program', async ({}) => {
+  // ...
+});
+
+// 7. Missing step definition for "tests\Features\003_Program\008_SortingProgram.feature:9:1"    
+When('Admin clicks on Arrow next to programName', async ({}) => {
+  // ...
+});
+
+// 8. Missing step definition for "tests\Features\003_Program\008_SortingProgram.feature:10:1"   
+Then('Admin See the Program Name is sorted in Ascending order\\/Descending order', async ({}) => {
+  // ...
+});
+
+// 9. Missing step definition for "tests\Features\003_Program\008_SortingProgram.feature:14:1"   
+When('Admin clicks on Arrow next to Program Description', async ({}) => {
+  // ...
+});
+
+// 10. Missing step definition for "tests\Features\003_Program\008_SortingProgram.feature:15:1"  
+Then('Admin See the program Description is sorted in Ascending order\\/Descending order', async ({}) => {
+  // ...
+});
+
+// 1. Missing step definition for "tests\Features\003_Program\008_SortingProgram.feature:19:1"   
+When('Admin clicks on Arrow next to Program status', async ({}) => {
+  // ...
+});
+
+// 2. Missing step definition for "tests\Features\003_Program\008_SortingProgram.feature:20:1"   
+Then('Admin See the  Program Status is sorted in Ascending order\\/Descending order', async ({}) => {
+  // ...
+});
+
+// 3. Missing step definition for "tests\Features\003_Program\009_PaginationProgram.feature:9:1" 
+When('Admin clicks Next page link on the program table', async ({}) => {
+  // ...
+});
+
+// 4. Missing step definition for "tests\Features\003_Program\009_PaginationProgram.feature:10:1"
+Then('Admin should see the Pagination has {string} active link', async ({}, arg) => {
+  // ...
+});
+
+// 5. Missing step definition for "tests\Features\003_Program\009_PaginationProgram.feature:14:1"
+When('Admin clicks Last page link', async ({}) => {
+  // ...
+});
+
+// 6. Missing step definition for "tests\Features\003_Program\009_PaginationProgram.feature:15:1"
+Then('Admin should see the last page record on the table with Next page link are disabled', async ({}) => {
+  // ...
+});
+
+// 7. Missing step definition for "tests\Features\003_Program\009_PaginationProgram.feature:18:1"
+Given('Admin is on last page of Program module table', async ({}) => {
+  // ...
+});
+
+// 8. Missing step definition for "tests\Features\003_Program\009_PaginationProgram.feature:19:1"
+When('Admin clicks Previous page link', async ({}) => {
+  // ...
+});
+
+// 9. Missing step definition for "tests\Features\003_Program\009_PaginationProgram.feature:20:1"
+Then('Admin should see the previous page record on the table with pagination has previous page link', async ({}) => {
+  // ...
+});
+
+// 10. Missing step definition for "tests\Features\003_Program\009_PaginationProgram.feature:23:1"
+Given('Admin is on Previous Program page', async ({}) => {
+  // ...
+});
+// 1. Missing step definition for "tests\Features\003_Program\009_PaginationProgram.feature:24:1"
+When('Admin clicks First page link', async ({}) => {
+  // ...
+});
+
+// 2. Missing step definition for "tests\Features\003_Program\009_PaginationProgram.feature:25:1"
+Then('Admin should see the very first page record on the table with Previous page link are disabled', async ({}) => {
+  // ...
 });

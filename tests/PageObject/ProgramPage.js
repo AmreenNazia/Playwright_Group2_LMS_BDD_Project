@@ -1,11 +1,17 @@
 const { expect } = require('@playwright/test');
 const exp = require('constants');
+const { ReusablePage } = require('./ReusablePage');
 const { TIMEOUT } = require('dns');
 const { getDataByKeyOption } = require('../Utilities/ExcelUtils'); 
 const filepath = 'tests/TestData/PlayWright_Group2_Data.xlsx';
 require('dotenv').config();
 
+const programName =  'GroupTwoPWTestingTwo';
+const programDesc =  'GroupTwoTesingTwo';
+
 class ProgramPage {
+
+  
   constructor(page) {
     this.page = page;
     this.program_btn = page.getByRole('button', { name: 'Program' });
@@ -22,6 +28,29 @@ class ProgramPage {
     this.checkbox_headerlevel = page.locator('//table//th[1]//input[@type="checkbox"]');
     this.eachrow_checkbox = page.locator('//tbody//tr//td[1]');
     this.sorticons = page.locator('//th//p-sorticon');
+    this.editIcon = page.locator('//tr[1]//button[@id = "editProgram"]');
+    this.programDetailsPage = page.getByText('Program Details')
+    this.mandatoryFields = page.locator('label').filter({ hasText: 'Name*' }).locator('span');
+    this.aestrikAssetion = page.getByLabel('Program Details')
+    this.specificEditIcon = page.locator('#editProgram');
+    this.programNameTextBox = page.locator('#programName');
+    this.saveProgram = page.getByText('Save');
+    this.lastPageIcon = page.locator('.p-paginator-last p-paginator-element p-link p-ripple ng-star-inserted');
+    this.savedProgramNameAssertion = page.locator('//td[2]')
+    this.programDescriptionTextBox = page.locator('#programDescription');
+    this.savedProgramDesc = page.locator('//td[3]');
+    this.successMessage = page.locator('.Successful');
+    this.activeRadioButton = page.locator('//p-radiobutton[@ng-reflect-input-id = "Active"]')
+    this.savedStatus = page.locator('//td[4]')
+    this.cancelProgramBtn = page.getByText('Cancel');
+    this.closeIcon = page.locator('//span[@ng-reflect-ng-class = "pi pi-times"]');
+    this.deletIcon = page.locator('//tr[1]//button[@id = "deleteProgram"]')
+    this.deletConfirmation = page.locator('div').filter({ hasText: /^Confirm$/ })
+    this.yesBtn = page.getByText('Yes');
+    this.saveSuccesMessage= page.getByRole('alert')
+    this.paginationBar = page.locator('p-paginator')
+    this.noBtn = page.getByText('No');
+    this.closeButton = page.getByRole('button', { name: '' })
     this.editanddelete_icons = page.locator('//tr//td[5]');
     this.bottomfooter = page.locator('//span[@class="p-paginator-current ng-star-inserted"]');
     this.footer = page.locator('//div[@class="p-datatable-footer ng-star-inserted"]');
@@ -108,6 +137,109 @@ class ProgramPage {
     }
     console.log('All sort icons are visible');
   }
+
+  async clickEditIcon(){
+    await this.overlayer.click();
+    this.editIcon.click();
+  }
+
+  async AssertProgramDetailsPage(){
+    expect (await this.programDetailsPage).toHaveText(/.*Program Details/);
+  }
+
+  async AssertMandatoryFields(){
+    await expect(this.aestrikAssetion).toContainText('*');
+  }
+
+  async editProgramName(){
+    await (this.search_text).fill(programName);
+    await this.overlayer.click();
+    await (this.specificEditIcon).click();
+    await (this.programNameTextBox).fill(programName);
+    await (this.saveProgram).click();
+    expect (await this.savedProgramNameAssertion).toHaveText(programName);
+  }
+
+  async editProgramDescription(){
+    await (this.search_text).fill(programDesc);
+    await this.overlayer.click();
+    await (this.specificEditIcon).click();
+    await (this.programDescriptionTextBox).fill(programDesc);
+    await (this.saveProgram).click();
+    await (this.successMessage);
+    expect (await this.savedProgramDesc).toHaveText(programDesc);
+  }
+  async statusUpdate(){
+    await (this.search_text).fill(programName);
+    await this.overlayer.click();
+    await (this.specificEditIcon).click();
+    await (this.activeRadioButton).click();
+    await (this.saveProgram).click();
+    await (this.successMessage);
+    expect (await this.savedStatus).toHaveText('Active');
+  }
+
+ async clickCancel(){
+  await (this.search_text).fill(programName);
+    await this.overlayer.click();
+    await (this.specificEditIcon).click();
+    await (this.cancelProgramBtn).click();
+    expect (await this.programDetailsPage).not.toBeVisible();
+ }
+ 
+ async clickClose(){
+  await (this.search_text).fill(programDesc);
+  await this.overlayer.click();
+  await (this.specificEditIcon).click();
+  await (this.closeIcon).click();
+  expect (await this.programDetailsPage).not.toBeVisible();
+ }
+
+ async clickDeleteIcon(){
+  await (this.overlayer).click();
+  await (this.deletIcon).click();
+ }
+ 
+ async deleteConfirmation(){
+  expect (await this.deletConfirmation).toBeVisible();
+ }
+
+ async clickProgramMenu(){
+  await (this.program_btn).click();
+ }
+ async clickYesBtn(){
+ 
+  await (this.yesBtn).click();
+ }
+
+ async clickDeletewithoutOverLay(){
+  await (this.deletIcon).click();
+ }
+
+ async clickNoBtn(){
+  await (this.noBtn).click();
+ }
+
+ async searchProgram(){
+  await this.page.reload();
+  await (this.search_text).fill(programName);
+  
+ }
+ async overLayClick(){
+  await (this.overlayer).click();
+ }
+
+ async successMessageAssertion(){
+   expect(await this.saveSuccesMessage).toBeVisible();
+ }
+
+ async searchAssertion(){
+  expect (await this.paginationBar).toContainText('Showing 0 to 0 of 0 entries');
+ }
+
+async clickCloseIcon(){
+  await this.closeButton.click();
+}
 
   async edit_deletebuttons(){
     const count= await this.editanddelete_icons.count();
