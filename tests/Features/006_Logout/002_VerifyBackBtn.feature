@@ -1,4 +1,4 @@
-@only
+ 
 Feature:Validation on Logout button
         Background:
                 Given Admin is logged out of the application
