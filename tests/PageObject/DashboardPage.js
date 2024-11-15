@@ -1,6 +1,7 @@
 const { expect } = require('@playwright/test');
 const { getDataByKeyOption } = require('../Utilities/ExcelUtils'); 
 const filepath = 'tests/TestData/PlayWright_Group2_Data.xlsx';
+const { ReusablePage } = require('../PageObject/ReusablePage');
 const sheetName = 'Dashboard';
 
 class DashboardPage {
@@ -10,11 +11,14 @@ class DashboardPage {
         this.title_allignment = page.locator('//span[text()=" LMS - Learning Management System "]');
         this.dashboard_title = page.getByText(' LMS - Learning Management System ');
         this.navigation_bar = page.locator('//mat-toolbar');
-        this.navigation_bar_order = page.locator('//mat-toolbar//div//button');
-
+        this.navigation_bar_order = page.locator('//mat-toolbar//div//button//span[1]');
+        this.logout = page.getByText('Logout');
+    }
+    async getLogouttext(){
+        return this.logout
     }
     
-    async title(KeyOption){
+    async title(KeyOption,sheetName){
         
         const testData = getDataByKeyOption(filepath,sheetName,KeyOption);
         const expectedtitle = testData['expectedValue'];
@@ -25,6 +29,13 @@ class DashboardPage {
          
 
     }
+
+    async getHeadertitle(){
+
+         return this.dashboard_title;
+    }
+
+    
 
     async allignment() {
         const pageTitle = await this.page.title();
@@ -44,22 +55,14 @@ class DashboardPage {
          
     
 
-    async navbartext(KeyOption){
-        // const testData = readExcelFile('tests/TestData/PlayWright_Group2_Data.xlsx', 'Dashboard');
-        const excel_Data = getDataByKeyOption(filepath,sheetName,KeyOption);
-        const expected_nav_text = excel_Data['expectedValue'];
-        const actual_nav_text =  await this.navigation_bar.textContent();
+    async getNavbarText(){
+        return this.navigation_bar;
         
-       return {actual_nav_text,expected_nav_text};
     }
 
-    async navorder(KeyOption) {
-        const excel_Data = getDataByKeyOption(filepath, sheetName, KeyOption);
-        const expected_nav_text = excel_Data['expectedValue'];
-        const nth_value = excel_Data['nth'];
-        const actual_nav_order = await this.navigation_bar_order.nth(nth_value).textContent();
-        console.log(actual_nav_order)
-        return {actual_nav_order, expected_nav_text};
+    async getnavorderlocator() {
+         return this.navigation_bar_order;
+          
     }
 
      
