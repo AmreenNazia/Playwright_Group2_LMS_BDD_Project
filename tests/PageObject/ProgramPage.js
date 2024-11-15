@@ -108,11 +108,11 @@ class ProgramPage {
   }
 
   async disabled_delete() {
-    expect(await this.disable_delete).toBeDisabled();
+    return this.disable_delete;
   }
 
   async search_box() {
-    expect(await this.search_text).toBeVisible();
+     return this.search_text;
 
   }
   async datacolumnheaders() {
@@ -120,7 +120,7 @@ class ProgramPage {
     return actual_header;
   }
   async checkbox_header() {
-     await expect(this.checkbox_headerlevel).not.toBeChecked();
+      return this.checkbox_headerlevel ;
   }
   async eachrowCheckbox() {
     const count = await this.eachrow_checkbox.count();
