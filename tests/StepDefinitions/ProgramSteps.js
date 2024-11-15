@@ -439,7 +439,7 @@ When('Admin enter valid details for mandatory fields from {string} and {string} 
  
 Then('Admin gets a message {string}', async function({}, arg) {
       const success_message = await program.alert_message();
-      expect(success_message).toBeVisible();
+      expect(await success_message).toBeVisible();
 });
 // 2. Missing step definition for "tests/Features/003_Program/004_AddNewProgram.feature:72:9"
 When('Admin searches with newly created Program Name sent from {string} and {string}', async function({}, keyoption, sheetname)  {
