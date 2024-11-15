@@ -1,4 +1,4 @@
-/** Generated from: tests\Features\003_Program\008_SortingProgram.feature */
+/** Generated from: tests/Features/003_Program/008_SortingProgram.feature */
 import { test } from "playwright-bdd";
 
 test.describe("Manage Program - Sorting Program", () => {
@@ -32,7 +32,7 @@ test.describe("Manage Program - Sorting Program", () => {
 
 test.use({
   $test: ({}, use) => use(test),
-  $uri: ({}, use) => use("tests\\Features\\003_Program\\008_SortingProgram.feature"),
+  $uri: ({}, use) => use("tests/Features/003_Program/008_SortingProgram.feature"),
   $bddFileMeta: ({}, use) => use(bddFileMeta),
 });
 

@@ -1,4 +1,4 @@
-/** Generated from: tests\Features\003_Program\005_EditProgram.feature */
+/** Generated from: tests/Features/003_Program/005_EditProgram.feature */
 import { test } from "playwright-bdd";
 
 test.describe("Manage Program - Edit Program", () => {
@@ -64,7 +64,7 @@ test.describe("Manage Program - Edit Program", () => {
 
 test.use({
   $test: ({}, use) => use(test),
-  $uri: ({}, use) => use("tests\\Features\\003_Program\\005_EditProgram.feature"),
+  $uri: ({}, use) => use("tests/Features/003_Program/005_EditProgram.feature"),
   $bddFileMeta: ({}, use) => use(bddFileMeta),
 });
 

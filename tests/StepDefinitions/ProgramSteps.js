@@ -381,7 +381,7 @@ When('Admin clicks save button without entering mandatory', async function({}) {
 // 2. Missing step definition for "tests/Features/003_Program/004_AddNewProgram.feature:25:1"
 Then('Admin gets message field is required', async function({})  {
      const field_Required = await program.fieldsrequired();
-     await expect(field_Required).toContainText('Program Name is required');
+     await expect(field_Required).toContainText('Program name is required');
      await expect(field_Required).toContainText('Description is required.');
      await expect(field_Required).toContainText('Status is required.');
      
@@ -441,7 +441,19 @@ Then('Admin gets a message {string}', async function({}, arg) {
       const success_message = await program.alert_message();
       expect(success_message).toBeVisible();
 });
+// 2. Missing step definition for "tests/Features/003_Program/004_AddNewProgram.feature:72:9"
+When('Admin searches with newly created Program Name sent from {string} and {string}', async function({}, keyoption, sheetname)  {
+        program = await this.pageManager.getProgramPage();
+        await program.searchcreatedProgram (keyoption,sheetname);
 
+});
+
+// 3. Missing step definition for "tests/Features/003_Program/004_AddNewProgram.feature:73:9"
+Then('Records of the newly created  Program Name is displayed and match the data entered from {string} and {string}', async function ({}, keyoption, sheetname)  {
+  program = await this.pageManager.getProgramPage();
+  const desc_name = await program.descriptionVisibility(keyoption,sheetname);
+  expect(await desc_name.program_desc).toBe(desc_name.text)
+});
 // 1. Missing step definition for "tests\Features\003_Program\007_SearchBarValidation.feature:10:1"
 When('Admin enter the program to search By program name', async ({}) => {
   // ...

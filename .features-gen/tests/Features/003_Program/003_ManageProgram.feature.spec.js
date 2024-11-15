@@ -1,4 +1,4 @@
-/** Generated from: tests\Features\003_Program\003_ManageProgram.feature */
+/** Generated from: tests/Features/003_Program/003_ManageProgram.feature */
 import { test } from "playwright-bdd";
 
 test.describe("Manage Program Page validation", () => {
@@ -68,7 +68,7 @@ test.describe("Manage Program Page validation", () => {
 
 test.use({
   $test: ({}, use) => use(test),
-  $uri: ({}, use) => use("tests\\Features\\003_Program\\003_ManageProgram.feature"),
+  $uri: ({}, use) => use("tests/Features/003_Program/003_ManageProgram.feature"),
   $bddFileMeta: ({}, use) => use(bddFileMeta),
 });
 
