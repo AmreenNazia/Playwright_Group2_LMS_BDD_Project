@@ -1,4 +1,4 @@
-/** Generated from: tests/Features/003_Program/008_SortingProgram.feature */
+/** Generated from: tests\Features\003_Program\008_SortingProgram.feature */
 import { test } from "playwright-bdd";
 
 test.describe("Manage Program - Sorting Program", () => {
@@ -32,12 +32,12 @@ test.describe("Manage Program - Sorting Program", () => {
 
 test.use({
   $test: ({}, use) => use(test),
-  $uri: ({}, use) => use("tests/Features/003_Program/008_SortingProgram.feature"),
+  $uri: ({}, use) => use("tests\\Features\\003_Program\\008_SortingProgram.feature"),
   $bddFileMeta: ({}, use) => use(bddFileMeta),
 });
 
 const bddFileMeta = {
-  "Verify sorting of  Program name in Ascending order/Descending order": {"pickleLocation":"7:1"},
-  "Verify sorting of  Program Description in  Ascending order/Descending order": {"pickleLocation":"12:1"},
-  "Verify sorting of Program status in Ascending order/Descending order": {"pickleLocation":"17:1"},
+  "Verify sorting of  Program name in Ascending order/Descending order": {"pickleLocation":"8:1"},
+  "Verify sorting of  Program Description in  Ascending order/Descending order": {"pickleLocation":"13:1"},
+  "Verify sorting of Program status in Ascending order/Descending order": {"pickleLocation":"18:1"},
 };

@@ -464,10 +464,6 @@ Then('Records of the newly created  Program Name is displayed and match the data
   const desc_name = await program.descriptionVisibility(keyoption,sheetname);
   expect(await desc_name.program_desc).toBe(desc_name.text)
 });
-// 1. Missing step definition for "tests\Features\003_Program\007_SearchBarValidation.feature:10:1"
-When('Admin enter the program to search By program name', async ({}) => {
-  // ...
-});
 
 // 2. Missing step definition for "tests\Features\003_Program\007_SearchBarValidation.feature:11:1"
 Then('Admin should able to see Program name, description, and status for searched program name', async ({}) => {

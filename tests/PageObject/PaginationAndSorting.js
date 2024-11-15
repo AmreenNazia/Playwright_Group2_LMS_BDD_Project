@@ -11,7 +11,6 @@ class PaginationAndSorting {
         this.lastLink = page.locator('//span[@class ="p-paginator-icon pi pi-angle-double-right"]');
         this.table = page.locator('.p-datatable-wrapper ng-star-inserted');
         this.ProgramNameCol =  page.locator('//th[2]')
-        this.sortType =  this.ProgramNameCol.getAttribute('aria-sort');
         this.cells = page.locator('//tr//td[2]');
         this.overlayer = page.locator('.cdk-overlay-backdrop');
         this.paginationFooter = page.locator('//span[@class = "p-paginator-pages ng-star-inserted"]//button');
