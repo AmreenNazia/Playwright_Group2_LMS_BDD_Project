@@ -13,6 +13,8 @@ constructor(page){
         this.loginPageHeader = process.env.LOGIN_PAGEHEADER;
         this.editProgramName = process.env.EDIT_PROGRAM;
         this.editProgramDesc = process.env.EDIT_PROGRAMDES;
+        this.invalidProgramName = process.env.INVALID_PROGRAMNAME;
+        this.partialProgramName = process.env.PARTIAL_PROGRAMNAME;
         this.logout = page.getByText('Logout');
 }
 async navigate() { 
@@ -25,10 +27,18 @@ async navigate() {
     await this.login_btn.click();
   }
   async getEditProgramName(){
-    return this.editProgramName;
+    return String(this.editProgramName);
   }
   async getEditProgramDesc(){
-    return this.editProgramDesc;
+    return String(this.editProgramDesc);
+  }
+
+  async getInvalidProgramName(){
+    return String(this.invalidProgramName);
+  }
+
+  async getPartialProgramName(){
+    return String(this.partialProgramName);
   }
 
   async validLogin(KeyOption,sheetname){
@@ -56,6 +66,12 @@ async navigate() {
 async validate(){
   const text = await this.logout.textContent();
   return text;
+}
+
+async isVisible(selector){
+  
+  const element = await (selector);
+  return element !== null && await element.isVisible();
 }
 
 }

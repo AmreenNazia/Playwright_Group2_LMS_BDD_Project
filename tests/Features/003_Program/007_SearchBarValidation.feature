@@ -10,10 +10,12 @@ Given Admin is on Program module
 When Admin enter the program to search By program name
 Then Admin should able to see Program name, description, and status for searched program name
 
+
 Scenario: Admin should able to see Program name, description, and status for searched program name
 Given Admin is on Program module
 When Admin enter the program to search By program description
 Then Admin should able to see Program name, description, and status for searched program description
+
 
 Scenario: Verify Admin is able to search results not found
 Given Admin is on Program module

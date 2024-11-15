@@ -5,7 +5,8 @@ const { expect } = require('@playwright/test');
 const exp = require('constants');
 const { emitWarning } = require('process');
 let program;
- 
+ let reusablepage;
+ let paginationAndSorting;
 
 
 
@@ -421,111 +422,159 @@ Then('Admin gets a message {string}', async function({}, arg) {
       expect(success_message).toBeVisible();
 });
 
-// 1. Missing step definition for "tests\Features\003_Program\007_SearchBarValidation.feature:10:1"
-When('Admin enter the program to search By program name', async ({}) => {
-  // ...
+
+When('Admin enter the program to search By program name', async function () {
+  program = this.pageManager.getProgramPage();
+  reusablepage = this.pageManager.getReusablePage();
+  const programName = await reusablepage.getEditProgramName();
+  await program.fillSearchBar(programName);
 });
 
 // 2. Missing step definition for "tests\Features\003_Program\007_SearchBarValidation.feature:11:1"
 Then('Admin should able to see Program name, description, and status for searched program name', async ({}) => {
-  // ...
+ 
+    const ele = await program.getTableValues();
+    await expect(ele).toBeVisible();
 });
 
 // 3. Missing step definition for "tests\Features\003_Program\007_SearchBarValidation.feature:15:1"
-When('Admin enter the program to search By program description', async ({}) => {
-  // ...
+When('Admin enter the program to search By program description', async function()  {
+  reusablepage = this.pageManager.getReusablePage();
+  const programDes = await reusablepage.getEditProgramDesc();
+  console.log(programDes)
+  await program.fillSearchBar(programDes);
+
 });
 
 // 4. Missing step definition for "tests\Features\003_Program\007_SearchBarValidation.feature:16:1"
-Then('Admin should able to see Program name, description, and status for searched program description', async ({}) => {
-  // ...
+Then('Admin should able to see Program name, description, and status for searched program description', async function ()  {
+  const ele = await program.getTableValues();
+    await expect(ele).toBeVisible();
 });
 
-// 5. Missing step definition for "tests\Features\003_Program\007_SearchBarValidation.feature:20:1"
-When('Admin enter the program to search By program name that does not exist', async ({}) => {    
-  // ...
+
+When('Admin enter the program to search By program name that does not exist', async function() {    
+  reusablepage = this.pageManager.getReusablePage();
+  const programName = await reusablepage.getInvalidProgramName();
+  await program.fillSearchBar(programName);
 });
 
-// 6. Missing step definition for "tests\Features\003_Program\007_SearchBarValidation.feature:25:1"
-When('Admin enter the program to search By partial name of program', async ({}) => {
-  // ...
+
+When('Admin enter the program to search By partial name of program', async function ()  {
+  reusablepage = this.pageManager.getReusablePage();
+  const programName = await reusablepage.getPartialProgramName();
+  await program.fillSearchBar(programName);
 });
 
 // 7. Missing step definition for "tests\Features\003_Program\008_SortingProgram.feature:9:1"    
-When('Admin clicks on Arrow next to programName', async ({}) => {
-  // ...
+When('Admin clicks on Arrow next to programName', async function()  {
+  paginationAndSorting = this.pageManager.getPaginationAndSorting();
+  const sorticon = await paginationAndSorting.getProgramNameCol();
+  await paginationAndSorting.clickSortIcon(sorticon);
 });
 
 // 8. Missing step definition for "tests\Features\003_Program\008_SortingProgram.feature:10:1"   
-Then('Admin See the Program Name is sorted in Ascending order\\/Descending order', async ({}) => {
-  // ...
+Then('Admin See the Program Name is sorted in Ascending order\\/Descending order', async function () {
+  const sortingCells = await paginationAndSorting.getCells();
+await paginationAndSorting.pagination_Asc_Sorting(sortingCells);
+
 });
 
 // 9. Missing step definition for "tests\Features\003_Program\008_SortingProgram.feature:14:1"   
-When('Admin clicks on Arrow next to Program Description', async ({}) => {
-  // ...
+When('Admin clicks on Arrow next to Program Description', async function () {
+  paginationAndSorting = this.pageManager.getPaginationAndSorting();
+  const sorticon = await paginationAndSorting.getProgramDescCol();
+  await paginationAndSorting.dblClickSortIcon(sorticon);
 });
 
-// 10. Missing step definition for "tests\Features\003_Program\008_SortingProgram.feature:15:1"  
-Then('Admin See the program Description is sorted in Ascending order\\/Descending order', async ({}) => {
-  // ...
+
+Then('Admin See the program Description is sorted in Ascending order\\/Descending order', async function () {
+  const sortingCells = await paginationAndSorting.getProgDes_cells();
+  await paginationAndSorting.pagination_Des_Sorting(sortingCells);
 });
 
-// 1. Missing step definition for "tests\Features\003_Program\008_SortingProgram.feature:19:1"   
-When('Admin clicks on Arrow next to Program status', async ({}) => {
-  // ...
+
+When('Admin clicks on Arrow next to Program status', async function() {
+  paginationAndSorting = this.pageManager.getPaginationAndSorting();
+  const sorticon = await paginationAndSorting.getProgramStatus();
+  await paginationAndSorting.clickSortIcon(sorticon);
 });
 
 // 2. Missing step definition for "tests\Features\003_Program\008_SortingProgram.feature:20:1"   
-Then('Admin See the  Program Status is sorted in Ascending order\\/Descending order', async ({}) => {
-  // ...
+Then('Admin See the  Program Status is sorted in Ascending order\\/Descending order', async function () {
+  const sortingCells = await paginationAndSorting.getProgStatus_cells();
+  await paginationAndSorting.pagination_Asc_Sorting(sortingCells);
 });
 
 // 3. Missing step definition for "tests\Features\003_Program\009_PaginationProgram.feature:9:1" 
-When('Admin clicks Next page link on the program table', async ({}) => {
-  // ...
+When('Admin clicks Next page link on the program table', async function() {
+paginationAndSorting = this.pageManager.getPaginationAndSorting();
+const ele = await paginationAndSorting.getNextLink();
+const ele1 =  await paginationAndSorting.getOverLayer();
+await paginationAndSorting.click(ele1)
+await paginationAndSorting.click(ele)
 });
 
 // 4. Missing step definition for "tests\Features\003_Program\009_PaginationProgram.feature:10:1"
-Then('Admin should see the Pagination has {string} active link', async ({}, arg) => {
-  // ...
+Then('Admin should see the Pagination has {string} active link', async function ({}, arg)  {
+  const ele = await paginationAndSorting.getNextLink();
+  await expect (ele).toBeEnabled();
 });
 
 // 5. Missing step definition for "tests\Features\003_Program\009_PaginationProgram.feature:14:1"
-When('Admin clicks Last page link', async ({}) => {
-  // ...
+When('Admin clicks Last page link', async function ()  {
+  paginationAndSorting = this.pageManager.getPaginationAndSorting();
+  const ele = await paginationAndSorting.getLastLink();
+  const ele1 =  await paginationAndSorting.getOverLayer();
+  await paginationAndSorting.click(ele1)
+  await paginationAndSorting.click(ele)
 });
 
 // 6. Missing step definition for "tests\Features\003_Program\009_PaginationProgram.feature:15:1"
-Then('Admin should see the last page record on the table with Next page link are disabled', async ({}) => {
-  // ...
+Then('Admin should see the last page record on the table with Next page link are disabled', async function () {
+  const ele = await paginationAndSorting.getNextLink();
+  await expect (ele).toBeDisabled()
 });
 
 // 7. Missing step definition for "tests\Features\003_Program\009_PaginationProgram.feature:18:1"
-Given('Admin is on last page of Program module table', async ({}) => {
-  // ...
+Given('Admin is on last page of Program module table', async function ()  {
+  paginationAndSorting = this.pageManager.getPaginationAndSorting();
+  const ele = await paginationAndSorting.getLastLink();
+  const ele1 =  await paginationAndSorting.getOverLayer();
+  await paginationAndSorting.click(ele1)
+  await paginationAndSorting.click(ele)
 });
 
 // 8. Missing step definition for "tests\Features\003_Program\009_PaginationProgram.feature:19:1"
-When('Admin clicks Previous page link', async ({}) => {
-  // ...
+When('Admin clicks Previous page link', async function () {
+  paginationAndSorting = this.pageManager.getPaginationAndSorting();
+  const ele = await paginationAndSorting.getPreviousLink();
+  await paginationAndSorting.click(ele)
 });
 
 // 9. Missing step definition for "tests\Features\003_Program\009_PaginationProgram.feature:20:1"
-Then('Admin should see the previous page record on the table with pagination has previous page link', async ({}) => {
-  // ...
+Then('Admin should see the previous page record on the table with pagination has previous page link', async function ()  {
+  const ele = await paginationAndSorting.getPreviousLink();
+  await expect (ele).toBeEnabled();
 });
 
 // 10. Missing step definition for "tests\Features\003_Program\009_PaginationProgram.feature:23:1"
-Given('Admin is on Previous Program page', async ({}) => {
-  // ...
+Given('Admin is on Previous Program page', async function ()  {
+  paginationAndSorting = this.pageManager.getPaginationAndSorting();
+  const ele = await paginationAndSorting.getNextLink();
+  const ele1 =  await paginationAndSorting.getOverLayer();
+  await paginationAndSorting.click(ele1)
+  await paginationAndSorting.click(ele)
 });
 // 1. Missing step definition for "tests\Features\003_Program\009_PaginationProgram.feature:24:1"
-When('Admin clicks First page link', async ({}) => {
-  // ...
+When('Admin clicks First page link', async function () {
+  paginationAndSorting = this.pageManager.getPaginationAndSorting();
+  const ele = await paginationAndSorting.getFirstLink();
+  await paginationAndSorting.click(ele)
 });
 
 // 2. Missing step definition for "tests\Features\003_Program\009_PaginationProgram.feature:25:1"
-Then('Admin should see the very first page record on the table with Previous page link are disabled', async ({}) => {
-  // ...
+Then('Admin should see the very first page record on the table with Previous page link are disabled', async function () {
+  const ele = await paginationAndSorting.getPreviousLink();
+  await expect (ele).toBeDisabled()
 });
