@@ -1,13 +1,13 @@
 /** Generated from: tests/Features/006_Logout/002_VerifyBackBtn.feature */
 import { test } from "playwright-bdd";
 
-test.describe.only("Validation on Logout button", () => {
+test.describe("Validation on Logout button", () => {
 
   test.beforeEach(async ({ Given }) => {
     await Given("Admin is logged out of the application");
   });
 
-  test("Verify back button function", { tag: ["@only"] }, async ({ Given, When, Then }) => {
+  test("Verify back button function", async ({ Given, When, Then }) => {
     await Given("Admin is in login Page");
     await When("Admin clicks  browser back button");
     await Then("Admin should receive error message");
@@ -24,5 +24,5 @@ test.use({
 });
 
 const bddFileMeta = {
-  "Verify back button function": {"pickleLocation":"5:9","tags":["@only"]},
+  "Verify back button function": {"pickleLocation":"5:9"},
 };

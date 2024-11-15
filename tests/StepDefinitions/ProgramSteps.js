@@ -105,12 +105,16 @@ Then('Admin should able to see Program name, description, and status for each pr
 
 Then('Admin should see a Delete button in left top is disabled', async function() {
     program = await this.pageManager.getProgramPage();
-   await program.disabled_delete();
+  const disabledDelete =  await program.disabled_delete();
+  expect(await disabledDelete).toBeDisabled();
+
+
  });
 
  Then('Admin should see Search bar with text as {string}', async function({}, expected) {
    program = await this.pageManager.getProgramPage();
-   await program.search_box();
+   const searchBox =  await program.search_box();
+  expect(await searchBox).toBeVisible();
    
  });
 
@@ -123,7 +127,9 @@ Then('Admin should see a Delete button in left top is disabled', async function(
 
  Then('Admin should see checkbox default state as unchecked beside Program Name column as header', async function({}) {
   program = await this.pageManager.getProgramPage(); 
-  await program.checkbox_header();
+  const checkBox =  await program.checkbox_header();
+  expect(await checkBox).not.toBeChecked();
+   
    
  });
 

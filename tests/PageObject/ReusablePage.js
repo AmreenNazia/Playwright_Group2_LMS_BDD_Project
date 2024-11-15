@@ -62,6 +62,8 @@ async isVisible(selector){
   const element = await (selector);
   return element !== null && await element.isVisible();
 }
+ 
+
 async notVisible(selector){
   
   const element = await (selector);
