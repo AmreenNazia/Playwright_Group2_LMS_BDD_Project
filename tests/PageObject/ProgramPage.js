@@ -62,10 +62,11 @@ class ProgramPage {
     this.save = page.getByRole('button', { name: 'Save'});
     this.cancel_btn = page.getByRole('button',{name: 'Cancel'});
     this.required_text = page.getByLabel('Program Details');
-    this.programname = page.locator('//input[@id="programName"]');
+    this.add_programname = page.locator('//input[@id="programName"]');
      this.programdescription = page.locator('#programDescription')
     this.radiobutton =  page.locator('.p-radiobutton-box').first();
     this.successmessage = page.getByText('Successful', { exact: true });
+    this.desc_rowtable = page.locator('//tbody//tr//td[3]');
     
     
 }
@@ -275,8 +276,8 @@ async redStar(){
       const actualtext = await this.name_star.textContent();
       return actualtext;
 }
-async saveProgram(){
-  await this.save.click();
+async save_program(){
+  await this.saveProgram.click();
 }
 
 async fieldsrequired(){
@@ -287,14 +288,18 @@ async click_cancel(){
   await this.cancel_btn.click();
 }
 
+async cancel(){
+  return this.cancel_btn;
+}
+
 async enter_programname(Keyoption,sheetname){
   const testData = getDataByKeyOption(filepath,sheetname,Keyoption);
   const program_name = testData['Input_name'];
-  await this.programname.fill(program_name);
+  await this.add_programname.fill(program_name);
   
 }
 async enteredText(){
- return this.programname;
+ return this.add_programname;
 }
 async enter_programDescription(Keyoption,sheetname){
   const testData = getDataByKeyOption(filepath,sheetname,Keyoption);
@@ -315,16 +320,30 @@ async entered_text(){
     const testData = getDataByKeyOption(filepath,sheetname,keyoption);
   const program_name = testData['Input_name'];
   const program_description = testData['Input_desc'];
-    await this.programname.fill(program_name);
+    await this.add_programname.fill(program_name);
     await this.programdescription.fill(program_description);
     await this.radiobutton.click();
     await this.save.click();
   }
+
+  async searchcreatedProgram (keyoption,sheetname){
+    const testData = getDataByKeyOption(filepath,sheetname,keyoption);
+  const program_name = testData['Input_name'];
+ await this.page.reload();
+  await this.search_text.fill(program_name);
+
+  }
+  async descriptionVisibility(keyoption,sheetname){
+    const testData = getDataByKeyOption(filepath,sheetname,keyoption);
+  const program_desc = testData['Input_desc'];
+  const text = await this.desc_rowtable.textContent();
+  return {program_desc, text}
+  }
   async alert_message(){
      
-   const message =  await this.successmessage.textContent();
-   console.log(message)
-   return message;
+    return  this.successmessage;
+ 
+  
      
   }
 

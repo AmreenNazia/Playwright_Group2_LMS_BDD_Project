@@ -47,7 +47,15 @@ test.describe("Verify add New Program", () => {
 
   });
 
-  test.describe("Verify enter description", () => {});
+  test.describe("Verify enter description", () => {
+
+    test("Example #1", async ({ Given, When, Then }) => {
+      await Given("Admin is on Program details form");
+      await When("Admin enters the Description in text box from \"validatetextbox\" and \"Program\"");
+      await Then("Admin can see the text entered in description box");
+    });
+
+  });
 
   test("Verify select Status", async ({ Given, When, Then }) => {
     await Given("Admin is on Program details form");
@@ -55,7 +63,37 @@ test.describe("Verify add New Program", () => {
     await Then("Admin can see 'Active/Inactive' status selected");
   });
 
-  test.describe("Verify Admin is able to save the program details", () => {});
+  test.describe("Verify Admin is able to save the program details", () => {
+
+    test("Example #1", async ({ Given, When, Then }) => {
+      await Given("Admin is on Program details form");
+      await When("Admin enter valid details for mandatory fields from \"validInput\" and \"Program\" and Click on save button");
+      await Then("Admin gets a message 'Successful Program created'");
+    });
+
+  });
+
+  test("Verify cancel program details", async ({ Given, When, Then }) => {
+    await Given("Admin is on Program details form");
+    await When("Admin Click on cancel button");
+    await Then("Admin can see Program Details form disappears");
+  });
+
+  test.describe("Verify added Program is created", () => {
+
+    test("Example #1", async ({ Given, When, Then }) => {
+      await Given("Admin is on Program module");
+      await When("Admin searches with newly created Program Name sent from \"validInput\" and \"Program\"");
+      await Then("Records of the newly created  Program Name is displayed and match the data entered from \"validInput\" and \"Program\"");
+    });
+
+  });
+
+  test.only("Verify close window with \"X\"", { tag: ["@only"] }, async ({ Given, When, Then }) => {
+    await Given("Admin is on Program details form");
+    await When("Admin Click on X button");
+    await Then("Admin can see program details form disappear");
+  });
 
 });
 
@@ -68,11 +106,16 @@ test.use({
 });
 
 const bddFileMeta = {
-  "Verify add New Program": {"pickleLocation":"6:1"},
-  "Verify title of the pop up window": {"pickleLocation":"11:1"},
-  "Verify mandatory fields with red \"*\" mark": {"pickleLocation":"16:1"},
-  "Verify empty form submission": {"pickleLocation":"22:1"},
-  "Verify cancel button": {"pickleLocation":"28:1"},
-  "Verify enter program name|Example #1": {"pickleLocation":"40:1"},
-  "Verify select Status": {"pickleLocation":"50:1"},
+  "Verify add New Program": {"pickleLocation":"6:5"},
+  "Verify title of the pop up window": {"pickleLocation":"11:5"},
+  "Verify mandatory fields with red \"*\" mark": {"pickleLocation":"16:5"},
+  "Verify empty form submission": {"pickleLocation":"22:5"},
+  "Verify cancel button": {"pickleLocation":"28:5"},
+  "Verify enter program name|Example #1": {"pickleLocation":"40:13"},
+  "Verify enter description|Example #1": {"pickleLocation":"49:13"},
+  "Verify select Status": {"pickleLocation":"51:5"},
+  "Verify Admin is able to save the program details|Example #1": {"pickleLocation":"63:13"},
+  "Verify cancel program details": {"pickleLocation":"65:5"},
+  "Verify added Program is created|Example #1": {"pickleLocation":"76:13"},
+  "Verify close window with \"X\"": {"pickleLocation":"78:5","tags":["@only"],"ownTags":["@only"]},
 };
