@@ -52,6 +52,11 @@ async isVisible(selector){
   const element = await (selector);
   return element !== null && await element.isVisible();
 }
+async notVisible(selector){
+  
+  const element = await (selector);
+  return element !== null && await element.isVisible();
+}
 async navbar_order(name, selector) {
   await selector.first().waitFor({ state: 'visible' });
   const count = await selector.count();
