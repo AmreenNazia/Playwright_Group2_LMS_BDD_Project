@@ -6,8 +6,8 @@ const { getDataByKeyOption } = require('../Utilities/ExcelUtils');
 const filepath = 'tests/TestData/PlayWright_Group2_Data.xlsx';
 require('dotenv').config();
 
-const programName =  'GroupTwoPWTestingTwo';
-const programDesc =  'GroupTwoTesingTwo';
+const programName =  'GroupTwoPWTestingThree';
+const programDesc =  'GPTwo-Testing';
 
 class ProgramPage {
 
@@ -66,6 +66,7 @@ class ProgramPage {
      this.programdescription = page.locator('#programDescription')
     this.radiobutton =  page.locator('.p-radiobutton-box').first();
     this.successmessage = page.getByText('Successful', { exact: true });
+    this.tableValues = page.locator('//tr//td[2]');
     this.desc_rowtable = page.locator('//tbody//tr//td[3]');
     this.error_message = page.locator('//div//small');
     
@@ -344,6 +345,20 @@ async entered_text(){
      
     return  this.saveSuccesMessage;
  }
+
+  async fillSearchBar(String){
+    await this.search_text.fill(String);
+  }
+
+  async valueAssertion(ele){
+    const value = await ele.textContent();
+    return value;
+  }
+
+  async getTableValues(){
+    return this.tableValues;
+  }
+
 
 }
 module.exports = { ProgramPage }
