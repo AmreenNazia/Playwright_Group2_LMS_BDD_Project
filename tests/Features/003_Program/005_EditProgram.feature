@@ -1,3 +1,4 @@
+
 Feature: Manage Program - Edit Program
 
 Background: Admin is on program module after reaching dashboard
@@ -18,16 +19,21 @@ Scenario: Verify mandatory fields with red "*" mark
 When Admin clicks on Edit option for particular program
 Then Admin should see red aestrik mark beside mandatory field "Name"
 
-
-Scenario: Verify edit Program Name
-When Admin edits the program name and click on save button
+ 
+Scenario Outline: Verify edit Program Name
+When Admin edits the program name and click on save button from "<KeyOption>" and "<sheetname>"
 Then Updated program name is seen by the Admin
+Examples:
+| KeyOption       | sheetname |
+| validatetextbox | Program   |
 
-
-Scenario: Verify edit Description
-When Admin edits the description text and click on save button
+ 
+Scenario Outline: Verify edit Description
+When Admin edits the description text and click on save button from "<KeyOption>" and "<sheetname>"
 Then Admin can see the description is updated
-
+Examples:
+| KeyOption       | sheetname |
+| validatetextbox | Program   |
 
 Scenario: Verify edit Status
 When Admin can change the status of the program and click on save button

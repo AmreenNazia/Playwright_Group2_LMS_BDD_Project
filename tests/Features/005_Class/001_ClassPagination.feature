@@ -1,4 +1,3 @@
-@only
 Feature: Class Page Validation
 Background:
 Given Admin is on the Dashboard page after login
