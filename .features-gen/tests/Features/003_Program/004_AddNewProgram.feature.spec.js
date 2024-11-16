@@ -114,8 +114,8 @@ const bddFileMeta = {
   "Verify enter program name|Example #1": {"pickleLocation":"40:13"},
   "Verify enter description|Example #1": {"pickleLocation":"49:13"},
   "Verify select Status": {"pickleLocation":"51:5"},
-  "Verify Admin is able to save the program details|Example #1": {"pickleLocation":"63:13"},
-  "Verify cancel program details": {"pickleLocation":"65:5"},
-  "Verify added Program is created|Example #1": {"pickleLocation":"76:13"},
-  "Verify close window with \"X\"": {"pickleLocation":"78:5"},
+  "Verify Admin is able to save the program details|Example #1": {"pickleLocation":"62:13"},
+  "Verify cancel program details": {"pickleLocation":"64:5"},
+  "Verify added Program is created|Example #1": {"pickleLocation":"75:13"},
+  "Verify close window with \"X\"": {"pickleLocation":"77:5"},
 };

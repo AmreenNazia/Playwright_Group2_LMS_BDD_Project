@@ -68,7 +68,7 @@ class ProgramPage {
     this.successmessage = page.getByText('Successful', { exact: true });
     this.tableValues = page.locator('//tr//td[2]');
     this.desc_rowtable = page.locator('//tbody//tr//td[3]');
-    
+    this.error_message = page.locator('//div//small');
     
 }
   async click_program() {
@@ -126,7 +126,7 @@ class ProgramPage {
   async eachrowCheckbox() {
     const count = await this.eachrow_checkbox.count();
     for (let i = 0; i < count; i++) {
-      await expect(this.eachrow_checkbox.nth(i)).not.toBeChecked();
+      expect(await this.eachrow_checkbox).nth(i).not.toBeChecked();
     }
      
       console.log('All checkboxes are verified to be unchecked.');
@@ -324,6 +324,7 @@ async entered_text(){
     await this.add_programname.fill(program_name);
     await this.programdescription.fill(program_description);
     await this.radiobutton.click();
+    expect (await this.error_message).not.toBeVisible();
     await this.save.click();
   }
 
@@ -343,10 +344,7 @@ async entered_text(){
   async alert_message(){
      
     return  this.saveSuccesMessage;
- 
-  
-     
-  }
+ }
 
   async fillSearchBar(String){
     await this.search_text.fill(String);

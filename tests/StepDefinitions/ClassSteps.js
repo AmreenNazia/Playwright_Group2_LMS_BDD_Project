@@ -1,7 +1,7 @@
 const { createBdd} = require('playwright-bdd');
 const { Given, When, Then }= createBdd();
 const { POManager } = require('../PageObject/POManager'); 
-const { expect } = require('@playwright/test');
+const { expect, selectors } = require('@playwright/test');
 const exp = require('constants');
 let class_page;
 
@@ -81,4 +81,79 @@ Given('Admin is on the Dashboard page after login', async function({})  {
   const actual_footer = await program.footer_text();
    expect(await actual_footer).toMatch(/In/)
   });
-  
+  /***Add New Class ***/
+
+
+  // 1. Missing step definition for "tests/Features/005_Class/002_AddNewClass.feature:4:1"
+Given('Admin is on the Manage class page after login', async function({})  {
+  const reusablepage = await this.pageManager.getReusablePage();
+  await reusablepage.navigate();
+  await reusablepage.login();
+  class_page = await this.pageManager.getClassPage();
+  const selector = await class_page.clickClass();
+   await reusablepage.click(selector)
+
+});
+
+// 2. Missing step definition for "tests/Features/005_Class/002_AddNewClass.feature:7:1"
+Given('Admin is on the Manage class page', async function({})  {
+  const actualtext = await class_page.manageclass_text();
+  expect(await actualtext).toBe(' Manage Class')
+});
+
+// 3. Missing step definition for "tests/Features/005_Class/002_AddNewClass.feature:8:1"
+When('Admin clicks add new class under the class menu bar.', async function({}) {
+  const program = await this.pageManager.getProgramPage();
+  await program.over_layer();
+  class_page = await this.pageManager.getClassPage();
+  const selector = await class_page.clickClass();
+  const reusablepage = this.pageManager.getReusablePage();
+  await reusablepage.click(selector);
+  const selector1 = await class_page.addNewClass();
+  await reusablepage.click(selector1)
+
+});
+
+// 4. Missing step definition for "tests/Features/005_Class/002_AddNewClass.feature:9:1"
+Then('Admin should see a popup open for class details with empty form along with <SAVE> and <CANCEL> button and Close\\(X) Icon on the top right corner of the window', async function({})  {
+ const program = await this.pageManager.getProgramPage();
+  const dialob_box = await program.dialogbox();
+  const reusablepage = this.pageManager.getReusablePage();
+await reusablepage.isVisible(dialob_box);
+});
+
+Then('Admin should see few input fields and their respective text boxes in the class details window', async function({})  {
+  class_page = await this.pageManager.getClassPage(); 
+    await class_page.inputFields(); 
+   
+});
+/**** Add new class Popup****/
+
+ 
+
+// 2. Missing step definition for "tests/Features/005_Class/003_AddNewClassPopup.feature:7:1"
+Given('Admin is on the Class Popup window', async function({}) {
+  const program = await this.pageManager.getProgramPage();
+  await program.over_layer();
+  class_page = await this.pageManager.getClassPage();
+  const selector = await class_page.clickClass();
+  const reusablepage = this.pageManager.getReusablePage();
+  await reusablepage.click(selector);
+  const selector1 = await class_page.addNewClass();
+  await reusablepage.click(selector1)
+});
+
+// 3. Missing step definition for "tests/Features/005_Class/003_AddNewClassPopup.feature:8:1"
+When('Admin enters mandatory fields in the form and clicks on save button from {string} and {string}', async function({}, keyoption, sheetname)  {
+   const class_page = await this.pageManager.getClassPage();
+   await class_page.add_NewClass(keyoption,sheetname);
+
+});
+
+// 4. Missing step definition for "tests/Features/005_Class/003_AddNewClassPopup.feature:9:1"
+Then('Admin gets message Class added Successfully', async function({})  {
+  const selector = await class_page.getsuccessmessage();
+    const reusablepage = await this.pageManager.getReusablePage();
+    await reusablepage.isVisible(selector);
+    console.log("Successfull Class added")
+});

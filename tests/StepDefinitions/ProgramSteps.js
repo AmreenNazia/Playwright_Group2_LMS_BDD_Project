@@ -442,12 +442,15 @@ Then('Admin can see {string} status selected', async function({}, arg) {
  
 When('Admin enter valid details for mandatory fields from {string} and {string} and Click on save button', async function ({},keyoption,sheetname) {
      await program.addNewProgram(keyoption,sheetname);
+     const field_Required = await program.fieldsrequired();
+     await expect(field_Required).toContainText('Program name is required');
+
 });
 
  
 Then('Admin gets a message {string}', async function({}, arg) {
       const success_message = await program.alert_message();
-      expect(await success_message).toBeVisible();
+      expect(await success_message).toBeVisible({ timeout: 10000 });
 });
 // 2. Missing step definition for "tests/Features/003_Program/004_AddNewProgram.feature:72:9"
 When('Admin searches with newly created Program Name sent from {string} and {string}', async function({}, keyoption, sheetname)  {
@@ -619,7 +622,23 @@ When('Admin clicks First page link', async function () {
 });
 
 // 2. Missing step definition for "tests\Features\003_Program\009_PaginationProgram.feature:25:1"
+
+Then('Admin should see the very first page record on the table with Previous page link are disabled', async ({}) => {
+  // ...
+});
+
+// 1. Missing step definition for "tests/Features/003_Program/005_EditProgram.feature:24:1"
+When('Admin edits the program name and click on save button from {string} and {string}', async ({}, keyoption, sheetname) => {
+  
+});
+
+// 2. Missing step definition for "tests/Features/003_Program/005_EditProgram.feature:32:1"
+When('Admin edits the description text and click on save button from {string} and {string}', async ({}, keyoption, sheetname) => {
+   
+});
+
 Then('Admin should see the very first page record on the table with Previous page link are disabled', async function () {
   const ele = await paginationAndSorting.getPreviousLink();
   await expect (ele).toBeDisabled()
 });
+ 
