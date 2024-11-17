@@ -105,16 +105,12 @@ Then('Admin should able to see Program name, description, and status for each pr
 
 Then('Admin should see a Delete button in left top is disabled', async function() {
     program = await this.pageManager.getProgramPage();
-  const disabledDelete =  await program.disabled_delete();
-  expect(await disabledDelete).toBeDisabled();
-
-
+   await program.disabled_delete();
  });
 
  Then('Admin should see Search bar with text as {string}', async function({}, expected) {
    program = await this.pageManager.getProgramPage();
-   const searchBox =  await program.search_box();
-  expect(await searchBox).toBeVisible();
+   await program.search_box();
    
  });
 
@@ -127,9 +123,7 @@ Then('Admin should see a Delete button in left top is disabled', async function(
 
  Then('Admin should see checkbox default state as unchecked beside Program Name column as header', async function({}) {
   program = await this.pageManager.getProgramPage(); 
-  const checkBox =  await program.checkbox_header();
-  expect(await checkBox).not.toBeChecked();
-   
+  await program.checkbox_header();
    
  });
 
@@ -442,15 +436,18 @@ Then('Admin can see {string} status selected', async function({}, arg) {
  
 When('Admin enter valid details for mandatory fields from {string} and {string} and Click on save button', async function ({},keyoption,sheetname) {
      await program.addNewProgram(keyoption,sheetname);
+<<<<<<< HEAD
      const field_Required = await program.fieldsrequired();
      await expect(field_Required).toContainText('Program name is required');
 
+=======
+>>>>>>> parent of 2866f13 (class module sorting updated)
 });
 
  
 Then('Admin gets a message {string}', async function({}, arg) {
       const success_message = await program.alert_message();
-      expect(await success_message).toBeVisible({ timeout: 10000 });
+      expect(await success_message).toBeVisible();
 });
 // 2. Missing step definition for "tests/Features/003_Program/004_AddNewProgram.feature:72:9"
 When('Admin searches with newly created Program Name sent from {string} and {string}', async function({}, keyoption, sheetname)  {
@@ -472,10 +469,6 @@ Then('Records of the newly created  Program Name is displayed and match the data
   program = await this.pageManager.getProgramPage();
   const desc_name = await program.descriptionVisibility(keyoption,sheetname);
   expect(await desc_name.program_desc).toBe(desc_name.text)
-});
-// 1. Missing step definition for "tests\Features\003_Program\007_SearchBarValidation.feature:10:1"
-When('Admin enter the program to search By program name', async ({}) => {
-  // ...
 });
 
 // 2. Missing step definition for "tests\Features\003_Program\007_SearchBarValidation.feature:11:1"
@@ -622,23 +615,7 @@ When('Admin clicks First page link', async function () {
 });
 
 // 2. Missing step definition for "tests\Features\003_Program\009_PaginationProgram.feature:25:1"
-
-Then('Admin should see the very first page record on the table with Previous page link are disabled', async ({}) => {
-  // ...
-});
-
-// 1. Missing step definition for "tests/Features/003_Program/005_EditProgram.feature:24:1"
-When('Admin edits the program name and click on save button from {string} and {string}', async ({}, keyoption, sheetname) => {
-  
-});
-
-// 2. Missing step definition for "tests/Features/003_Program/005_EditProgram.feature:32:1"
-When('Admin edits the description text and click on save button from {string} and {string}', async ({}, keyoption, sheetname) => {
-   
-});
-
 Then('Admin should see the very first page record on the table with Previous page link are disabled', async function () {
   const ele = await paginationAndSorting.getPreviousLink();
   await expect (ele).toBeDisabled()
 });
- 

@@ -4,7 +4,6 @@ const { ProgramPage } = require('./ProgramPage');
 const { ReusablePage } = require('./ReusablePage');
 const {PaginationAndSorting} = require('./PaginationAndSorting')
 const { LogoutPage } = require('./LogoutPage');
-const { ClassPage } = require('./ClassPage');
 class POManager
 {
 constructor(page)
@@ -16,7 +15,6 @@ constructor(page)
     this.reusablepage = new ReusablePage(this.page);
     this.paginationAndSorting = new PaginationAndSorting(this.page)
     this.logoutpage = new LogoutPage(this.page);
-    this.classpage = new ClassPage(this.page);
 }
 
 getLoginPage()
@@ -39,9 +37,6 @@ getPaginationAndSorting(){
 }
 getLogoutPage(){
     return this.logoutpage;
-}
-getClassPage(){
-    return this.classpage;
 }
 }
 
