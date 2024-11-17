@@ -1,4 +1,4 @@
-@only
+
 Feature:Add New Class popup
 Background: :
 Given Admin is on the Manage class page after login

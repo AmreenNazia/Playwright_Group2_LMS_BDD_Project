@@ -1,4 +1,4 @@
- @only
+
 Feature: Navigation
 
     Background:
