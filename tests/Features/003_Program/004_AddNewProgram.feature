@@ -52,12 +52,8 @@ Feature: Verify add New Program
         Given Admin is on Program details form
         When Admin selects the status of the program by clicking on the radio button "(Active/InActive)"
         Then Admin can see 'Active/Inactive' status selected
-<<<<<<< HEAD
- 
-=======
 
 
->>>>>>> parent of 2866f13 (class module sorting updated)
     Scenario Outline:Verify Admin is able to save the program details
         Given Admin is on Program details form
         When Admin enter valid details for mandatory fields from "<KeyOption>" and "<sheetname>" and Click on save button

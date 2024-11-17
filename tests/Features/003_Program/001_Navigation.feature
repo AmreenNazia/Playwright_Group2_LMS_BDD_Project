@@ -1,8 +1,4 @@
-<<<<<<< HEAD
- @only
-=======
  
->>>>>>> parent of 2866f13 (class module sorting updated)
 Feature: Navigation
 
     Background:

@@ -68,11 +68,7 @@ class ProgramPage {
     this.successmessage = page.getByText('Successful', { exact: true });
     this.tableValues = page.locator('//tr//td[2]');
     this.desc_rowtable = page.locator('//tbody//tr//td[3]');
-<<<<<<< HEAD
-    this.error_message = page.locator('//div//small');
-=======
     
->>>>>>> parent of 2866f13 (class module sorting updated)
     
 }
   async click_program() {
