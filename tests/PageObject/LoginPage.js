@@ -125,7 +125,7 @@ const sharp = require('sharp')
             timeout: 60000, // Set a longer timeout if needed
             waitUntil: 'load'
           });
-          await this.page.pause();
+          
         
         if (response){
             const status = response.status();

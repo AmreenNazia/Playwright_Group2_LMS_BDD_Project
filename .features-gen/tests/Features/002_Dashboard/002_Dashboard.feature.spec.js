@@ -1,4 +1,4 @@
-/** Generated from: tests/Features/002_Dashboard/002_Dashboard.feature */
+/** Generated from: tests\Features\002_Dashboard\002_Dashboard.feature */
 import { test } from "playwright-bdd";
 
 test.describe("Validating Dashboard Page", () => {
@@ -67,7 +67,7 @@ test.describe("Validating Dashboard Page", () => {
 
 test.use({
   $test: ({}, use) => use(test),
-  $uri: ({}, use) => use("tests/Features/002_Dashboard/002_Dashboard.feature"),
+  $uri: ({}, use) => use("tests\\Features\\002_Dashboard\\002_Dashboard.feature"),
   $bddFileMeta: ({}, use) => use(bddFileMeta),
 });
 

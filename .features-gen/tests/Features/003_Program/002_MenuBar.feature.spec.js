@@ -1,4 +1,4 @@
-/** Generated from: tests/Features/003_Program/002_MenuBar.feature */
+/** Generated from: tests\Features\003_Program\002_MenuBar.feature */
 import { test } from "playwright-bdd";
 
 test.describe("Menu Bar", () => {
@@ -37,7 +37,7 @@ test.describe("Menu Bar", () => {
 
 test.use({
   $test: ({}, use) => use(test),
-  $uri: ({}, use) => use("tests/Features/003_Program/002_MenuBar.feature"),
+  $uri: ({}, use) => use("tests\\Features\\003_Program\\002_MenuBar.feature"),
   $bddFileMeta: ({}, use) => use(bddFileMeta),
 });
 
