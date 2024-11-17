@@ -1,4 +1,4 @@
-/** Generated from: tests/Features/005_Class/003_AddNewClassPopup.feature */
+/** Generated from: tests\Features\005_Class\003_AddNewClassPopup.feature */
 import { test } from "playwright-bdd";
 
 test.describe.only("Add New Class popup", () => {
@@ -23,7 +23,7 @@ test.describe.only("Add New Class popup", () => {
 
 test.use({
   $test: ({}, use) => use(test),
-  $uri: ({}, use) => use("tests/Features/005_Class/003_AddNewClassPopup.feature"),
+  $uri: ({}, use) => use("tests\\Features\\005_Class\\003_AddNewClassPopup.feature"),
   $bddFileMeta: ({}, use) => use(bddFileMeta),
 });
 

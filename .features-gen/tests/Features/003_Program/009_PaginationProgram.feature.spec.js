@@ -43,8 +43,8 @@ test.use({
 });
 
 const bddFileMeta = {
-  "Verify Admin is able to click Next page link": {"pickleLocation":"7:1"},
-  "Verify Admin is able to click  Last page link": {"pickleLocation":"12:1"},
-  "Verify Admin is able to click Previous page link": {"pickleLocation":"17:1"},
-  "Verify Admin is able to click  First page link": {"pickleLocation":"22:1"},
+  "Verify Admin is able to click Next page link": {"pickleLocation":"8:1"},
+  "Verify Admin is able to click  Last page link": {"pickleLocation":"13:1"},
+  "Verify Admin is able to click Previous page link": {"pickleLocation":"18:1"},
+  "Verify Admin is able to click  First page link": {"pickleLocation":"23:1"},
 };
