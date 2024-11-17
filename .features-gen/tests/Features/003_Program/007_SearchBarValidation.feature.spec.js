@@ -44,7 +44,7 @@ test.use({
 
 const bddFileMeta = {
   "Verify Admin is able to search results found for program name": {"pickleLocation":"8:1"},
-  "Admin should able to see Program name, description, and status for searched program name": {"pickleLocation":"14:1"},
-  "Verify Admin is able to search results not found": {"pickleLocation":"20:1"},
-  "Verify Admin is able to search with partial program name": {"pickleLocation":"25:1"},
+  "Admin should able to see Program name, description, and status for searched program name": {"pickleLocation":"13:1"},
+  "Verify Admin is able to search results not found": {"pickleLocation":"18:1"},
+  "Verify Admin is able to search with partial program name": {"pickleLocation":"23:1"},
 };

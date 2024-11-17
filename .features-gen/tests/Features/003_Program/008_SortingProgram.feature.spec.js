@@ -37,7 +37,7 @@ test.use({
 });
 
 const bddFileMeta = {
-  "Verify sorting of  Program name in Ascending order/Descending order": {"pickleLocation":"8:1"},
-  "Verify sorting of  Program Description in  Ascending order/Descending order": {"pickleLocation":"13:1"},
-  "Verify sorting of Program status in Ascending order/Descending order": {"pickleLocation":"18:1"},
+  "Verify sorting of  Program name in Ascending order/Descending order": {"pickleLocation":"7:1"},
+  "Verify sorting of  Program Description in  Ascending order/Descending order": {"pickleLocation":"12:1"},
+  "Verify sorting of Program status in Ascending order/Descending order": {"pickleLocation":"17:1"},
 };

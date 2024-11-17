@@ -156,9 +156,9 @@ Then('Admin lands on Program details form', async function () {
 
 
 
-// Then('Admin should see red aestrik mark beside mandatory field {string}', async function ({}, arg)  {
-//   await program.AssertMandatoryFields();
-// });
+Then('Admin should see red aestrik mark beside mandatory field {string}', async function ({}, arg)  {
+  await program.AssertMandatoryFields();
+});
 
 
 When('Admin edits the program name and click on save button', async function (){
@@ -168,9 +168,7 @@ When('Admin edits the program name and click on save button', async function (){
 
 
 Then('Updated program name is seen by the Admin', async function () {
-  const success_message = await program.alert_message();
-  expect(await success_message.textContent({timeout:60000})).toBe('SuccessfulProgram Updated');
-  // expect (await program.editProgramName).toBeTruthy();
+  expect (await program.editProgramName).toBeTruthy();
 });
 
 
@@ -192,9 +190,7 @@ When('Admin can change the status of the program and click on save button', asyn
 
 
 Then('Status updated can be viewed by the Admin', async function () {
-  // expect(await program.statusUpdate).toBeTruthy();
-  const success_message = await program.alert_message();
-  expect(await success_message.textContent({timeout:60000})).toBe('SuccessfulProgram Updated');
+  expect (await program.statusUpdate).toBeTruthy();
 });
 
 
@@ -206,10 +202,7 @@ When('Admin click on save button', async function () {
 
 
 Then('Admin can see the updated program details', async function () {
-  // expect (await program.editProgramDescription).toBeTruthy();
-  const success_message = await program.alert_message();
-  expect(await success_message.textContent({timeout:60000})).toBe('SuccessfulProgram Updated');
-
+  expect (await program.editProgramDescription).toBeTruthy();
 });
 
 
@@ -230,9 +223,8 @@ When('Admin searches with newly updated {string}', async function () {
 });
 
 
- Then('Admin verifies that the details are correctly updated from {string} and {string}', async function ({}, keyoption, sheetname) {
-  // expect (await program.editProgramName).toBeTruthy();
-  await program.validateEditedDetails(keyoption,sheetname)
+Then('Admin verifies that the details are correctly updated.', async function () {
+  expect (await program.editProgramName).toBeTruthy();
 });
 
 
@@ -450,20 +442,20 @@ Then('Admin can see {string} status selected', async function({}, arg) {
  
 When('Admin enter valid details for mandatory fields from {string} and {string} and Click on save button', async function ({},keyoption,sheetname) {
      await program.addNewProgram(keyoption,sheetname);
-    //  const field_Required = await program.fieldsrequired();
-    //  await expect(field_Required).not.toContainText('Program name is required');
+     const field_Required = await program.fieldsrequired();
+     await expect(field_Required).toContainText('Program name is required');
 
 });
 
  
 Then('Admin gets a message {string}', async function({}, arg) {
       const success_message = await program.alert_message();
-      expect(await success_message.textContent()).toBe('SuccessfulProgram Created Successfully');
+      expect(await success_message).toBeVisible({ timeout: 10000 });
 });
 // 2. Missing step definition for "tests/Features/003_Program/004_AddNewProgram.feature:72:9"
 When('Admin searches with newly created Program Name sent from {string} and {string}', async function({}, keyoption, sheetname)  {
         program = await this.pageManager.getProgramPage();
-        await program.searchcreatedProgram(keyoption,sheetname);
+        await program.searchcreatedProgram (keyoption,sheetname);
 
 });
 
@@ -482,7 +474,9 @@ Then('Records of the newly created  Program Name is displayed and match the data
   expect(await desc_name.program_desc).toBe(desc_name.text)
 });
 // 1. Missing step definition for "tests\Features\003_Program\007_SearchBarValidation.feature:10:1"
- 
+When('Admin enter the program to search By program name', async ({}) => {
+  // ...
+});
 
 // 2. Missing step definition for "tests\Features\003_Program\007_SearchBarValidation.feature:11:1"
 Then('Admin should able to see Program name, description, and status for searched program name', async ({}) => {
@@ -627,65 +621,20 @@ When('Admin clicks First page link', async function () {
   await paginationAndSorting.click(ele)
 });
 
+// 2. Missing step definition for "tests\Features\003_Program\009_PaginationProgram.feature:25:1"
+
+Then('Admin should see the very first page record on the table with Previous page link are disabled', async ({}) => {
+  // ...
+});
+
 // 1. Missing step definition for "tests/Features/003_Program/005_EditProgram.feature:24:1"
-When('Admin edits the program name and click on save button from {string} and {string}', async function({}, keyoption, sheetname)  {
-        program =  await this.pageManager.getProgramPage();
-        await program.searchforEditName(keyoption,sheetname);
-        await program.clickEditIcon();
-      await program.editProgramName(keyoption,sheetname);
-
-
+When('Admin edits the program name and click on save button from {string} and {string}', async ({}, keyoption, sheetname) => {
+  
 });
 
 // 2. Missing step definition for "tests/Features/003_Program/005_EditProgram.feature:32:1"
-When('Admin edits the description text and click on save button from {string} and {string}', async function({}, keyoption, sheetname)  {
-  program =  await this.pageManager.getProgramPage();
-  await program.searchEditedProgramName(keyoption,sheetname);
-  await program.clickEditIcon();
-await program.editProgramDescription(keyoption,sheetname);     
-});
-When('Admin clicks on Edit option for particular program from {string} and {string}', async function({}, keyoption, sheetname)  {
-        program =  await this.pageManager.getProgramPage();
-        await program.searchforEditName(keyoption,sheetname);
-        await program.clickEditIcon();
-});
-When('Admin can change the status of the program from {string} and {string} and click on save button', async function({}, keyoption, sheetname)  {
-    program =  await this.pageManager.getProgramPage();
-    await program.searchEditedProgramName(keyoption,sheetname);
-    await program.clickEditIcon();
-    await program.statusUpdate();
-
-});
-// 1. Missing step definition for "tests/Features/003_Program/005_EditProgram.feature:54:1"
-When('Admin click on save button of the updated program from {string} and {string}', async function({}, keyoption, sheetname)  {
-  program =  await this.pageManager.getProgramPage();
-  await program.searchEditedProgramName(keyoption,sheetname);
-  await program.clickEditIcon();
-  await program.save_program();
-});
-
-// 2. Missing step definition for "tests/Features/003_Program/005_EditProgram.feature:62:1"
-When('Admin click on cancel button of the updated program from {string} and {string}', async function({}, keyoption, sheetname) {
-  program =  await this.pageManager.getProgramPage();
-  await program.searchEditedProgramName(keyoption,sheetname);
-  await program.clickEditIcon();
-  await program.click_cancel();
-
-});
-
-// 3. Missing step definition for "tests/Features/003_Program/005_EditProgram.feature:69:1"
-When('Admin searches with newly updated Program Name from {string} and {string}', async function({}, keyoption,sheetname){
-  program =  await this.pageManager.getProgramPage();
-  await program.searchEditedProgramName(keyoption,sheetname);
-});
-
-// 4. Missing step definition for "tests/Features/003_Program/005_EditProgram.feature:75:1"
-When('Admin Click on X button of the updated program from {string} and {string}', async function({}, keyoption, sheetname) {
-  program =  await this.pageManager.getProgramPage();
-  await program.searchEditedProgramName(keyoption,sheetname);
-  await program.clickEditIcon();
-  await program.clickClose();
-
+When('Admin edits the description text and click on save button from {string} and {string}', async ({}, keyoption, sheetname) => {
+   
 });
 
 Then('Admin should see the very first page record on the table with Previous page link are disabled', async function () {

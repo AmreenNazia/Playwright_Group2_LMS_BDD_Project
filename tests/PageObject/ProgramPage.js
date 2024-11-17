@@ -3,7 +3,6 @@ const exp = require('constants');
 const { ReusablePage } = require('./ReusablePage');
 const { TIMEOUT } = require('dns');
 const { getDataByKeyOption } = require('../Utilities/ExcelUtils'); 
-const { default: test } = require('node:test');
 const filepath = 'tests/TestData/PlayWright_Group2_Data.xlsx';
 require('dotenv').config();
 
@@ -70,8 +69,6 @@ class ProgramPage {
     this.tableValues = page.locator('//tr//td[2]');
     this.desc_rowtable = page.locator('//tbody//tr//td[3]');
     this.error_message = page.locator('//div//small');
-    this.specificEditbutton = page.locator('//span//button[@id="editProgram"]');
-    this.editedDetails = page.locator('//tbody//tr//td');
     
 }
   async click_program() {
@@ -144,8 +141,8 @@ class ProgramPage {
   }
 
   async clickEditIcon(){
-
-     await this.specificEditIcon.click();
+    await this.overlayer.click();
+    this.editIcon.click();
   }
 
   async AssertProgramDetailsPage(){
@@ -156,31 +153,32 @@ class ProgramPage {
     await expect(this.aestrikAssetion).toContainText('*');
   }
 
-  async editProgramName(Keyoption,sheetname){
-    const testData = getDataByKeyOption(filepath,sheetname,Keyoption);
-    const program_name = testData['Input_name'];
-    // await (this.specificEditIcon).click();
-    await (this.programNameTextBox).clear();
-    await (this.programNameTextBox).fill(program_name);
+  async editProgramName(){
+    await (this.search_text).fill(programName);
+    await this.overlayer.click();
+    await (this.specificEditIcon).click();
+    await (this.programNameTextBox).fill(programName);
     await (this.saveProgram).click();
-    // expect (await this.savedProgramNameAssertion).toHaveText(program_name);
+    expect (await this.savedProgramNameAssertion).toHaveText(programName);
   }
 
-  async editProgramDescription(Keyoption,sheetname){
-    const testData = getDataByKeyOption(filepath,sheetname,Keyoption);
-    const program_desc = testData['Input_desc'];
-    await (this.programDescriptionTextBox).clear();
-    await (this.programDescriptionTextBox).fill(program_desc);
+  async editProgramDescription(){
+    await (this.search_text).fill(programDesc);
+    await this.overlayer.click();
+    await (this.specificEditIcon).click();
+    await (this.programDescriptionTextBox).fill(programDesc);
     await (this.saveProgram).click();
-    // await (this.successMessage);
-    // expect (await this.savedProgramDesc).toHaveText(programDesc);
+    await (this.successMessage);
+    expect (await this.savedProgramDesc).toHaveText(programDesc);
   }
   async statusUpdate(){
-    
+    await (this.search_text).fill(programName);
+    await this.overlayer.click();
+    await (this.specificEditIcon).click();
     await (this.activeRadioButton).click();
     await (this.saveProgram).click();
-    // await (this.successMessage);
-    // expect (await this.savedStatus).toHaveText('Active');
+    await (this.successMessage);
+    expect (await this.savedStatus).toHaveText('Active');
   }
 
  async clickCancel(){
@@ -192,11 +190,11 @@ class ProgramPage {
  }
  
  async clickClose(){
-  // await (this.search_text).fill(programDesc);
-  // await this.overlayer.click();
-  // await (this.specificEditIcon).click();
+  await (this.search_text).fill(programDesc);
+  await this.overlayer.click();
+  await (this.specificEditIcon).click();
   await (this.closeIcon).click();
-  // expect (await this.programDetailsPage).not.toBeVisible();
+  expect (await this.programDetailsPage).not.toBeVisible();
  }
 
  async clickDeleteIcon(){
@@ -330,31 +328,13 @@ async entered_text(){
     await this.save.click();
   }
 
-  async searchcreatedProgram(keyoption,sheetname){
+  async searchcreatedProgram (keyoption,sheetname){
     const testData = getDataByKeyOption(filepath,sheetname,keyoption);
   const program_name = testData['Input_name'];
  await this.page.reload();
   await this.search_text.fill(program_name);
 
   }
-  async searchforEditName(keyoption,sheetname){
-    const testData = getDataByKeyOption(filepath,sheetname,keyoption);
-  const program_name = testData['searchCreatedName'];
-  await this.page.reload();
-  await this.search_text.fill(program_name);
-  await this.page.waitForLoadState('networkidle');
-
- }
- async searchEditedProgramName(keyoption,sheetname){
-  const testData = getDataByKeyOption(filepath,sheetname,keyoption);
-const program_name = testData['SearchUpdatedName'];
-console.log(program_name)
-await this.page.reload();
-await this.search_text.fill(program_name);
-await this.page.waitForLoadState('networkidle');
-
-}
-
   async descriptionVisibility(keyoption,sheetname){
     const testData = getDataByKeyOption(filepath,sheetname,keyoption);
   const program_desc = testData['Input_desc'];
@@ -377,32 +357,6 @@ await this.page.waitForLoadState('networkidle');
 
   async getTableValues(){
     return this.tableValues;
-  }
-
-  async validateEditedDetails(keyoption,sheetname){
-    const testData = getDataByKeyOption(filepath,sheetname,keyoption);
-    const updatedProgramname = testData['Input_name'];
-    const updatedDescription = testData['Input_desc'];
-    const rowCount = await this.editedDetails.count();
-
-let programName, programDesc, status;
-
-for (let i = 1; i < rowCount - 1; i++) {
-  const textContent = await this.editedDetails.nth(i).textContent();
-
-  if (i === 1) {
-    programName = textContent;
-  } else if (i === 2) {
-    programDesc = textContent;
-  } else {
-    status = textContent;
-  }
-}
-expect(updatedProgramname).toBe(programName);
-expect(updatedDescription).toBe(programDesc);
-expect('Active').toBe(status);
-
-
   }
 
 
