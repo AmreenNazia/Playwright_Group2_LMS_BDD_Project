@@ -1,4 +1,4 @@
-/** Generated from: tests/Features/003_Program/009_PaginationProgram.feature */
+/** Generated from: tests\Features\003_Program\009_PaginationProgram.feature */
 import { test } from "playwright-bdd";
 
 test.describe("Manage Program - Pagination", () => {
@@ -38,13 +38,13 @@ test.describe("Manage Program - Pagination", () => {
 
 test.use({
   $test: ({}, use) => use(test),
-  $uri: ({}, use) => use("tests/Features/003_Program/009_PaginationProgram.feature"),
+  $uri: ({}, use) => use("tests\\Features\\003_Program\\009_PaginationProgram.feature"),
   $bddFileMeta: ({}, use) => use(bddFileMeta),
 });
 
 const bddFileMeta = {
-  "Verify Admin is able to click Next page link": {"pickleLocation":"7:1"},
-  "Verify Admin is able to click  Last page link": {"pickleLocation":"12:1"},
-  "Verify Admin is able to click Previous page link": {"pickleLocation":"17:1"},
-  "Verify Admin is able to click  First page link": {"pickleLocation":"22:1"},
+  "Verify Admin is able to click Next page link": {"pickleLocation":"8:1"},
+  "Verify Admin is able to click  Last page link": {"pickleLocation":"13:1"},
+  "Verify Admin is able to click Previous page link": {"pickleLocation":"18:1"},
+  "Verify Admin is able to click  First page link": {"pickleLocation":"23:1"},
 };

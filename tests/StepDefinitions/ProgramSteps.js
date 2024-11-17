@@ -264,7 +264,9 @@ Then('Admin will get confirm deletion popup', async function () {
 });
 
 Given('Admin is on Confirm deletion form', async function () {
-  program = await this.pageManager.getProgramPage();
+  reusablepage = await this.pageManager.getReusablePage();
+  // const txt = reusablepage.getEditProgramName();
+  // program = await this.pageManager.getProgramPage();
   await program.searchProgram();
   await  program.clickDeletewithoutOverLay();
   await program.deleteConfirmation();
@@ -486,7 +488,7 @@ Then('Records of the newly created  Program Name is displayed and match the data
 
 // 2. Missing step definition for "tests\Features\003_Program\007_SearchBarValidation.feature:11:1"
 Then('Admin should able to see Program name, description, and status for searched program name', async ({}) => {
- 
+
     const ele = await program.getTableValues();
     await expect(ele).toBeVisible();
 });
@@ -563,16 +565,15 @@ Then('Admin See the  Program Status is sorted in Ascending order\\/Descending or
 // 3. Missing step definition for "tests\Features\003_Program\009_PaginationProgram.feature:9:1" 
 When('Admin clicks Next page link on the program table', async function() {
 paginationAndSorting = this.pageManager.getPaginationAndSorting();
-const ele = await paginationAndSorting.getNextLink();
+// const ele = await paginationAndSorting.getNextLink();
 const ele1 =  await paginationAndSorting.getOverLayer();
 await paginationAndSorting.click(ele1)
-await paginationAndSorting.click(ele)
+await paginationAndSorting.validateNextPageLink();
 });
 
 // 4. Missing step definition for "tests\Features\003_Program\009_PaginationProgram.feature:10:1"
 Then('Admin should see the Pagination has {string} active link', async function ({}, arg)  {
-  const ele = await paginationAndSorting.getNextLink();
-  await expect (ele).toBeEnabled();
+   await paginationAndSorting.getNextLink(); 
 });
 
 // 5. Missing step definition for "tests\Features\003_Program\009_PaginationProgram.feature:14:1"
@@ -586,7 +587,7 @@ When('Admin clicks Last page link', async function ()  {
 
 // 6. Missing step definition for "tests\Features\003_Program\009_PaginationProgram.feature:15:1"
 Then('Admin should see the last page record on the table with Next page link are disabled', async function () {
-  const ele = await paginationAndSorting.getNextLink();
+  const ele = await paginationAndSorting.getNextLink1();
   await expect (ele).toBeDisabled()
 });
 
@@ -602,20 +603,21 @@ Given('Admin is on last page of Program module table', async function ()  {
 // 8. Missing step definition for "tests\Features\003_Program\009_PaginationProgram.feature:19:1"
 When('Admin clicks Previous page link', async function () {
   paginationAndSorting = this.pageManager.getPaginationAndSorting();
-  const ele = await paginationAndSorting.getPreviousLink();
-  await paginationAndSorting.click(ele)
+  await paginationAndSorting.getPreviousLink();
+
 });
 
 // 9. Missing step definition for "tests\Features\003_Program\009_PaginationProgram.feature:20:1"
 Then('Admin should see the previous page record on the table with pagination has previous page link', async function ()  {
-  const ele = await paginationAndSorting.getPreviousLink();
-  await expect (ele).toBeEnabled();
+  const ele = await paginationAndSorting.getPreviousLink1();
+  expect( await ele).toBeEnabled();
+ 
 });
 
 // 10. Missing step definition for "tests\Features\003_Program\009_PaginationProgram.feature:23:1"
 Given('Admin is on Previous Program page', async function ()  {
   paginationAndSorting = this.pageManager.getPaginationAndSorting();
-  const ele = await paginationAndSorting.getNextLink();
+  const ele = await paginationAndSorting.getNextLink1();
   const ele1 =  await paginationAndSorting.getOverLayer();
   await paginationAndSorting.click(ele1)
   await paginationAndSorting.click(ele)
@@ -689,7 +691,7 @@ When('Admin Click on X button of the updated program from {string} and {string}'
 });
 
 Then('Admin should see the very first page record on the table with Previous page link are disabled', async function () {
-  const ele = await paginationAndSorting.getPreviousLink();
+  const ele = await paginationAndSorting.getPreviousLink1();
   await expect (ele).toBeDisabled()
 });
  

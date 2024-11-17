@@ -4,6 +4,7 @@ const { POManager } = require('../PageObject/POManager');
 const { expect, selectors } = require('@playwright/test');
 const exp = require('constants');
 let class_page;
+let paginationAndSorting;
 
 
 // 1. Missing step definition for "tests/Features/005_Class/001_ClassPagination.feature:4:1"
@@ -156,4 +157,121 @@ Then('Admin gets message Class added Successfully', async function({})  {
     const reusablepage = await this.pageManager.getReusablePage();
     await reusablepage.isVisible(selector);
     console.log("Successfull Class added")
+});
+
+
+When('Admin clicks on program in dashboard and admin lands on class Page', async function() {
+  const class_page = await this.pageManager.getClassPage();
+  const class_Btn = await class_page.clickClass();
+  const reusablepage = await this.pageManager.getReusablePage();
+  await reusablepage.click(class_Btn)
+});
+
+// 2. Missing step definition for "tests\Features\005_Class\005_Sort Class details.feature:10:1"
+When('Admin clicks on the Batchname sort icon', async function()  {
+  paginationAndSorting = await this.pageManager.getPaginationAndSorting();
+  const sorticon = await paginationAndSorting.getbatchNamecol();
+  await paginationAndSorting.clickSortIcon(sorticon);
+});
+
+// 3. Missing step definition for "tests\Features\005_Class\005_Sort Class details.feature:11:1"
+Then('Admin should see Class details are sorted by Batch Name', async function()  {
+  const sortingCells = await paginationAndSorting.getbatchNameCell();
+await paginationAndSorting.pagination_Asc_Sorting(sortingCells);
+});
+
+// 4. Missing step definition for "tests\Features\005_Class\005_Sort Class details.feature:14:1"
+When('Admin clicks on the Class topic sort icon', async function()  {
+  paginationAndSorting = await this.pageManager.getPaginationAndSorting();
+  const sorticon = await paginationAndSorting.getclassTopicCol();
+  await paginationAndSorting.clickSortIcon(sorticon);
+});
+
+// 5. Missing step definition for "tests\Features\005_Class\005_Sort Class details.feature:15:1"
+Then('Admin should see Class details are sorted by Class Topic', async function()  {
+  const sortingCells = await paginationAndSorting.getclassTopicCell();
+  await paginationAndSorting.pagination_Asc_Sorting(sortingCells);
+});
+
+// 6. Missing step definition for "tests\Features\005_Class\005_Sort Class details.feature:18:1"
+When('Admin clicks on the Class descreption  sort icon', async function()  {
+  paginationAndSorting = await this.pageManager.getPaginationAndSorting();
+  const sorticon = await paginationAndSorting.getclassDesCol();
+  await paginationAndSorting.clickSortIcon(sorticon);
+});
+
+// 7. Missing step definition for "tests\Features\005_Class\005_Sort Class details.feature:19:1"
+Then('Admin should see Class details are sorted by Class Description', async function()  {
+  const sortingCells = await paginationAndSorting.getclassDesCell();
+  await paginationAndSorting.pagination_Asc_Sorting(sortingCells);
+});
+
+// 8. Missing step definition for "tests\Features\005_Class\005_Sort Class details.feature:22:1"
+When('Admin clicks on the Status sort icon', async function()  {
+  paginationAndSorting = await this.pageManager.getPaginationAndSorting();
+  const sorticon = await paginationAndSorting.getclass_statusCol();
+  await paginationAndSorting.clickSortIcon(sorticon);
+});
+
+// 9. Missing step definition for "tests\Features\005_Class\005_Sort Class details.feature:23:1"
+Then('Admin should see Class details are sorted by Status', async function()  {
+  const sortingCells = await paginationAndSorting.getclass_statusCell();
+  await paginationAndSorting.pagination_Asc_Sorting(sortingCells);
+});
+
+// 10. Missing step definition for "tests\Features\005_Class\005_Sort Class details.feature:26:1"
+When('Admin clicks on the Class Date sort icon', async function()  {
+  paginationAndSorting = await this.pageManager.getPaginationAndSorting();
+  const sorticon = await paginationAndSorting.getclass_DateCol();
+  await paginationAndSorting.clickSortIcon(sorticon);
+});
+// 1. Missing step definition for "tests\Features\005_Class\005_Sort Class details.feature:27:1"
+Then('Admin should see Class details are sorted by Class Date', async function()  {
+  const sortingCells = await paginationAndSorting.getclass_DateCell();
+  await paginationAndSorting.pagination_Asc_Sorting(sortingCells);
+});
+
+// 2. Missing step definition for "tests\Features\005_Class\005_Sort Class details.feature:30:1"
+When('Admin clicks on the Staff Name sort icon', async function() {
+  paginationAndSorting = await this.pageManager.getPaginationAndSorting();
+  const sorticon = await paginationAndSorting.getstaffNameCol();
+  await paginationAndSorting.clickSortIcon(sorticon);
+});
+
+// 3. Missing step definition for "tests\Features\005_Class\005_Sort Class details.feature:31:1"
+Then('Admin should see Class details are sorted by Staff name', async function()  {
+  const sortingCells = await paginationAndSorting.getstaffNameCell();
+  await paginationAndSorting.pagination_Asc_Sorting(sortingCells);
+
+});
+
+// 1. Missing step definition for "tests\Features\005_Class\006_Pagination.feature:9:1"
+When('Admin clicks Next page link on the class table', async function(){
+  paginationAndSorting = this.pageManager.getPaginationAndSorting();
+const ele = await paginationAndSorting.getNextLink1();
+const ele1 =  await paginationAndSorting.getOverLayer();
+await paginationAndSorting.click(ele1)
+await ele.scrollIntoViewIfNeeded();
+await paginationAndSorting.validateNextPageLink();
+});
+
+// 2. Missing step definition for "tests\Features\005_Class\006_Pagination.feature:10:1"
+Then('Admin should see the next page record on the table  with Pagination has next active link enabled', async function() {
+  await paginationAndSorting.getNextLink(); 
+});
+
+// 3. Missing step definition for "tests\Features\005_Class\006_Pagination.feature:18:1"
+Then('Admin should see the previous page record on the table with pagination has previous page link enabled', async function() {
+  paginationAndSorting = this.pageManager.getPaginationAndSorting();
+  const ele = await paginationAndSorting.getPreviousLink1();
+  await ele.scrollIntoViewIfNeeded();
+  expect( await ele).toBeEnabled();
+});
+
+// 4. Missing step definition for "tests\Features\005_Class\006_Pagination.feature:21:1"
+When('Admin clicks Start page link', async function() {
+  paginationAndSorting = this.pageManager.getPaginationAndSorting();
+  const ele = await paginationAndSorting.getFirstLink();
+  await ele.scrollIntoViewIfNeeded();
+  await paginationAndSorting.click(ele)
 });
