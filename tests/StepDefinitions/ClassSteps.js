@@ -5,6 +5,7 @@ const { expect, selectors } = require('@playwright/test');
 const exp = require('constants');
 let class_page;
 let paginationAndSorting;
+let number;
 
 
 // 1. Missing step definition for "tests/Features/005_Class/001_ClassPagination.feature:4:1"
@@ -159,7 +160,61 @@ Then('Admin gets message Class added Successfully', async function({})  {
     console.log("Successfull Class added")
 });
 
+When('Admin selects class date in date picker', async function({}){
+  await class_page.getNoofClasses();
+    
+});
 
+Then('Admin should see no of class value is added automatically', async function({})  {
+  await class_page.getNoofClasses();
+});
+// 1. Missing step definition for "tests/Features/005_Class/003_AddNewClassPopup.feature:24:1"
+When('Admin clicks date picker', async function({}) {
+      await class_page.getDataPicker();
+});
+
+// 2. Missing step definition for "tests/Features/005_Class/003_AddNewClassPopup.feature:25:1"
+Then('Admin should see weekends dates are disabled to select', async function({}) {
+    await class_page.weekendspicker();
+    
+});
+
+// 1. Missing step definition for "tests/Features/005_Class/003_AddNewClassPopup.feature:29:1"
+When('Admin skips to add value in mandatory field and enter only the optional field', async function({}) {
+      await class_page.optionalFields();
+});
+
+// 2. Missing step definition for "tests/Features/005_Class/003_AddNewClassPopup.feature:30:1"
+Then('Admin should see error message below the test field and the field will be highlighed in red color', async function({})  {
+      await class_page.geterrormessage();
+});
+
+// 1. Missing step definition for "tests/Features/005_Class/003_AddNewClassPopup.feature:41:1"
+When('Admin clicks on save button without entering data', async function({})  {
+   const selector = await class_page.clicksave();
+   await selector.click();
+});
+
+// 2. Missing step definition for "tests/Features/005_Class/003_AddNewClassPopup.feature:42:1"
+Then('class wont be created and Admin gets error message', async function({}) {
+  await class_page.geterrormessage();
+});
+
+// 1. Missing step definition for "tests/Features/005_Class/003_AddNewClassPopup.feature:46:1"
+When('Admin clicks Cancel\\/Close\\(X) Icon on Admin Details form', async function({}) {
+   const program = await this.pageManager.getProgramPage();
+   await program.clickClose();
+
+});
+
+// 2. Missing step definition for "tests/Features/005_Class/003_AddNewClassPopup.feature:47:1"
+Then('Class Details popup window should be closed without saving', async function({}) {
+  const program = await this.pageManager.getProgramPage(); 
+  const selector =  await program.logout_Menubar();
+    expect(await selector).toBeVisible();
+});
+
+/************** */
 When('Admin clicks on program in dashboard and admin lands on class Page', async function() {
   const class_page = await this.pageManager.getClassPage();
   const class_Btn = await class_page.clickClass();
@@ -275,6 +330,11 @@ When('Admin clicks Start page link', async function() {
   await ele.scrollIntoViewIfNeeded();
   await paginationAndSorting.click(ele)
 });
+
+
+
+
+/**********Edit************/
 
 // 1. Missing step definition for "tests\Features\005_Class\004_EditNewClass.feature:9:1"
 When('Admin clicks on the edit icon', async function() {
