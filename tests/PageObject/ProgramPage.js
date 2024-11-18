@@ -7,8 +7,8 @@ const { default: test } = require('node:test');
 const filepath = 'tests/TestData/PlayWright_Group2_Data.xlsx';
 require('dotenv').config();
 
-const programName =  'GroupTwoPWTestingThree';
-const programDesc =  'GPTwo-Testing';
+// const programName =  'GroupTwoPWTestingThree';
+// const programDesc =  'GPTwo-Testing';
 
 class ProgramPage {
 
@@ -225,9 +225,11 @@ class ProgramPage {
  }
 
  async searchProgram(){
-  await this.page.reload();
-  await (this.search_text).fill(programName);
-  
+  const sheetname = 'Program';
+  const Keyoption = 'DeleteProgram';
+  const testData = getDataByKeyOption(filepath,sheetname,Keyoption);
+  const programName = testData['Input_name'];
+  await this.search_text.fill(programName);
  }
  async overLayClick(){
   await (this.overlayer).click();
