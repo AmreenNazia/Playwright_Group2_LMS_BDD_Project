@@ -81,6 +81,7 @@ class PaginationAndSorting {
     }
 
     async getNextLink(){
+        
         return this.nextLink;
     }
 

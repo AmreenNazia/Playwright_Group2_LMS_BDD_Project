@@ -26,7 +26,7 @@ class ClassPage{
         this.save = page.getByRole('button', { name: 'Save'});
         this.saveSuccesMessage= page.getByRole('alert');
         //  this.overlayer = page.locator('.cdk-overlay-backdrop');
-        this.clickNoofClasses = page.getByText('No of Classes');
+        this.clickNoofClasses = page.locator('//div//input[@id="classNo"]');
     }
     async clickClass(){
         return this.class_btn;
@@ -97,7 +97,7 @@ class ClassPage{
          console.log(date_count)
          
         for (let i = 0; i < date_count; i++) {
-            while(i<=3){
+            while(i<=date_count-1){
                 const date = await this.date_class.nth(i).textContent();
                 await this.date_class.nth(i).click();  
                 console.log('Date selected:', date);
@@ -118,6 +118,7 @@ class ClassPage{
             }
         }
         console.log("Selected staff name is "+staffname);
+         
         await this.status_Active.click();
         await this.save.click();
         
@@ -126,6 +127,9 @@ class ClassPage{
     async getsuccessmessage(){
         return this.saveSuccesMessage;
     }
+
+    
+    
      
 }
 module.exports = {ClassPage}
