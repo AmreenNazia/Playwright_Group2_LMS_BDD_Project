@@ -275,3 +275,78 @@ When('Admin clicks Start page link', async function() {
   await ele.scrollIntoViewIfNeeded();
   await paginationAndSorting.click(ele)
 });
+
+// 1. Missing step definition for "tests\Features\005_Class\004_EditNewClass.feature:9:1"
+When('Admin clicks on the edit icon', async function() {
+ 
+});
+
+// 2. Missing step definition for "tests\Features\005_Class\004_EditNewClass.feature:10:1"
+Then('A new pop up with class details appears', async function() {
+  // ...
+});
+
+// 3. Missing step definition for "tests\Features\005_Class\004_EditNewClass.feature:14:1"
+Then('Admin should see batch name field is disabled', async function() {
+  // ...
+});
+
+// 4. Missing step definition for "tests\Features\005_Class\004_EditNewClass.feature:18:1"
+Then('Admin should see class topic field is disabled', async function() {
+  // ...
+});
+
+// 5. Missing step definition for "tests\Features\005_Class\004_EditNewClass.feature:21:1"
+Given('Admin is on the Edit Class Popup window', async function() {
+  // ...
+});
+
+// 6. Missing step definition for "tests\Features\005_Class\004_EditNewClass.feature:22:1"
+When('Update the fields with valid {string} data from excel {string}  and click save', async function ({}, arg, arg1) {
+  // ...
+});
+
+// 7. Missing step definition for "tests\Features\005_Class\004_EditNewClass.feature:23:1"
+Then('Admin gets message {string} and see the updated values in data table', async function ({}, arg)  {
+  // ...
+});
+
+// 8. Missing step definition for "tests\Features\005_Class\004_EditNewClass.feature:31:1"
+When('Update the fields with invalid {string} data from excel {string} and click save', async function ({}, arg, arg1)  {
+  // ...
+});
+
+// 9. Missing step definition for "tests\Features\005_Class\004_EditNewClass.feature:32:1"
+Then('Admin should get Error message', async function() {
+  // ...
+});
+
+// 10. Missing step definition for "tests\Features\005_Class\004_EditNewClass.feature:40:1"
+When('Update the mandatory fields with valid {string} data from excel "ClassPage"and click save', async function ({}, arg) {
+  // ...
+});
+
+// 1. Missing step definition for "tests\Features\005_Class\004_EditNewClass.feature:49:1"
+When('Update the optional fields with valid {string} data from excel {string} and click save', async function ({}, arg, arg1)  {
+  // ...
+});
+
+// 2. Missing step definition for "tests\Features\005_Class\004_EditNewClass.feature:58:1"
+When('Admin enters only numbers or special char in the text fields for {string} data from excel {string}', async function ({}, arg, arg1) {
+  // ...
+});
+
+// 3. Missing step definition for "tests\Features\005_Class\004_EditNewClass.feature:59:1"
+Then('Admin should get Error message  Admin gets message {string} and see the updated values in data table', async function ({}, arg) {
+  // ...
+});
+
+// 4. Missing step definition for "tests\Features\005_Class\004_EditNewClass.feature:67:1"
+When('Admin clicks Cancel button on edit popup', async function ()  {
+  // ...
+});
+
+// 5. Missing step definition for "tests\Features\005_Class\004_EditNewClass.feature:68:1"
+Then('Admin can see the class details popup disappears and can see nothing changed for particular Class', async function() {
+  // ...
+});

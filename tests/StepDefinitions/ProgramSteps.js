@@ -438,12 +438,9 @@ Then('Admin can see {string} status selected', async function({}, arg) {
  
 When('Admin enter valid details for mandatory fields from {string} and {string} and Click on save button', async function ({},keyoption,sheetname) {
      await program.addNewProgram(keyoption,sheetname);
-<<<<<<< HEAD
      const field_Required = await program.fieldsrequired();
      await expect(field_Required).toContainText('Program name is required');
 
-=======
->>>>>>> parent of 2866f13 (class module sorting updated)
 });
 
  
