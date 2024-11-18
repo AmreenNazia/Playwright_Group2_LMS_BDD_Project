@@ -47,9 +47,9 @@ test.describe("Add New Class popup", () => {
     await Then("Class Details popup window should be closed without saving");
   });
 
-  test.describe.only("Validate Save button on class Details form", () => {
+  test.describe("Validate Save button on class Details form", () => {
 
-    test("Example #1", { tag: ["@only"] }, async ({ Given, When, Then }) => {
+    test("Example #1", async ({ Given, When, Then }) => {
       await Given("Admin is on the Class Popup window");
       await When("Admin enters mandatory fields in the form and clicks on save button from \"validInput\" and \"Class\"");
       await Then("Admin gets message Class added Successfully");
@@ -74,5 +74,5 @@ const bddFileMeta = {
   "Check if class is created when only optional fields are entered with valid data": {"pickleLocation":"27:1"},
   "Empty form submission": {"pickleLocation":"39:1"},
   "Validate Cancel/Close(X) icon on class Details form": {"pickleLocation":"44:1"},
-  "Validate Save button on class Details form|Example #1": {"pickleLocation":"56:1","tags":["@only"]},
+  "Validate Save button on class Details form|Example #1": {"pickleLocation":"55:1"},
 };
