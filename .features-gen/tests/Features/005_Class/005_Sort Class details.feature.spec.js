@@ -1,4 +1,4 @@
-/** Generated from: tests\Features\005_Class\005_Sort Class details.feature */
+/** Generated from: tests/Features/005_Class/005_Sort Class details.feature */
 import { test } from "playwright-bdd";
 
 test.describe("Sort Class details", () => {
@@ -44,7 +44,7 @@ test.describe("Sort Class details", () => {
 
 test.use({
   $test: ({}, use) => use(test),
-  $uri: ({}, use) => use("tests\\Features\\005_Class\\005_Sort Class details.feature"),
+  $uri: ({}, use) => use("tests/Features/005_Class/005_Sort Class details.feature"),
   $bddFileMeta: ({}, use) => use(bddFileMeta),
 });
 
