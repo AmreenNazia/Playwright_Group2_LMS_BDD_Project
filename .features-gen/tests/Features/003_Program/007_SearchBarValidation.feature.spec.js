@@ -1,4 +1,4 @@
-/** Generated from: tests\Features\003_Program\007_SearchBarValidation.feature */
+/** Generated from: tests/Features/003_Program/007_SearchBarValidation.feature */
 import { test } from "playwright-bdd";
 
 test.describe("Manage Program - Search bar", () => {
@@ -38,7 +38,7 @@ test.describe("Manage Program - Search bar", () => {
 
 test.use({
   $test: ({}, use) => use(test),
-  $uri: ({}, use) => use("tests\\Features\\003_Program\\007_SearchBarValidation.feature"),
+  $uri: ({}, use) => use("tests/Features/003_Program/007_SearchBarValidation.feature"),
   $bddFileMeta: ({}, use) => use(bddFileMeta),
 });
 

@@ -1,4 +1,4 @@
-/** Generated from: tests\Features\005_Class\004_EditNewClass.feature */
+/** Generated from: tests/Features/005_Class/004_EditNewClass.feature */
 import { test } from "playwright-bdd";
 
 test.describe("Edit New class", () => {
@@ -55,7 +55,7 @@ test.describe("Edit New class", () => {
 
 test.use({
   $test: ({}, use) => use(test),
-  $uri: ({}, use) => use("tests\\Features\\005_Class\\004_EditNewClass.feature"),
+  $uri: ({}, use) => use("tests/Features/005_Class/004_EditNewClass.feature"),
   $bddFileMeta: ({}, use) => use(bddFileMeta),
 });
 
@@ -65,5 +65,5 @@ const bddFileMeta = {
   "Check disabled class topic": {"pickleLocation":"18:1"},
   "Check if the optional fields are updated with valid data|Example #1": {"pickleLocation":"59:1"},
   "Validate invalid values in the text fields|Example #1": {"pickleLocation":"68:1"},
-  "Validate Cancel button on Edit popup": {"pickleLocation":"71:1"},
+  "Validate Cancel button on Edit popup": {"pickleLocation":"73:1"},
 };
