@@ -15,7 +15,6 @@
     "@cucumber/cucumber": "^11.0.1",
     "@playwright/test": "^1.48.2",
     "@types/node": "^22.9.0",
-    "allure-playwright": "^3.0.6",
     "dotenv": "^16.4.5",
     "playwright-bdd": "^7.5.0"
   },
