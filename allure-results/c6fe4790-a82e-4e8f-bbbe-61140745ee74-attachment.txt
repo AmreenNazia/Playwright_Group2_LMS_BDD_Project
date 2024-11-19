@@ -1,0 +1,1 @@
+All checkboxes are verified to be unchecked.

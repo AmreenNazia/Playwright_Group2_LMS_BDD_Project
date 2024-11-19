@@ -1,0 +1,5 @@
+Error with URL: favicon.ico - axios is not defined
+Error with URL: https://fonts.gstatic.com - axios is not defined
+Error with URL: https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap - axios is not defined
+Error with URL: https://fonts.googleapis.com/icon?family=Material+Icons - axios is not defined
+Error with URL: styles.css - axios is not defined

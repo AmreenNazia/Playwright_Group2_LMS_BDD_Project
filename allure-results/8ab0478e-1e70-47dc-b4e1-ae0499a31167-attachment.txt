@@ -1,0 +1,5 @@
+Number of pages3
+Ascending Order actual List: DVLPR-0001,DVLPR02,DVLPR02,Java Batch 01,Python101
+Ascending Order expected: DVLPR-0001,DVLPR02,DVLPR02,Java Batch 01,Python101
+Ascending Order actual List: SMPO-0001,SMPO-0001,SMPO-0001,SMPO-0001,SMPO-0001
+Ascending Order expected: SMPO-0001,SMPO-0001,SMPO-0001,SMPO-0001,SMPO-0001

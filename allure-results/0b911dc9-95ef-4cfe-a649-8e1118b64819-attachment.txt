@@ -1,0 +1,9 @@
+Number of pages5
+Ascending Order actual List: AProgram,BProgram,CProgram,Cybersecurity,DataAnalyst
+Ascending Order expected: AProgram,BProgram,CProgram,Cybersecurity,DataAnalyst
+Ascending Order actual List: datamining,dataparse,datapi,datapipe,datapipline
+Ascending Order expected: datamining,dataparse,datapi,datapipe,datapipline
+Ascending Order actual List: DelTestSeven,Devops,DProgram,EProgram,GTWOTestingTwo
+Ascending Order expected: DelTestSeven,Devops,DProgram,EProgram,GTWOTestingTwo
+Ascending Order actual List: Java,javacollection,playwrightbatchthree,PlaywrightGTwo,ProgramJAVA
+Ascending Order expected: Java,javacollection,playwrightbatchthree,PlaywrightGTwo,ProgramJAVA
