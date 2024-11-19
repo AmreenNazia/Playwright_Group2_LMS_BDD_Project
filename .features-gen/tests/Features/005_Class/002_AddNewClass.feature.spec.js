@@ -1,4 +1,4 @@
-/** Generated from: tests\Features\005_Class\002_AddNewClass.feature */
+/** Generated from: tests/Features/005_Class/002_AddNewClass.feature */
 import { test } from "playwright-bdd";
 
 test.describe("Add New Class", () => {
@@ -25,7 +25,7 @@ test.describe("Add New Class", () => {
 
 test.use({
   $test: ({}, use) => use(test),
-  $uri: ({}, use) => use("tests\\Features\\005_Class\\002_AddNewClass.feature"),
+  $uri: ({}, use) => use("tests/Features/005_Class/002_AddNewClass.feature"),
   $bddFileMeta: ({}, use) => use(bddFileMeta),
 });
 

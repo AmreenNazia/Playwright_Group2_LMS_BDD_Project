@@ -1,4 +1,4 @@
-/** Generated from: tests\Features\006_Logout\001_Logout.feature */
+/** Generated from: tests/Features/006_Logout/001_Logout.feature */
 import { test } from "playwright-bdd";
 
 test.describe("Validation on Logout button", () => {
@@ -19,7 +19,7 @@ test.describe("Validation on Logout button", () => {
 
 test.use({
   $test: ({}, use) => use(test),
-  $uri: ({}, use) => use("tests\\Features\\006_Logout\\001_Logout.feature"),
+  $uri: ({}, use) => use("tests/Features/006_Logout/001_Logout.feature"),
   $bddFileMeta: ({}, use) => use(bddFileMeta),
 });
 

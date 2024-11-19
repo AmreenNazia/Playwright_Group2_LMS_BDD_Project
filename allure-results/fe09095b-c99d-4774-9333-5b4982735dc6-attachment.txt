@@ -1,8 +1,0 @@
-Ascending Order testprogramdesc,testing,SearchTestOne,sd,Quality Analyst
-Descending Ordertestprogramdesc,testing,SearchTestOne,sd,Quality Analyst
-Ascending Order playwrightbatchthree,OOPs concepts,JAva,FrontEnd,fhfg
-Descending Orderplaywrightbatchthree,OOPs concepts,JAva,FrontEnd,fhfg
-Ascending Order dynamo,dynamis,dynamio,dynamics,dynamicDb
-Descending Orderdynamo,dynamis,dynamio,dynamics,dynamicDb
-Ascending Order dynamicdata,dynamic,DelTestSeven,datadesc,DA-COURSE
-Descending Orderdynamicdata,dynamic,DelTestSeven,datadesc,DA-COURSE

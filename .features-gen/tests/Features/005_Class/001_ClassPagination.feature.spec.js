@@ -1,4 +1,4 @@
-/** Generated from: tests\Features\005_Class\001_ClassPagination.feature */
+/** Generated from: tests/Features/005_Class/001_ClassPagination.feature */
 import { test } from "playwright-bdd";
 
 test.describe("Class Page Validation", () => {
@@ -67,7 +67,7 @@ test.describe("Class Page Validation", () => {
 
 test.use({
   $test: ({}, use) => use(test),
-  $uri: ({}, use) => use("tests\\Features\\005_Class\\001_ClassPagination.feature"),
+  $uri: ({}, use) => use("tests/Features/005_Class/001_ClassPagination.feature"),
   $bddFileMeta: ({}, use) => use(bddFileMeta),
 });
 

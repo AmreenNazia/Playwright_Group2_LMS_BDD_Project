@@ -1,5 +1,0 @@
-Number of pages3
-Ascending Order actual List: ,,,,
-Ascending Order expected: ,,,,
-Ascending Order actual List: ,Basic coding,core Jave,Jira Class,Postman tesing
-Ascending Order expected: ,Basic coding,core Jave,Jira Class,Postman tesing

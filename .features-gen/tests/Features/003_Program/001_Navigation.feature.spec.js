@@ -1,4 +1,4 @@
-/** Generated from: tests\Features\003_Program\001_Navigation.feature */
+/** Generated from: tests/Features/003_Program/001_Navigation.feature */
 import { test } from "playwright-bdd";
 
 test.describe("Navigation", () => {
@@ -19,7 +19,7 @@ test.describe("Navigation", () => {
 
 test.use({
   $test: ({}, use) => use(test),
-  $uri: ({}, use) => use("tests\\Features\\003_Program\\001_Navigation.feature"),
+  $uri: ({}, use) => use("tests/Features/003_Program/001_Navigation.feature"),
   $bddFileMeta: ({}, use) => use(bddFileMeta),
 });
 

@@ -1,4 +1,4 @@
-/** Generated from: tests\Features\003_Program\006_DeleteProgram.feature */
+/** Generated from: tests/Features/003_Program/006_DeleteProgram.feature */
 import { test } from "playwright-bdd";
 
 test.describe("Manage Program - Delete Program", () => {
@@ -44,7 +44,7 @@ test.describe("Manage Program - Delete Program", () => {
 
 test.use({
   $test: ({}, use) => use(test),
-  $uri: ({}, use) => use("tests\\Features\\003_Program\\006_DeleteProgram.feature"),
+  $uri: ({}, use) => use("tests/Features/003_Program/006_DeleteProgram.feature"),
   $bddFileMeta: ({}, use) => use(bddFileMeta),
 });
 
