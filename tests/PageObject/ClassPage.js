@@ -1,6 +1,8 @@
 const { ReusablePage } = require('./ReusablePage');
 const { TIMEOUT } = require('dns');
 const { getDataByKeyOption } = require('../Utilities/ExcelUtils'); 
+const { expect } = require('allure-playwright');
+const filepath = 'tests/TestData/PlayWright_Group2_Data.xlsx';
  
 require('dotenv').config();
 
@@ -25,9 +27,29 @@ class ClassPage{
         this.status_Active = this.activeRadioButton = page.locator('//p-radiobutton[@ng-reflect-input-id = "Active"]')
         this.save = page.getByRole('button', { name: 'Save'});
         this.saveSuccesMessage= page.getByRole('alert');
-        //  this.overlayer = page.locator('.cdk-overlay-backdrop');
+          this.overlayer = page.locator('.cdk-overlay-backdrop');
         this.clickNoofClasses = page.getByText('No of Classes');
-    }
+        this.editIcon = page.locator('//td//button[@icon = "pi pi-pencil"]');
+        this.editPopUpWindow = page.getByText('Class Details');
+        this.closeIcon = page.locator('//span[@ng-reflect-ng-class = "pi pi-times"]');
+        this.EditIcon = page.locator('//tbody//tr[1]//button[@ng-reflect-icon="pi pi-pencil"]')
+        this.batchNameField = page.locator('//p-dropdown[@id = "batchName"]');
+        this.noOfClassesField = page.locator('//input[@id = "classNo"]')
+        this.classTopicField = page.locator('#classTopic')
+        this.search_text = page.getByPlaceholder('Search...');
+        this.staffNameField = page.locator('#staffId');
+        this.staffNameClearIcom = page.locator('//p-dropdown[@placeholder="Select a Staff Name"]//i')
+        this.dropDownList = page.locator('//div[@role="button" and @aria-expanded="false"]')
+        this.list = page.locator('//li[@aria-label = "Getha Takur"]')
+        this.comments = page.locator('#classComments')
+        this.classDescription = page.locator('#classDescription');
+        this.classNotes = page.locator('#classNotes');
+        this.classRecordings = page.locator('#classRecordingPath');
+        this.calssDesc_Specific = page.locator('//tbody//tr//td[4] ')
+        this.errorMessage = page.locator('.p-invalid ng-star-inserted')
+        this.cancelButton = page.getByText('Cancel');
+        this.classTopic_Specific = page.locator('//tbody/tr//td[3]')
+        }
     async clickClass(){
         return this.class_btn;
     }
@@ -96,8 +118,8 @@ class ClassPage{
         const date_count =  select_Date.length;
          console.log(date_count)
          
-        for (let i = 0; i < date_count; i++) {
-            while(i<=3){
+        for (let i = 0; i < date_count-1; i++) {
+            while(i<=date_count-1){
                 const date = await this.date_class.nth(i).textContent();
                 await this.date_class.nth(i).click();  
                 console.log('Date selected:', date);
@@ -118,6 +140,7 @@ class ClassPage{
             }
         }
         console.log("Selected staff name is "+staffname);
+        expect (await this.noOfClassesField).toHaveAttribute('ng-reflect-model', date_count-1)
         await this.status_Active.click();
         await this.save.click();
         
@@ -126,6 +149,102 @@ class ClassPage{
     async getsuccessmessage(){
         return this.saveSuccesMessage;
     }
+
+    async editPopupAssertion(){
+    //    expect( await this.editPopUpWindow).textContent('Class Details');
+       const text = await this.editPopUpWindow.textContent();
+    //    console.log('The output is' +text)
+       return text;
+    }
+    async checkEditIcon(){
+         const count = await this.editIcon.count();
+        for(let i = 0; i < count; i++){
+            let k = 0;
+            if(i === 0){
+            await this.overlayer.click();
+            }
+                await this.editIcon.nth(i).click();
+                const value = await this.editPopupAssertion();
+                // console.log('************The edit pop up window is: ' +value)
+            if(value === 'Class Details'){
+                await this.closeIcon.click();
+                k++;
+                
+            }
+            continue;
+            
+    }
      
+}
+ async clickEditIcon(){
+    await this.overlayer.click();
+    await this.EditIcon.click();
+ }
+
+ async getBatchNameField(){
+    return this.batchNameField;
+ }
+
+ async getClassTopicField(){
+    return this.classTopicField;
+ }
+
+ async validEditClass(Keyoption,Sheetname){
+    const testData = getDataByKeyOption(filepath,Sheetname,Keyoption)
+    const staffname = testData['staffName'];
+    await this.staffNameClearIcom.click();
+    await this.staffNameField.click();
+    await this.dropDownList.click();
+    await this.list.click();
+    // await (this. staffNameField).fill(staffname)
+    await (this.save).click();
+    return staffname;
+ }
+
+ async optionalFieldsEdit(KeyOption,SheetName){
+    const testData = getDataByKeyOption(filepath,SheetName,KeyOption)
+    let value_comments = (testData['Comments']).toString();
+    let value_ClassDesc = (testData['ClassDesc']).toString();;
+    let Notes_Value = (testData['Notes']).toString();;
+    let Recording_Value = (testData['Recording']).toString();;
+    console.log(value_comments,value_ClassDesc,Notes_Value,Recording_Value)
+    await (this.comments).fill(value_comments);
+    await (this.classDescription).fill(value_ClassDesc);
+    await (this.classNotes).fill(Notes_Value);
+    await (this.classRecordings).fill(Recording_Value);
+    await (this.save).click();
+    return value_ClassDesc;
+ }
+async editAssertion(KeyOption,SheetName){
+    const testData = getDataByKeyOption(filepath,SheetName,KeyOption)
+    let value_comments = (testData['Comments']).toString();
+    let value_ClassDesc = (testData['ClassDesc']).toString();;
+    let Notes_Value = (testData['Notes']).toString();;
+    let Recording_Value = (testData['Recording']).toString();;
+    await this.search_text.fill(value_ClassDesc);
+    expect (await this.calssDesc_Specific.textContent()).toEqual(value_ClassDesc);
+    
+}
+ async searchClass(txt){
+    await this.overlayer.click();
+    await this.search_text.fill(txt);
+    await this.EditIcon.click();
+ }
+
+ async getErrorMessage(){
+    return this.errorMessage;
+    
+ }
+
+ async clickCancel(){
+    await this.cancelButton.click();
+ }
+
+ async getclassTopic_Specific(){
+    const txt = await (this.classTopic_Specific).textContent();
+    console.log('******Actual value ' , txt)
+    return txt;
+ }
+ 
 }
 module.exports = {ClassPage}

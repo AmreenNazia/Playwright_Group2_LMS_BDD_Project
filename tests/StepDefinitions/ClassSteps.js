@@ -3,8 +3,11 @@ const { Given, When, Then }= createBdd();
 const { POManager } = require('../PageObject/POManager'); 
 const { expect, selectors } = require('@playwright/test');
 const exp = require('constants');
+require('dotenv').config();
+
 let class_page;
 let paginationAndSorting;
+let reusablepage;
 
 
 // 1. Missing step definition for "tests/Features/005_Class/001_ClassPagination.feature:4:1"
@@ -276,77 +279,97 @@ When('Admin clicks Start page link', async function() {
   await paginationAndSorting.click(ele)
 });
 
-// 1. Missing step definition for "tests\Features\005_Class\004_EditNewClass.feature:9:1"
+
 When('Admin clicks on the edit icon', async function() {
- 
+ class_page = this.pageManager.getClassPage();
 });
 
-// 2. Missing step definition for "tests\Features\005_Class\004_EditNewClass.feature:10:1"
+
 Then('A new pop up with class details appears', async function() {
-  // ...
+  await class_page.checkEditIcon();
 });
 
-// 3. Missing step definition for "tests\Features\005_Class\004_EditNewClass.feature:14:1"
+// 1. Missing step definition for "tests\Features\005_Class\004_EditNewClass.feature:13:1"
+When('Admin clicks the edit icon', async function () {
+  class_page = this.pageManager.getClassPage();
+  await class_page.clickEditIcon();
+});
+
 Then('Admin should see batch name field is disabled', async function() {
-  // ...
+  expect(await class_page.getBatchNameField()).toBeDisabled();
 });
 
-// 4. Missing step definition for "tests\Features\005_Class\004_EditNewClass.feature:18:1"
 Then('Admin should see class topic field is disabled', async function() {
-  // ...
+  expect (await class_page.getClassTopicField()).toBeDisabled();
 });
 
 // 5. Missing step definition for "tests\Features\005_Class\004_EditNewClass.feature:21:1"
 Given('Admin is on the Edit Class Popup window', async function() {
-  // ...
+  class_page = this.pageManager.getClassPage();
+  reusablepage = this.pageManager.getReusablePage();
+  const topic = reusablepage.getClassTopicValue();;
+  console.log(topic);
+  await class_page.searchClass(topic);
 });
 
 // 6. Missing step definition for "tests\Features\005_Class\004_EditNewClass.feature:22:1"
-When('Update the fields with valid {string} data from excel {string}  and click save', async function ({}, arg, arg1) {
-  // ...
+When('Update the fields with valid {string} data from excel {string}  and click save', async function ({}, KeyOption, SheetName) {
+ await class_page.validEditClass(KeyOption,SheetName);
+  const text = await class_page.validEditClass(KeyOption,SheetName);
 });
 
 // 7. Missing step definition for "tests\Features\005_Class\004_EditNewClass.feature:23:1"
 Then('Admin gets message {string} and see the updated values in data table', async function ({}, arg)  {
-  // ...
+  const expValue = await reusablepage.getNewClassDescValue();
+  await class_page.getsuccessmessage();
+  // expect(await text).toEqual(expValue);
 });
-
 // 8. Missing step definition for "tests\Features\005_Class\004_EditNewClass.feature:31:1"
-When('Update the fields with invalid {string} data from excel {string} and click save', async function ({}, arg, arg1)  {
-  // ...
+When('Update the fields with invalid {string} data from excel {string} and click save', async function ({}, KeyOption,SheetName)  {
+
 });
 
-// 9. Missing step definition for "tests\Features\005_Class\004_EditNewClass.feature:32:1"
-Then('Admin should get Error message', async function() {
-  // ...
-});
 
-// 10. Missing step definition for "tests\Features\005_Class\004_EditNewClass.feature:40:1"
-When('Update the mandatory fields with valid {string} data from excel "ClassPage"and click save', async function ({}, arg) {
+When('Update the mandatory fields with valid {string} data from excel {string} and click save', async function ({}, arg,arg1) {
   // ...
 });
 
 // 1. Missing step definition for "tests\Features\005_Class\004_EditNewClass.feature:49:1"
-When('Update the optional fields with valid {string} data from excel {string} and click save', async function ({}, arg, arg1)  {
-  // ...
+When('Update the optional fields with valid {string} data from excel {string} and click save', async function ({}, KeyOption,SheetName)  {
+  class_page = this.pageManager.getClassPage();
+  await class_page.optionalFieldsEdit(KeyOption,SheetName);
+ 
 });
-
+Then('Admin gets message Class details updated Successfully  and see {string} and {string} the updated values in data table', async function({}, KeyOption,SheetName) {
+  await class_page.getsuccessmessage();
+  await class_page.editAssertion(KeyOption,SheetName);
+});
 // 2. Missing step definition for "tests\Features\005_Class\004_EditNewClass.feature:58:1"
-When('Admin enters only numbers or special char in the text fields for {string} data from excel {string}', async function ({}, arg, arg1) {
-  // ...
+When('Admin enters only numbers or special char in the text fields for {string} data from excel {string}', async function ({}, KeyOption,SheetName) {
+  class_page = this.pageManager.getClassPage();
+  await class_page.optionalFieldsEdit(KeyOption,SheetName);
 });
 
 // 3. Missing step definition for "tests\Features\005_Class\004_EditNewClass.feature:59:1"
-Then('Admin should get Error message  Admin gets message {string} and see the updated values in data table', async function ({}, arg) {
-  // ...
+Then('Admin should get Error message' , async function ()  {
+ expect (await class_page.getErrorMessage()).toBeVisible();
+ 
 });
 
 // 4. Missing step definition for "tests\Features\005_Class\004_EditNewClass.feature:67:1"
 When('Admin clicks Cancel button on edit popup', async function ()  {
-  // ...
+  class_page = this.pageManager.getClassPage();
+  await class_page.clickCancel();
 });
 
 // 5. Missing step definition for "tests\Features\005_Class\004_EditNewClass.feature:68:1"
 Then('Admin can see the class details popup disappears and can see nothing changed for particular Class', async function() {
-  // ...
+  class_page = this.pageManager.getClassPage();
+  reusablepage = this.pageManager.getReusablePage();
+  const topic = reusablepage.getClassTopicValue();;
+  console.log(topic);
+  const actual = await class_page.getclassTopic_Specific();
+  expect(await actual).toEqual(topic);
 });
+
+

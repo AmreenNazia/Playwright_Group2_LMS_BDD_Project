@@ -17,6 +17,7 @@ constructor(page){
         this.invalidProgramName = process.env.INVALID_PROGRAMNAME;
         this.partialProgramName = process.env.PARTIAL_PROGRAMNAME;
         this.logout = page.getByText('Logout');
+        this.classTopicValue = process.env.TOPIC;
 }
 async navigate() { 
     await this.page.goto(this.url);
@@ -39,7 +40,14 @@ async navigate() {
   }
 
   async getPartialProgramName(){
-    return String(this.partialProgramName);
+    return this.partialProgramName;
+  }
+
+ getClassTopicValue(){
+    return String(process.env.TOPIC);
+  }
+  getNewClassDescValue(){
+    return String(process.env.CLASSDESC)
   }
 
   async validLogin(KeyOption,sheetname){
