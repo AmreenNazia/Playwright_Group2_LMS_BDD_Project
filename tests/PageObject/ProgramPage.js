@@ -192,11 +192,8 @@ class ProgramPage {
  }
  
  async clickClose(){
-  // await (this.search_text).fill(programDesc);
-  // await this.overlayer.click();
-  // await (this.specificEditIcon).click();
+   
   await (this.closeIcon).click();
-  // expect (await this.programDetailsPage).not.toBeVisible();
  }
 
  async clickDeleteIcon(){

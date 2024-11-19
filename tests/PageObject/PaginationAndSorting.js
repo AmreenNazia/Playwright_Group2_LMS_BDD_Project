@@ -148,6 +148,8 @@ class PaginationAndSorting {
 
     async getNextLink(){
         
+ 
+ 
         if(expect(await this.nextLink).toBeDisabled()){
             
             console.log('Next Link disabled')
@@ -158,6 +160,7 @@ class PaginationAndSorting {
     }
 
     async getNextLink1(){
+ 
         return this.nextLink;
     }
 

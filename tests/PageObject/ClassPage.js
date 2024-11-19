@@ -3,6 +3,7 @@ const { TIMEOUT } = require('dns');
 const { getDataByKeyOption } = require('../Utilities/ExcelUtils'); 
 const { expect } = require('allure-playwright');
 const filepath = 'tests/TestData/PlayWright_Group2_Data.xlsx';
+const { expect } =require('@playwright/test');
  
 require('dotenv').config();
 
@@ -49,7 +50,18 @@ class ClassPage{
         this.errorMessage = page.locator('.p-invalid ng-star-inserted')
         this.cancelButton = page.getByText('Cancel');
         this.classTopic_Specific = page.locator('//tbody/tr//td[3]')
-        }
+        
+        //  this.overlayer = page.locator('.cdk-overlay-backdrop');
+        this.noOfClassesField = page.locator('//input[@id="classNo"]');
+        this.stringNumber;
+        this.weekendsPicker = page.locator('//table[contains(@class, "p-datepicker-calendar")]//tr//td[position()=1 or position()=7]')
+        this.classdescriptionField = page.locator('#classDescription');
+        this.commentsField = page.locator('#classComments');
+        this.notesField = page.locator('#classNotes');
+        this.recordingField = page.locator('#classRecordingPath');
+        this.error_message = page.locator('//div//small');
+    }
+    
     async clickClass(){
         return this.class_btn;
     }
@@ -82,7 +94,7 @@ class ClassPage{
 
        console.log("All input fields are visible")
     }
-
+   
     async add_NewClass(keyoption,sheetname){
         const filepath = 'tests/TestData/PlayWright_Group2_Data.xlsx';
         const testdata = getDataByKeyOption(filepath,sheetname,keyoption);
@@ -116,10 +128,12 @@ class ClassPage{
         }
         // const chosenDate = select_Date[2];
         const date_count =  select_Date.length;
-         console.log(date_count)
+        let num = date_count;
          
-        for (let i = 0; i < date_count-1; i++) {
-            while(i<=date_count-1){
+         console.log(date_count) //5
+         
+        for (let i = 0; i < date_count; i++) {
+            while(i <= date_count-1){
                 const date = await this.date_class.nth(i).textContent();
                 await this.date_class.nth(i).click();  
                 console.log('Date selected:', date);
@@ -127,7 +141,6 @@ class ClassPage{
                 break;  
             }
         }
-        
         
         await this.staff_Name.click();
         const staff_count = await this.select_Staffname.count();
@@ -140,7 +153,13 @@ class ClassPage{
             }
         }
         console.log("Selected staff name is "+staffname);
-        expect (await this.noOfClassesField).toHaveAttribute('ng-reflect-model', date_count-1)
+        // await currentElement.scrollIntoViewIfNeeded();
+        
+        // expect (await this.noOfClassesField).toHaveAttribute('ng-reflect-model', stringNumber)
+        // await page.waitForSelector('#classNo'); // Adjust selector as needed
+        // this.clickNoofClasses = await page.$eval('#classNo', el => el.value);
+
+
         await this.status_Active.click();
         await this.save.click();
         
@@ -174,8 +193,74 @@ class ClassPage{
             continue;
             
     }
-     
 }
+    async getNoofClasses(){
+        
+        await this.calendar_btn.scrollIntoViewIfNeeded();
+        await this.calendar_btn.click();
+        const select_Date = []
+        const list_dates = await this.date_class.count();
+        for( let i = 0; i< list_dates; i++)
+        {
+            const date  = await this.date_class.nth(i).textContent();
+            select_Date.push(date);
+            
+        }
+        // const chosenDate = select_Date[2];
+        const date_count =  select_Date.length;
+        let num = date_count;
+        this.stringNumber = num.toString();
+         console.log(date_count) //5
+         
+        for (let i = 0; i < date_count; i++) {
+            while(i <= date_count-1){
+                const date = await this.date_class.nth(i).textContent();
+                await this.date_class.nth(i).click();  
+                console.log('Date selected:', date);
+                // await this.page.pause();
+                break;  
+            }
+        }
+        
+    await this.staff_Name.click();
+    expect(await this.noOfClassesField).toHaveAttribute('ng-reflect-model',stringNumber)
+  
+}
+    
+
+async getDataPicker(){
+        await this.calendar_btn.scrollIntoViewIfNeeded();
+        await this.calendar_btn.click();
+}
+async weekendspicker(){
+    const count= await this.weekendsPicker.count();
+    for (let i = 0; i < count; i++) {
+   await expect (this.weekendsPicker.nth(i)).toBeDisabled();
+  }
+  console.log('Weekends dates are disbaled');
+}
+async optionalFields(){
+    await this.classdescriptionField.scrollIntoViewIfNeeded();
+    await this.classdescriptionField.fill('description');
+    await this.commentsField.fill('comments');
+    await this.notesField.fill('notes');
+    await this.recordingField.fill('record');
+    await this.save.click();
+}
+async geterrormessage(){
+   const count_errormessages =  await this.error_message.count();
+   for (let i = 0; i < count_errormessages; i++) {
+    await expect (this.error_message.nth(i)).toBeVisible();
+   }
+}
+async clicksave(){
+    return this.save;
+
+}
+
+
+     
+
  async clickEditIcon(){
     await this.overlayer.click();
     await this.EditIcon.click();
@@ -247,4 +332,5 @@ async editAssertion(KeyOption,SheetName){
  }
  
 }
+
 module.exports = {ClassPage}
