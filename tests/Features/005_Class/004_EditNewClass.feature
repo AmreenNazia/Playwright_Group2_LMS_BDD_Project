@@ -69,6 +69,7 @@ Examples:
 
 
 
+
 Scenario: Validate Cancel button on Edit popup
 Given Admin is on the Edit Class Popup window
 When Admin clicks Cancel button on edit popup
