@@ -43,7 +43,7 @@ test.describe("Edit New class", () => {
 
   });
 
-  test("Validate Cancel button on Edit popup", async ({ Given, When, Then }) => {
+  test.only("Validate Cancel button on Edit popup", { tag: ["@only"] }, async ({ Given, When, Then }) => {
     await Given("Admin is on the Edit Class Popup window");
     await When("Admin clicks Cancel button on edit popup");
     await Then("Admin can see the class details popup disappears and can see nothing changed for particular Class");
