@@ -1,4 +1,4 @@
-/** Generated from: tests/Features/003_Program/007_SearchBarValidation.feature */
+/** Generated from: tests\Features\003_Program\007_SearchBarValidation.feature */
 import { test } from "playwright-bdd";
 
 test.describe("Manage Program - Search bar", () => {
@@ -29,7 +29,7 @@ test.describe("Manage Program - Search bar", () => {
   test("Verify Admin is able to search with partial program name", async ({ Given, When, Then }) => {
     await Given("Admin is on Program module");
     await When("Admin enter the program to search By partial name of program");
-    await Then("Admin should able to see Program name, description, and status for searched program name");
+    await Then("Admin should able to see Program name, description, and status for searched program name for partial search");
   });
 
 });
@@ -38,7 +38,7 @@ test.describe("Manage Program - Search bar", () => {
 
 test.use({
   $test: ({}, use) => use(test),
-  $uri: ({}, use) => use("tests/Features/003_Program/007_SearchBarValidation.feature"),
+  $uri: ({}, use) => use("tests\\Features\\003_Program\\007_SearchBarValidation.feature"),
   $bddFileMeta: ({}, use) => use(bddFileMeta),
 });
 

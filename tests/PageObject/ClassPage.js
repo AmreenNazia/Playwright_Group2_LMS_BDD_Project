@@ -1,7 +1,7 @@
 const { ReusablePage } = require('./ReusablePage');
 const { TIMEOUT } = require('dns');
 const { getDataByKeyOption } = require('../Utilities/ExcelUtils'); 
-const { expect } = require('allure-playwright');
+// const { expect } = require('allure-playwright');
 const filepath = 'tests/TestData/PlayWright_Group2_Data.xlsx';
 const { expect } =require('@playwright/test');
  

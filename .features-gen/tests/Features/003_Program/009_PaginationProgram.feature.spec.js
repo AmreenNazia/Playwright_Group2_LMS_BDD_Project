@@ -1,4 +1,4 @@
-/** Generated from: tests/Features/003_Program/009_PaginationProgram.feature */
+/** Generated from: tests\Features\003_Program\009_PaginationProgram.feature */
 import { test } from "playwright-bdd";
 
 test.describe("Manage Program - Pagination", () => {
@@ -38,7 +38,7 @@ test.describe("Manage Program - Pagination", () => {
 
 test.use({
   $test: ({}, use) => use(test),
-  $uri: ({}, use) => use("tests/Features/003_Program/009_PaginationProgram.feature"),
+  $uri: ({}, use) => use("tests\\Features\\003_Program\\009_PaginationProgram.feature"),
   $bddFileMeta: ({}, use) => use(bddFileMeta),
 });
 

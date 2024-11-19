@@ -268,7 +268,8 @@ Given('Admin is on Confirm deletion form', async function () {
   // const txt = reusablepage.getEditProgramName();
   // program = await this.pageManager.getProgramPage();
   await program.searchProgram();
-  await  program.clickDeletewithoutOverLay();
+  await program.overLayClick();
+  await program.clickDeletewithoutOverLay();
   await program.deleteConfirmation();
 });
 
@@ -488,9 +489,9 @@ Then('Records of the newly created  Program Name is displayed and match the data
 
 // 2. Missing step definition for "tests\Features\003_Program\007_SearchBarValidation.feature:11:1"
 Then('Admin should able to see Program name, description, and status for searched program name', async ({}) => {
-
-    const ele = await program.getTableValues();
-    await expect(ele).toBeVisible();
+  const programName = await reusablepage.getEditProgramName();
+    const txt = await program.getTableValues();
+     expect(txt).toEqual(programName);
 });
 
 // 3. Missing step definition for "tests\Features\003_Program\007_SearchBarValidation.feature:15:1"
@@ -505,7 +506,9 @@ When('Admin enter the program to search By program description', async function(
 // 4. Missing step definition for "tests\Features\003_Program\007_SearchBarValidation.feature:16:1"
 Then('Admin should able to see Program name, description, and status for searched program description', async function ()  {
   const ele = await program.getTableValues();
-    await expect(ele).toBeVisible();
+  reusablepage = this.pageManager.getReusablePage();
+  const programDes = await reusablepage.getEditProgramDesc();
+    expect(ele).toEqual(programDes);
 });
 
 
@@ -521,6 +524,13 @@ When('Admin enter the program to search By partial name of program', async funct
   const programName = await reusablepage.getPartialProgramName();
   await program.fillSearchBar(programName);
 });
+
+Then('Admin should able to see Program name, description, and status for searched program name for partial search', async ({}) => {
+  const programName = await reusablepage.getPartialProgramName();
+  const txt = await program.getTableValues();
+   expect(txt).toContain(programName);
+});
+
 
 // 7. Missing step definition for "tests\Features\003_Program\008_SortingProgram.feature:9:1"    
 When('Admin clicks on Arrow next to programName', async function()  {

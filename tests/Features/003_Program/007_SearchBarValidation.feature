@@ -25,4 +25,4 @@ Then There should be zero results.
 Scenario: Verify Admin is able to search with partial program name
 Given Admin is on Program module
 When Admin enter the program to search By partial name of program
-Then Admin should able to see Program name, description, and status for searched program name
+Then Admin should able to see Program name, description, and status for searched program name for partial search

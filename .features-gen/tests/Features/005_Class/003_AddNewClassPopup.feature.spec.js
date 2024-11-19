@@ -1,4 +1,4 @@
-/** Generated from: tests/Features/005_Class/003_AddNewClassPopup.feature */
+/** Generated from: tests\Features\005_Class\003_AddNewClassPopup.feature */
 import { test } from "playwright-bdd";
 
 test.describe("Add New Class popup", () => {
@@ -63,16 +63,16 @@ test.describe("Add New Class popup", () => {
 
 test.use({
   $test: ({}, use) => use(test),
-  $uri: ({}, use) => use("tests/Features/005_Class/003_AddNewClassPopup.feature"),
+  $uri: ({}, use) => use("tests\\Features\\005_Class\\003_AddNewClassPopup.feature"),
   $bddFileMeta: ({}, use) => use(bddFileMeta),
 });
 
 const bddFileMeta = {
-  "Admin is on the Manage Class page after login|Example #1": {"pickleLocation":"13:1"},
-  "Check no classes value added when selecting class dates": {"pickleLocation":"16:1"},
-  "Check weekend dates are disabled in calender": {"pickleLocation":"22:1"},
-  "Check if class is created when only optional fields are entered with valid data": {"pickleLocation":"27:1"},
-  "Empty form submission": {"pickleLocation":"39:1"},
-  "Validate Cancel/Close(X) icon on class Details form": {"pickleLocation":"44:1"},
-  "Validate Save button on class Details form|Example #1": {"pickleLocation":"55:1"},
+  "Admin is on the Manage Class page after login|Example #1": {"pickleLocation":"14:1"},
+  "Check no classes value added when selecting class dates": {"pickleLocation":"17:1"},
+  "Check weekend dates are disabled in calender": {"pickleLocation":"23:1"},
+  "Check if class is created when only optional fields are entered with valid data": {"pickleLocation":"28:1"},
+  "Empty form submission": {"pickleLocation":"40:1"},
+  "Validate Cancel/Close(X) icon on class Details form": {"pickleLocation":"45:1"},
+  "Validate Save button on class Details form|Example #1": {"pickleLocation":"56:1"},
 };

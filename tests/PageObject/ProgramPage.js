@@ -45,7 +45,8 @@ class ProgramPage {
     this.savedStatus = page.locator('//td[4]')
     this.cancelProgramBtn = page.getByText('Cancel');
     this.closeIcon = page.locator('//span[@ng-reflect-ng-class = "pi pi-times"]');
-    this.deletIcon = page.locator('//tr[1]//button[@id = "deleteProgram"]')
+    this.deleticon = page.locator('//tr[1]//button[@id = "deleteProgram"]')
+    this.deleteIcon = page.locator('#deleteProgram')
     this.deletConfirmation = page.locator('div').filter({ hasText: /^Confirm$/ })
     this.yesBtn = page.getByText('Yes');
     this.saveSuccesMessage= page.getByRole('alert')
@@ -55,7 +56,7 @@ class ProgramPage {
     this.editanddelete_icons = page.locator('//tr//td[5]');
     this.bottomfooter = page.locator('//span[@class="p-paginator-current ng-star-inserted"]');
     this.footer = page.locator('//div[@class="p-datatable-footer ng-star-inserted"]');
-   
+    this.checkBox = page.locator('//tbody//tr//td[1]')
     this.addNewProgram_btn = page.getByRole('menuitem', { name: 'Add New Program' });
     this.dialog_box = page.locator('//div[@role="dialog"]')
     this.programdetails = page.getByText('Program Details');
@@ -198,7 +199,7 @@ class ProgramPage {
 
  async clickDeleteIcon(){
   await (this.overlayer).click();
-  await (this.deletIcon).click();
+  await (this.deleticon).click();
  }
  
  async deleteConfirmation(){
@@ -214,7 +215,7 @@ class ProgramPage {
  }
 
  async clickDeletewithoutOverLay(){
-  await (this.deletIcon).click();
+  await (this.deleteIcon).click();
  }
 
  async clickNoBtn(){
@@ -375,7 +376,8 @@ await this.page.waitForLoadState('networkidle');
   }
 
   async getTableValues(){
-    return this.tableValues;
+    const txt = await (this.tableValues).textContent();
+    return txt;
   }
 
   async validateEditedDetails(keyoption,sheetname){

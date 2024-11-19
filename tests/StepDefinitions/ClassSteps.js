@@ -308,7 +308,7 @@ When('Admin clicks Next page link on the class table', async function(){
   paginationAndSorting = this.pageManager.getPaginationAndSorting();
 const ele = await paginationAndSorting.getNextLink1();
 const ele1 =  await paginationAndSorting.getOverLayer();
-await paginationAndSorting.click(ele1)
+await paginationAndSorting.clickSortIcon(ele)
 await ele.scrollIntoViewIfNeeded();
 await paginationAndSorting.validateNextPageLink();
 });
@@ -331,7 +331,7 @@ When('Admin clicks Start page link', async function() {
   paginationAndSorting = this.pageManager.getPaginationAndSorting();
   const ele = await paginationAndSorting.getFirstLink();
   await ele.scrollIntoViewIfNeeded();
-  await paginationAndSorting.click(ele)
+  await paginationAndSorting.clickSortIcon(ele)
 });
 
 

@@ -1,4 +1,4 @@
-/** Generated from: tests/Features/005_Class/006_Pagination.feature */
+/** Generated from: tests\Features\005_Class\006_Pagination.feature */
 import { test } from "playwright-bdd";
 
 test.describe("Verify Pagination", () => {
@@ -34,7 +34,7 @@ test.describe("Verify Pagination", () => {
 
 test.use({
   $test: ({}, use) => use(test),
-  $uri: ({}, use) => use("tests/Features/005_Class/006_Pagination.feature"),
+  $uri: ({}, use) => use("tests\\Features\\005_Class\\006_Pagination.feature"),
   $bddFileMeta: ({}, use) => use(bddFileMeta),
 });
 

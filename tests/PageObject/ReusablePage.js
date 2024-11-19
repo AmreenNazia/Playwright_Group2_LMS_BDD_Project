@@ -28,8 +28,8 @@ async navigate() {
     await  this.password.fill(process.env.PASSWORD);  // Use the password stored in .env
     await this.login_btn.click();
   }
-  async getEditProgramName(){
-    return String(this.editProgramName);
+   getEditProgramName(){
+    return String(process.env.EDIT_PROGRAM);
   }
   async getEditProgramDesc(){
     return String(this.editProgramDesc);
@@ -39,7 +39,7 @@ async navigate() {
     return String(this.invalidProgramName);
   }
 
-  async getPartialProgramName(){
+   getPartialProgramName(){
     return this.partialProgramName;
   }
 
