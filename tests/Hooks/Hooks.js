@@ -1,4 +1,4 @@
-import { createBdd } from 'playwright-bdd';
+const { createBdd } = require('playwright-bdd');
 const { Before, After } = createBdd();
 import { chromium } from '@playwright/test';
 import { POManager } from '../PageObject/POManager';
