@@ -53,7 +53,7 @@ class ClassPage{
         
         //  this.overlayer = page.locator('.cdk-overlay-backdrop');
         this.noOfClassesField = page.locator('//input[@id="classNo"]');
-        this.stringNumber;
+        
         this.weekendsPicker = page.locator('//table[contains(@class, "p-datepicker-calendar")]//tr//td[position()=1 or position()=7]')
         this.classdescriptionField = page.locator('#classDescription');
         this.commentsField = page.locator('#classComments');
@@ -209,7 +209,7 @@ class ClassPage{
         // const chosenDate = select_Date[2];
         const date_count =  select_Date.length;
         let num = date_count;
-        this.stringNumber = num.toString();
+        const stringNumber = num.toString();
          console.log(date_count) //5
          
         for (let i = 0; i < date_count; i++) {
