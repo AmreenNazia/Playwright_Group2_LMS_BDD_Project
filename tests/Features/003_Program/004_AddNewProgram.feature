@@ -65,6 +65,11 @@ Feature: Verify add New Program
         Given Admin is on Program details form
         When Admin clicks Cancel button
         Then Admin can see Program Details form disappears
+        
+        Scenario: Verify close window with "X" 
+    Given Admin is on Program details form 
+    When Admin Click on X button
+    Then Admin can see Program Details form disappears
  
     Scenario Outline: Verify added Program is created
         Given Admin is on Program module
@@ -74,7 +79,4 @@ Examples:
             | KeyOption  | sheetname |
             | validInput | Program   |
  
-    Scenario: Verify close window with "X" 
-    Given Admin is on Program details form 
-    When Admin Click on X button
-    Then Admin can see Program Details form disappears
+    
