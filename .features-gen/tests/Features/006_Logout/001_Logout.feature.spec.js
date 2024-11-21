@@ -7,7 +7,7 @@ test.describe("Validation on Logout button", () => {
     await Given("Admin is logged in to LMS Portal");
   });
 
-  test("Verify logout function", async ({ Given, When, Then }) => {
+  test("Verify logout function", { tag: ["@logout", "@logo"] }, async ({ Given, When, Then }) => {
     await Given("Admin is on dashboard page after Login");
     await When("Admin clicks on the logout in the menu bar");
     await Then("Admin should be redirected to login page");
@@ -24,5 +24,5 @@ test.use({
 });
 
 const bddFileMeta = {
-  "Verify logout function": {"pickleLocation":"6:5"},
+  "Verify logout function": {"pickleLocation":"6:5","tags":["@logout","@logo"],"ownTags":["@logo"]},
 };
