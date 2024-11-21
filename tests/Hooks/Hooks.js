@@ -1,3 +1,5 @@
+//npm install --save-dev @playwright/test allure-playwright 
+
 const { createBdd } = require('playwright-bdd');
 const { Before, After } = createBdd();
 import { chromium } from '@playwright/test';
