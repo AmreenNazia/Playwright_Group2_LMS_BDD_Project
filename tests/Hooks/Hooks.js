@@ -2,13 +2,8 @@ const { createBdd } = require('playwright-bdd');
 const { Before, After } = createBdd();
 import { chromium } from '@playwright/test';
 import { POManager } from '../PageObject/POManager';
-// import { writeFileSync } from 'fs';
-// import { join } from 'path';
 import * as allure from "allure-js-commons";
 import { ContentType } from "allure-js-commons";
-
- 
-
 
 Before(async function () {
   this.browser = await chromium.launch({
@@ -19,27 +14,17 @@ Before(async function () {
   this.pageManager = new POManager(this.page);
 });
 
-// After(async function () {
- 
-//   await this.page.screenshot({ path: `screenshots/screenshot-${Date.now()}.png` });
-//   // console.log("Browser will close");
- 
-// });
+After(async function () { // Use a regular function to bind 'this'
+  // Save the screenshot
+  const screenshotPath = `screenshots/screenshot-${Date.now()}.png`;
+  await this.page.screenshot({ path: screenshotPath });
 
- 
-
-
-
-After(async () => {
-  // await this.page.screenshot({ path: `screenshots/screenshot-${Date.now()}.png` });
-   
- 
+  // Add a text attachment
   await allure.attachment("Text file", "This is the file content.", ContentType.TEXT);
 
-  await allure.attachmentPath(`screenshots/screenshot-${Date.now()}.png`, {
-    contentType: ContentType.PNG,
-    fileExtension: "png",
-  });
+  // Add a screenshot as an attachment
+  await allure.attachmentPath("Screenshot", screenshotPath, ContentType.PNG);
+
+  // Close the browser
+  await this.browser.close();
 });
-
-
