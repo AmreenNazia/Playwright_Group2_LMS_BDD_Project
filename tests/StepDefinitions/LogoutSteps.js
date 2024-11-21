@@ -13,7 +13,7 @@ let logout;
    
   Then('Admin should be redirected to login page', async function({})  {
      const selector = await logout.loginPage_validation();
-     const reusablepage = await this.pageManager.getReusablePage();
+     const reusablepage = await  getReusablePage();
      await reusablepage.isVisible(selector);
      console.log("Admin redirected to login page")
   });
